@@ -1,4 +1,4 @@
-package upem.gestionprojet.book;
+package livre;
 
 import java.util.ArrayList;
 import java.util.List;
