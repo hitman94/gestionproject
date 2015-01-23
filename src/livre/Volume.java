@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * Classe qui représente un Volume appartenant à un Book 
+ */
 public class Volume {
 	
 	private Long id;

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * Classe qui représente un Book contenant des Volumes,
+ * ChapterInterfaces, etc... 
+ */
 public class Book {
 	
 	private Long id;
