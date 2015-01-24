@@ -1,4 +1,6 @@
-package Utilisateur;
+package utilisateur;
+
+
 public class UserFactory {
 	//Permet de créer un utilisateur et de lui assigner des droits grâce à une Ability.
 	public void createUser(String  nom,String prenom, String ID){}

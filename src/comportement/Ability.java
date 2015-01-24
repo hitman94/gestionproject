@@ -1,9 +1,11 @@
-package Comportement;
+package comportement;
+
 
 
 import java.util.List;
 
-import WorkPackage_WorkSpace.WorkPackage;
+import wpws.WorkPackage;
+
 
 public class Ability {
 	//Recupere la liste des workPackage qui nous a été affectée

@@ -1,9 +1,14 @@
-package WorkPackage_WorkSpace;
+package wpws;
 
-import java.awt.List;
-import Livre.Book;
-import Livre.ChapterInterface;
-import Livre.Volume;
+
+
+import java.util.List;
+
+import livre.Book;
+import livre.Chapter;
+import livre.ChapterInterface;
+import livre.SubChapter;
+import livre.Volume;
 
 public class WorkPackage {
 	//Attribue un livre à un workPackage
@@ -17,7 +22,7 @@ public class WorkPackage {
 	//recupère une liste de chapitre ou de sous chapitre
 	//Si SubChapterNumber different de -1 recupère le sous chapitre appartenant correspondant au chapterNumber
 	//sinon recupere tous le chapitre
-	public List<ChapterInterface> getChapterInterfaceByNumber(int chapterNumber,SubChapterNumber){}
+	public List<ChapterInterface> getChapterInterfaceByNumber(int chapterNumber,SubChapterNumber number){}
 //recupère le volume dont le titre est donné en paramètre
 	public Volume getVolume(String title){}
 	//Recupère le statut courant du workpackage

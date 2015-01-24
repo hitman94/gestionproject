@@ -1,4 +1,9 @@
-package Comportement;
+package comportement;
+
+import livre.Chapter;
+import livre.SubChapter;
+import wpws.WorkPackage;
+import entreprise.Service;
 
 public class DepartmentChiefAbility {
 	//Creer un service avec son nom, renvoie null si echec

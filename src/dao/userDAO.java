@@ -1,7 +1,9 @@
-package DAO;
+package dao;
 
-import java.awt.List;
-import Entreprise.AbstractStructure;
+import java.util.List;
+
+import entreprise.AbstractStructure;
+
 
 public class userDAO {
 	//retourne une liste de toutes les AbstractStructure

@@ -1,4 +1,6 @@
-package Comportement;
+package comportement;
+
+import java.util.UUID;
 
 public class HeadOfServiceAbility {
 	//Cree un groupe

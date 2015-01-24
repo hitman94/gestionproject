@@ -1,4 +1,8 @@
-package DAO;
+package dao;
+
+import entreprise.AbstractStructure;
+
+
 
 public class AbstractStructureDAO {
 	//retourne l’AbstractStructure correspondant à l’id

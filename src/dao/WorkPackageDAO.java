@@ -1,8 +1,11 @@
-package DAO;
+package dao;
 
-import java.awt.List;
+import java.util.List;
 
-import WorkPackage_WorkSpace.WorkPackage;
+import wpws.WorkPackage;
+
+
+
 
 public class WorkPackageDAO {
 	//retourne le WorkPackage correspondant à l’id

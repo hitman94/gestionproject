@@ -1,4 +1,7 @@
-package Comportement;
+package comportement;
+
+import livre.Chapter;
+import entreprise.Department;
 
 public class CompanyChiefAbility {
 	//Creer un departement avec son nom, renvoie null si echec
