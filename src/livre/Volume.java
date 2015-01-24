@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Objects;
 
 /*
- * Classe qui représente un Volume appartenant à un Book 
+ * Classe qui reprï¿½sente un Volume appartenant ï¿½ un Book 
  */
 public class Volume {
 	
 	private Long id;
+	
 	private String title;
 	private String author;
 	private List<ChapterInterface> chapters;
