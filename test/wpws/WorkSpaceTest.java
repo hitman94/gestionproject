@@ -4,7 +4,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class WorkSpace {
+public class WorkSpaceTest {
 	
 	/**
 	 * test if we get the right status
@@ -34,6 +34,7 @@ public class WorkSpace {
 	 * test if status of WS change
 	 * if condition of change id state :
 	 * e.g do we get status inprogress after a promote on a WP for instance
+	 * 
 	 */
 	@Test
 	public void testIfWSStatusChange(){
