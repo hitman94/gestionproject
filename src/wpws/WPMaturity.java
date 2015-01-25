@@ -4,10 +4,9 @@ public interface WPMaturity {
 	
 	/**
 	 * status du WP
-	 * @author emmanuel
 	 *
 	 */
 	public enum State {
-
+		Start,InProgress,Done;
 	}
 }
