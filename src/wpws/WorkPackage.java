@@ -22,7 +22,7 @@ public class WorkPackage {
 	//recupère une liste de chapitre ou de sous chapitre
 	//Si SubChapterNumber different de -1 recupère le sous chapitre appartenant correspondant au chapterNumber
 	//sinon recupere tous le chapitre
-	public List<ChapterInterface> getChapterInterfaceByNumber(int chapterNumber,SubChapterNumber number){}
+	public List<ChapterInterface> getChapterInterfaceByNumber(int chapterNumber,int subChapterNumber){}
 //recupère le volume dont le titre est donné en paramètre
 	public Volume getVolume(String title){}
 	//Recupère le statut courant du workpackage
