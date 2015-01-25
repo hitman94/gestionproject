@@ -1,13 +1,13 @@
 package wpws;
 
-public interface WSMaturity {
+public interface WPMaturity {
 	
 	/**
-	 * statut du WS
+	 * status du WP
 	 * @author emmanuel
 	 *
 	 */
 	public enum State {
-		
+
 	}
 }
