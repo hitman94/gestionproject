@@ -21,7 +21,7 @@ public class Service implements AbstractStructure {
 	}
 
 	@Override
-	public void setParent() {
+	public void setParent(AbstractStructure structure) {
 		// TODO Auto-generated method stub
 		
 	}

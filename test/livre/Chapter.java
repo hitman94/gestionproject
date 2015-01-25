@@ -1,10 +1,10 @@
-package test.livre;
+package livre;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class Book {
+public class Chapter {
 
 	@Test
 	public void test() {

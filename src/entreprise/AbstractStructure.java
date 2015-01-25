@@ -20,6 +20,6 @@ public interface AbstractStructure {
 	/*
 	 * Attribue le parent de l'AbstractStructure.
 	 */
-	public void setParent();
+	public void setParent(AbstractStructure structure);
 	
 }
