@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class SubChapter implements ChapterInterface {
-	
+
 	private Long id;
 	private String title;
 	private String author;
 	private List<Paragraph> subChapterParagraphs;
 	private Volume volume;
 	private Chapter chapter;
-	
+
 	public SubChapter(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
@@ -21,7 +21,7 @@ public class SubChapter implements ChapterInterface {
 		this.volume = null;
 		this.chapter = null;
 	}
-	
+
 	public SubChapter(Long id, String title, String author, Volume volume, Chapter chapter) {
 		this.id = id;
 		this.title = title;
@@ -30,8 +30,8 @@ public class SubChapter implements ChapterInterface {
 		this.volume = volume;
 		this.chapter = chapter;
 	}
-	
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -73,13 +73,15 @@ public class SubChapter implements ChapterInterface {
 	@Override
 	public void addParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		subChapterParagraphs.add(paragraph);
+		if(!subChapterParagraphs.contains(paragraph))
+			subChapterParagraphs.add(paragraph);
 	}
 
 	@Override
 	public void removeParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		subChapterParagraphs.remove(paragraph);		
+		if(subChapterParagraphs.contains(paragraph))
+			subChapterParagraphs.remove(paragraph);		
 	}
 
 	@Override

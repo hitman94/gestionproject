@@ -9,13 +9,13 @@ import java.util.Objects;
  * ChapterInterfaces, etc... 
  */
 public class Book {
-	
+
 	private Long id;
 	private String title;
 	private String author;
 	private List<Volume> volumes;
-	
-	
+
+
 	public Book(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
@@ -47,20 +47,27 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
+
 	public List<Volume> getVolumes(){
 		return volumes;
 	}
-	
+
 	public void addVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		volumes.add(volume);
+		if(!volumes.contains(volume))
+			volumes.add(volume);
 	}
-	
-	public void removeVolume(Volume volume){
+
+	public boolean removeVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		volumes.remove(volume);
+		if(volumes.contains(volume)){
+			volumes.remove(volume);
+			return true;
+		}
+		else
+			return false;
+		
 	}
-	
-	
+
+
 }

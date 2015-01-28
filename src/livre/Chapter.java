@@ -12,8 +12,8 @@ public class Chapter implements ChapterInterface {
 	private List<Paragraph> chapterParagraphs;
 	private List<SubChapter> subChapters;
 	private Volume volume;
-	
-	
+
+
 	public Chapter(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
@@ -22,7 +22,7 @@ public class Chapter implements ChapterInterface {
 		this.subChapters = new ArrayList<>(); 
 		this.volume = null;
 	}
-	
+
 	public Chapter(Long id, String title, String author, Volume volume) {
 		this.id = id;
 		this.title = title;
@@ -31,7 +31,7 @@ public class Chapter implements ChapterInterface {
 		this.subChapters = new ArrayList<>();
 		this.volume = volume;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -55,19 +55,21 @@ public class Chapter implements ChapterInterface {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
+
 	public List<SubChapter> getSubChapters(){
 		return subChapters;
 	}
-	
+
 	public void addSubChapter(SubChapter subChapter) {
 		Objects.requireNonNull(subChapter);
-		subChapters.add(subChapter);
+		if(!subChapters.contains(subChapter))
+			subChapters.add(subChapter);
 	}
-	
+
 	public void removeSubChapter(SubChapter subChapter){
 		Objects.requireNonNull(subChapter);
-		subChapters.remove(subChapter);
+		if(subChapters.contains(subChapter))
+			subChapters.remove(subChapter);
 	}
 
 	@Override
@@ -78,20 +80,22 @@ public class Chapter implements ChapterInterface {
 	@Override
 	public void addParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		chapterParagraphs.add(paragraph);
+		if(!chapterParagraphs.contains(paragraph))
+			chapterParagraphs.add(paragraph);
 	}
-	
+
 	@Override
 	public void removeParagraph(Paragraph paragraph){
 		Objects.requireNonNull(paragraph);
-		chapterParagraphs.remove(paragraph);
+		if(chapterParagraphs.contains(paragraph))
+			chapterParagraphs.remove(paragraph);
 	}
 
 	@Override
 	public Volume getVolume(){
 		return volume;
 	}
-	
+
 	@Override
 	public void setVolume(Volume volume) {
 		Objects.requireNonNull(volume);
