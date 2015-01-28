@@ -16,11 +16,19 @@ public class Volume {
 	private List<ChapterInterface> chapters;
 	private Book book;
 	
+	public Volume(Long id, String title, String author) {
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.chapters = new ArrayList<>();
+		this.book = null;
+	}
+	
 	public Volume(Long id, String title, String author, Book book) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.chapters = new ArrayList<ChapterInterface>();
+		this.chapters = new ArrayList<>();
 		this.book = book;
 	}
 

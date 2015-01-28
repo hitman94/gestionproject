@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /*
- * Classe qui repr�sente un Book contenant des Volumes,
+ * Classe qui représente un Book contenant des Volumes,
  * ChapterInterfaces, etc... 
  */
 public class Book {
@@ -14,7 +14,6 @@ public class Book {
 	private String title;
 	private String author;
 	private List<Volume> volumes;
-	
 	
 	
 	public Book(Long id, String title, String author) {

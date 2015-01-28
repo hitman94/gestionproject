@@ -5,18 +5,28 @@ import java.util.List;
 public interface ChapterInterface {
 	
 	/*
-	 * RÈcupÈre la liste des paragraphes
+	 * R√©cup√®re la liste des paragraphes
 	 * contenus dans une ChapterInterface.
 	 */
 	public List<Paragraph> getParagraphs();
 	
 	/*
-	 * Ajoute un Paragraph ‡ une ChapterInterface.
+	 * Ajoute un Paragraph √† une ChapterInterface.
 	 */
 	public void addParagraph(Paragraph paragraph);
 	
 	/*
-	 * Attribue un Volume ‡ une ChapterInterface.
+	 * Supprime un Paragraph d'une ChapterInterface.
+	 */
+	public void removeParagraph(Paragraph paragraph);
+	
+	/*
+	 * R√©cup√®re le Volume qui contient la ChapterInterface.
+	 */
+	public Volume getVolume();
+	
+	/*
+	 * Attribue un Volume √† une ChapterInterface.
 	 */
 	public void setVolume(Volume volume);
 
