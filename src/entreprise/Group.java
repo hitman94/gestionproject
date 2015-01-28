@@ -1,6 +1,22 @@
 package entreprise;
 
+import utilisateur.User;
+
 public class Group implements AbstractStructure {
+	
+	private final int STRUCTURE_LEVEL = 4;
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public User getChief() {
@@ -9,7 +25,7 @@ public class Group implements AbstractStructure {
 	}
 
 	@Override
-	public void setChief(User user) {
+	public void setChief(User chief) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -24,6 +40,12 @@ public class Group implements AbstractStructure {
 	public void setParent(AbstractStructure structure) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getStructureLevel() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
