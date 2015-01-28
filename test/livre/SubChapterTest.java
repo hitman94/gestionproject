@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class Volume {
+public class SubChapterTest {
 
 	@Test
 	public void test() {
