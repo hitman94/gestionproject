@@ -8,12 +8,19 @@ public class BookTest {
 
 	@Test
 	public void addVolume2TimesTest() {
-		Book b = new Book(new Long("1"), "Book 1", "Book Author1");
+		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
-		Volume v2 = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		b.addVolume(v);
-		b.addVolume(v2);
-		assertNotEquals("v et v2 sont identiques", v.getId(), v2.getId());
+		b.addVolume(v);
+		assertEquals(v.getId() + " ne doit pas être ajouté 2 fois.", b.getVolumes().size(), 1);
+	}
+	
+	public void removeVolume2TimesTest() {
+		Book b = new Book(new Long("1"), "Book 1", "Book Author");
+		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
+		b.addVolume(v);
+		b.removeVolume(v);
+		assertNotEquals(v.getId() + " ne peut être supprimé qu'1 fois.", b.removeVolume(v), true);
 	}
 
 }
