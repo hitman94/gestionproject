@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.DAO;
+package dao;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +27,7 @@ public class UserDAOTest {
 		saveUser(u);
 		deleteUser(u);
 		User u2 = getUserById("Dupont");
-		assertNull("u2 non null: delete raté"u2);
+		assertNull("u2 non null: delete ratï¿½"u2);
 	}
 	
 	@Test
@@ -37,8 +37,8 @@ public class UserDAOTest {
 		u.setNom("Bob");
 		updateUser(u);
 		User u2 = getUserById("Bob");
-		assertNull("u2 null: update raté"u2);
-		assertEquals("Nom de u2 different de Bob, update raté","Bob" u2.getNom());
+		assertNull("u2 null: update ratï¿½"u2);
+		assertEquals("Nom de u2 different de Bob, update ratï¿½","Bob" u2.getNom());
 	}
 	
 	@Test

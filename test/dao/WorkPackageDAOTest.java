@@ -1,4 +1,4 @@
-package test.DAO;
+package dao;
 
 import static org.junit.Assert.*;
 import livre.Book;
@@ -23,7 +23,7 @@ public class WorkPackageDAOTest {
 		saveWorkPackage(w);
 		deleteWorkPackage(w);
 		WorkPackage w2 = WorkPackage("id");
-		assertNull("w2 non null: delete raté",w2);
+		assertNull("w2 non null: delete ratï¿½",w2);
 	}
 	
 	@Test
@@ -33,8 +33,8 @@ public class WorkPackageDAOTest {
 		w.addBook(new Book(new Long(123), "test", "author"));;
 		updateWorkPackage(w);
 		WorkPackage w2 = getWorkPackageById("id");
-		assertNull("w2 null: update raté",w2);
-		assertEquals("Nom de w2 different de Bob, update raté","test", w.getVolume("title").getTitle() );
+		assertNull("w2 null: update ratï¿½",w2);
+		assertEquals("Nom de w2 different de Bob, update ratï¿½","test", w.getVolume("title").getTitle() );
 	}
 	
 
