@@ -13,12 +13,12 @@ public interface ChapterInterface {
 	/*
 	 * Ajoute un Paragraph à une ChapterInterface.
 	 */
-	public void addParagraph(Paragraph paragraph);
+	public boolean addParagraph(Paragraph paragraph);
 	
 	/*
 	 * Supprime un Paragraph d'une ChapterInterface.
 	 */
-	public void removeParagraph(Paragraph paragraph);
+	public boolean removeParagraph(Paragraph paragraph);
 	
 	/*
 	 * Récupère le Volume qui contient la ChapterInterface.

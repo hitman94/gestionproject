@@ -52,10 +52,14 @@ public class Book {
 		return volumes;
 	}
 
-	public void addVolume(Volume volume){
+	public boolean addVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		if(!volumes.contains(volume))
+		if(!volumes.contains(volume)){
 			volumes.add(volume);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public boolean removeVolume(Volume volume){

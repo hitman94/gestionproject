@@ -69,16 +69,24 @@ public class Volume {
 		this.book = book;
 	}
 
-	public void addChapter(ChapterInterface chapter){
+	public boolean addChapter(ChapterInterface chapter){
 		Objects.requireNonNull(chapter);
-		if(!chapters.contains(chapter))
+		if(!chapters.contains(chapter)){
 			chapters.add(chapter);
+			return true;
+		}
+		else
+			return false;
 	}
 
-	public void removeChapter(ChapterInterface chapter){
+	public boolean removeChapter(ChapterInterface chapter){
 		Objects.requireNonNull(chapter);
-		if(chapters.contains(chapter))
+		if(chapters.contains(chapter)){
 			chapters.remove(chapter);
+			return true;
+		}
+		else
+			return false;
 	}
 
 }

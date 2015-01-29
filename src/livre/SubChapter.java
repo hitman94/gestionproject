@@ -71,17 +71,25 @@ public class SubChapter implements ChapterInterface {
 	}
 
 	@Override
-	public void addParagraph(Paragraph paragraph) {
+	public boolean addParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		if(!subChapterParagraphs.contains(paragraph))
+		if(!subChapterParagraphs.contains(paragraph)){
 			subChapterParagraphs.add(paragraph);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
-	public void removeParagraph(Paragraph paragraph) {
+	public boolean removeParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		if(subChapterParagraphs.contains(paragraph))
-			subChapterParagraphs.remove(paragraph);		
+		if(subChapterParagraphs.contains(paragraph)){
+			subChapterParagraphs.remove(paragraph);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override

@@ -60,16 +60,24 @@ public class Chapter implements ChapterInterface {
 		return subChapters;
 	}
 
-	public void addSubChapter(SubChapter subChapter) {
+	public boolean addSubChapter(SubChapter subChapter) {
 		Objects.requireNonNull(subChapter);
-		if(!subChapters.contains(subChapter))
+		if(!subChapters.contains(subChapter)){
 			subChapters.add(subChapter);
+			return true;
+		}
+		else
+			return false;
 	}
 
-	public void removeSubChapter(SubChapter subChapter){
+	public boolean removeSubChapter(SubChapter subChapter){
 		Objects.requireNonNull(subChapter);
-		if(subChapters.contains(subChapter))
+		if(subChapters.contains(subChapter)){
 			subChapters.remove(subChapter);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
@@ -78,17 +86,25 @@ public class Chapter implements ChapterInterface {
 	}
 
 	@Override
-	public void addParagraph(Paragraph paragraph) {
+	public boolean addParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		if(!chapterParagraphs.contains(paragraph))
+		if(!chapterParagraphs.contains(paragraph)){
 			chapterParagraphs.add(paragraph);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
-	public void removeParagraph(Paragraph paragraph){
+	public boolean removeParagraph(Paragraph paragraph){
 		Objects.requireNonNull(paragraph);
-		if(chapterParagraphs.contains(paragraph))
+		if(chapterParagraphs.contains(paragraph)){
 			chapterParagraphs.remove(paragraph);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
