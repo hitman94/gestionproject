@@ -7,7 +7,7 @@ import org.junit.Test;
 public class BookTest {
 
 	@Test
-	public void bookConstructorTest(){
+	public void testBookConstructor(){
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		assertEquals(new Long("1"), b.getId());
 		assertEquals("Book 1", b.getTitle());
@@ -15,21 +15,21 @@ public class BookTest {
 	}
 	
 	@Test(expected = NullPointerException.class)
-	public void addNullVolumeTest() {
+	public void testAddNullVolume() {
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = null;
 		b.addVolume(v);
 	}
 	
 	@Test
-	public void addVolume2TimesTest() {
+	public void testAddVolume2Times() {
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		b.addVolume(v);
 		assertNotEquals(v.getTitle() + " ne peut être ajouté qu'1 fois.", true, b.addVolume(v));
 	}
 	
-	public void removeVolume2TimesTest() {
+	public void testRemoveVolume2Times() {
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		b.addVolume(v);
