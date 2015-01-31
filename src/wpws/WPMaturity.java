@@ -7,6 +7,6 @@ public interface WPMaturity {
 	 *
 	 */
 	public enum State {
-		Start,InProgress,Done;
+		Create,Start,InProgress,Done;
 	}
 }
