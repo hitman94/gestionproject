@@ -29,6 +29,7 @@ public class BookTest {
 		assertNotEquals(v.getTitle() + " ne peut être ajouté qu'1 fois.", true, b.addVolume(v));
 	}
 	
+	@Test
 	public void testRemoveVolume2Times() {
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
