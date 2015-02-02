@@ -1,46 +1,73 @@
 package entreprise;
 
+import java.util.Objects;
+
 import utilisateur.User;
 
-public interface AbstractStructure {
+public abstract class AbstractStructure {
+
+	private String name;
+	private User chief;
 	
+
+	public AbstractStructure(String name) {
+		this.name = name;
+		this.chief = null;
+	}
+
+	public AbstractStructure(String name, User chief) {
+		this.name = name;
+		this.chief = chief;
+	}
+
 	/*
-	 * Récupère le nom de l'AbstractStructure.
+	 * RÃ©cupÃ¨re le nom de l'AbstractStructure.
 	 */
-	public String getName();
+	public String getName() {
+		return name;
+	}
 
 	/*
 	 * Attribue le nom de l'AbstractStructure.
 	 */
-	public void setName(String name);
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/*
-	 * Récupère le chef de l'AbstractStructure.
+	 * RÃ©cupÃ¨re le chef de l'AbstractStructure.
 	 */
-	public User getChief();
-	
+	public User getChief() {
+		return chief;
+	}
+
 	/*
 	 * Attribue le chef de l'AbstractStructure.
 	 */
-	public void setChief(User chief);
-	
+	public void setChief(User chief) {
+		Objects.requireNonNull(chief);
+		this.chief = chief;
+	}
+
 	/*
-	 * Récupère le parent de l'AbstractStructure.
+	 * RÃ©cupÃ¨re le parent de l'AbstractStructure.
 	 */
-	public AbstractStructure getParent();
-	
+	public abstract AbstractStructure getParent();
+
 	/*
 	 * Attribue le parent de l'AbstractStructure.
 	 */
-	public void setParent(AbstractStructure structure);
-	
+	public abstract void setParent(AbstractStructure structure);
+
 	/*
-	 * Récupère le niveau de l'AbstractStructure:
-	 * 1 -- Entreprise
-	 * 2 -- Department
-	 * 3 -- Service
-	 * 4 -- Group
+	 * Ajoute une structure fille Ã  l'AbstractStructure.
+	 * 
 	 */
-	public int getStructureLevel();
-	
+	public abstract boolean addChildStructure(AbstractStructure structure);
+
+	/*
+	 * Supprime une structure fille Ã  l'AbstractStructure.
+	 */
+	public abstract boolean removeChildStructure(AbstractStructure structure);
+
 }

@@ -6,84 +6,61 @@ import java.util.Objects;
 
 import utilisateur.User;
 
-public class Entreprise implements AbstractStructure {
+public class Entreprise extends AbstractStructure {
 
-	private final int STRUCTURE_LEVEL = 1;
-
-	private String name;
-	private AbstractStructure parentStructure;
-	private User chief;
-	private List<AbstractStructure> childrenStructures;
+	private List<Department> childrenStructures;
 
 	public Entreprise(String name) {
-		this.name = name;
-		this.parentStructure = null;
-		this.chief = null;
+		super(name);
 		this.childrenStructures = new ArrayList<>();
 	}
 
-	public Entreprise(String name, AbstractStructure parentStructure, User chief) {
-		this.name = name;
-		this.parentStructure = parentStructure;
-		this.chief = chief;
+	public Entreprise(String name, User chief) {
+		super(name, chief);
 		this.childrenStructures = new ArrayList<>();
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public int getStructureLevel() {
-		return STRUCTURE_LEVEL;
-	}
-
-	@Override
-	public User getChief() {
-		return chief;
-	}
-
-	@Override
-	public void setChief(User chief) {
-		Objects.requireNonNull(chief);
-		this.chief = chief;
+	/*
+	 * Retourne la liste des structures filles.
+	 */
+	public List<Department> getChildrenStructures() {
+		return childrenStructures;
 	}
 
 	@Override
 	public AbstractStructure getParent() {
-		return parentStructure;
+		return null;
 	}
 
 	@Override
 	public void setParent(AbstractStructure structure) {
-		Objects.requireNonNull(structure);
-		if(this.getStructureLevel() < structure.getStructureLevel())
-			this.parentStructure = structure;
-		else
-			throw new IllegalArgumentException("This structure can't be added as the parent of this entreprise !");
-	}
-	
-	public List<AbstractStructure> getChildrenStructures() {
-		return childrenStructures;
+		return;
 	}
 
-	public void addChildStructure(AbstractStructure structure){
+	@Override
+	public boolean addChildStructure(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
-		if(this.getStructureLevel() > structure.getStructureLevel())
-			childrenStructures.add(structure);
+		if(structure instanceof Department){
+			Department department = (Department) structure;
+			if(!childrenStructures.contains(department))
+				childrenStructures.add(department);
+			return true;
+		}
 		else
-			throw new IllegalArgumentException("This structure can't be added as a child of this entreprise !");
+			return false;
 	}
-	
-	public void removeChildStructure(AbstractStructure structure){
+
+	@Override
+	public boolean removeChildStructure(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
-		childrenStructures.remove(structure);
+		if(structure instanceof Department){
+			Department department = (Department) structure;
+			if(childrenStructures.contains(department))
+				childrenStructures.remove(department);
+			return true;
+		}
+		else
+			return false;
 	}
 
 }

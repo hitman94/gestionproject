@@ -1,51 +1,44 @@
 package entreprise;
 
+import java.util.Objects;
+
 import utilisateur.User;
 
-public class Group implements AbstractStructure {
+public class Group extends AbstractStructure {
 	
-	private final int STRUCTURE_LEVEL = 4;
+	private Service parentStructure;
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public Group(String name) {
+		super(name);
+		this.parentStructure = null;
 	}
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public User getChief() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setChief(User chief) {
-		// TODO Auto-generated method stub
-		
+	public Group(String name, User chief, Service parentStructure) {
+		super(name, chief);
+		this.parentStructure = parentStructure;
 	}
 
 	@Override
 	public AbstractStructure getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return parentStructure;
 	}
 
 	@Override
 	public void setParent(AbstractStructure structure) {
-		// TODO Auto-generated method stub
+		Objects.requireNonNull(structure);
+		if(structure instanceof Service)
+			this.parentStructure = (Service) structure;
 		
 	}
 
 	@Override
-	public int getStructureLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean addChildStructure(AbstractStructure structure) {
+		return false;
+	}
+
+	@Override
+	public boolean removeChildStructure(AbstractStructure structure) {
+		return false;
 	}
 
 }

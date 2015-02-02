@@ -1,39 +1,37 @@
 package entreprise;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import utilisateur.User;
 
-public class Department implements AbstractStructure {
+public class Department extends AbstractStructure {
 	
-	private final int STRUCTURE_LEVEL = 2;
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	private Entreprise parentStructure;
+	private List<Service> childrenStructures;
+	
+	public Department(String name) {
+		super(name);
+		this.parentStructure = null;
+		this.childrenStructures = new ArrayList<>();
 	}
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+	public Department(String name, User chief, Entreprise parentStructure) {
+		super(name, chief);
+		this.parentStructure = parentStructure;
+		this.childrenStructures = new ArrayList<>();
 	}
-
-	@Override
-	public User getChief() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setChief(User chief) {
-		// TODO Auto-generated method stub
-		
+	
+	/*
+	 * Retourne la liste des structures filles.
+	 */
+	public List<Service> getChildrenStructures() {
+		return childrenStructures;
 	}
 
 	@Override
 	public AbstractStructure getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return parentStructure;
 	}
 
 	@Override
@@ -43,9 +41,15 @@ public class Department implements AbstractStructure {
 	}
 
 	@Override
-	public int getStructureLevel() {
+	public boolean addChildStructure(AbstractStructure structure) {
 		// TODO Auto-generated method stub
-		return 0;
+		return false;
+	}
+
+	@Override
+	public boolean removeChildStructure(AbstractStructure structure) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
