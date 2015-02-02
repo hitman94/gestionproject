@@ -1,7 +1,9 @@
 package livre;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /*
@@ -13,14 +15,14 @@ public class Volume {
 
 	private String title;
 	private String author;
-	private List<ChapterInterface> chapters;
+	private Map<Long, ChapterInterface> chapters;
 	private Book book;
 
 	public Volume(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.chapters = new ArrayList<>();
+		this.chapters = new HashMap<Long, ChapterInterface>();
 		this.book = null;
 	}
 
@@ -28,7 +30,7 @@ public class Volume {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.chapters = new ArrayList<>();
+		this.chapters = new HashMap<Long, ChapterInterface>();
 		this.book = book;
 	}
 
@@ -55,9 +57,13 @@ public class Volume {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+	
+	public List<ChapterInterface> getVolumes(){
+		return new ArrayList<ChapterInterface>(chapters.values());
+	}
 
-	public List<ChapterInterface> getChapters(){
-		return chapters;
+	public ChapterInterface getChapter(Long id){
+		return chapters.get(id);
 	}
 
 	public Book getBook() {
@@ -69,24 +75,40 @@ public class Volume {
 		this.book = book;
 	}
 
-	public boolean addChapter(ChapterInterface chapter){
-		Objects.requireNonNull(chapter);
-		if(!chapters.contains(chapter)){
-			chapters.add(chapter);
-			return true;
+	public void addChapter(ChapterInterface chapterInterface){
+		Objects.requireNonNull(chapterInterface);
+		if(chapterInterface instanceof Chapter){
+			Chapter chapter = (Chapter) chapterInterface;
+			if(chapters.putIfAbsent(chapter.getId(), chapter) != null){
+				throw new IllegalArgumentException();
+			}	
+		}
+		else if(chapterInterface instanceof SubChapter){
+			SubChapter subChapter = (SubChapter) chapterInterface;
+			if(chapters.putIfAbsent(subChapter.getId(), subChapter) != null){
+				throw new IllegalArgumentException();
+			}
 		}
 		else
-			return false;
+			throw new IllegalArgumentException();
 	}
 
-	public boolean removeChapter(ChapterInterface chapter){
-		Objects.requireNonNull(chapter);
-		if(chapters.contains(chapter)){
-			chapters.remove(chapter);
-			return true;
+	public void removeChapter(ChapterInterface chapterInterface){
+		Objects.requireNonNull(chapterInterface);
+		if(chapterInterface instanceof Chapter){
+			Chapter chapter = (Chapter) chapterInterface;
+			if(chapters.remove(chapter.getId()) == null){
+				throw new IllegalArgumentException();
+			}	
+		}
+		else if(chapterInterface instanceof SubChapter){
+			SubChapter subChapter = (SubChapter) chapterInterface;
+			if(chapters.remove(subChapter.getId()) == null){
+				throw new IllegalArgumentException();
+			}
 		}
 		else
-			return false;
+			throw new IllegalArgumentException();
 	}
 
 }

@@ -1,7 +1,9 @@
 package livre;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /*
@@ -13,14 +15,14 @@ public class Book {
 	private Long id;
 	private String title;
 	private String author;
-	private List<Volume> volumes;
+	private Map<Long, Volume> volumes;
 
 
 	public Book(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.volumes = new ArrayList<Volume>();
+		this.volumes = new HashMap<Long, Volume>();
 	}
 
 
@@ -47,31 +49,27 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
+	
 	public List<Volume> getVolumes(){
-		return volumes;
+		return new ArrayList<Volume>(volumes.values());
 	}
 
-	public boolean addVolume(Volume volume){
+	public Volume getVolume(Long id){
+		return volumes.get(id);
+	}
+
+	public void addVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		if(!volumes.contains(volume)){
-			volumes.add(volume);
-			return true;
+		if(volumes.putIfAbsent(volume.getId(), volume) != null){
+			throw new IllegalArgumentException();
 		}
-		else
-			return false;
 	}
 
-	public boolean removeVolume(Volume volume){
+	public void removeVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		if(volumes.contains(volume)){
-			volumes.remove(volume);
-			return true;
+		if(volumes.remove(volume.getId()) == null){
+			throw new IllegalArgumentException();
 		}
-		else
-			return false;
-		
 	}
-
 
 }

@@ -1,7 +1,9 @@
 package livre;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class SubChapter implements ChapterInterface {
@@ -9,26 +11,35 @@ public class SubChapter implements ChapterInterface {
 	private Long id;
 	private String title;
 	private String author;
-	private List<Paragraph> subChapterParagraphs;
-	private Volume volume;
+	private Map<Long, Paragraph> subChapterParagraphs;
 	private Chapter chapter;
+	private Volume volume;
 
 	public SubChapter(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.subChapterParagraphs = new ArrayList<>();
-		this.volume = null;
+		this.subChapterParagraphs = new HashMap<Long, Paragraph>();
 		this.chapter = null;
+		this.volume = null;
 	}
 
-	public SubChapter(Long id, String title, String author, Volume volume, Chapter chapter) {
+	public SubChapter(Long id, String title, String author, Chapter chapter) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.subChapterParagraphs = new ArrayList<>();
-		this.volume = volume;
+		this.subChapterParagraphs = new HashMap<Long, Paragraph>();
 		this.chapter = chapter;
+		this.volume = null;
+	}
+	
+	public SubChapter(Long id, String title, String author, Chapter chapter, Volume volume) {
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.subChapterParagraphs = new HashMap<Long, Paragraph>();
+		this.chapter = chapter;
+		this.volume = volume;
 	}
 
 
@@ -64,32 +75,28 @@ public class SubChapter implements ChapterInterface {
 		Objects.requireNonNull(chapter);
 		this.chapter = chapter;
 	}
+	
+	public Paragraph getParagraph(Long id){
+		return subChapterParagraphs.get(id);
+	}
 
 	@Override
 	public List<Paragraph> getParagraphs() {
-		return subChapterParagraphs;
+		return new ArrayList<Paragraph>(subChapterParagraphs.values());
 	}
 
 	@Override
-	public boolean addParagraph(Paragraph paragraph) {
+	public void addParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		if(!subChapterParagraphs.contains(paragraph)){
-			subChapterParagraphs.add(paragraph);
-			return true;
-		}
-		else
-			return false;
+		if(subChapterParagraphs.putIfAbsent(paragraph.getId(), paragraph) != null)
+			throw new IllegalArgumentException();
 	}
 
 	@Override
-	public boolean removeParagraph(Paragraph paragraph) {
+	public void removeParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		if(subChapterParagraphs.contains(paragraph)){
-			subChapterParagraphs.remove(paragraph);
-			return true;
-		}
-		else
-			return false;
+		if(subChapterParagraphs.remove(paragraph.getId()) == null)
+			throw new IllegalArgumentException();
 	}
 
 	@Override

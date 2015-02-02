@@ -1,7 +1,9 @@
 package livre;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Chapter implements ChapterInterface {
@@ -9,8 +11,8 @@ public class Chapter implements ChapterInterface {
 	private Long id;
 	private String title;
 	private String author;
-	private List<Paragraph> chapterParagraphs;
-	private List<SubChapter> subChapters;
+	private Map<Long, Paragraph> chapterParagraphs;
+	private Map<Long, SubChapter> subChapters;
 	private Volume volume;
 
 
@@ -18,8 +20,8 @@ public class Chapter implements ChapterInterface {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.chapterParagraphs = new ArrayList<>();
-		this.subChapters = new ArrayList<>(); 
+		this.chapterParagraphs = new HashMap<Long, Paragraph>();
+		this.subChapters = new HashMap<Long, SubChapter>();
 		this.volume = null;
 	}
 
@@ -27,8 +29,8 @@ public class Chapter implements ChapterInterface {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.chapterParagraphs = new ArrayList<>();
-		this.subChapters = new ArrayList<>();
+		this.chapterParagraphs = new HashMap<Long, Paragraph>();
+		this.subChapters = new HashMap<Long, SubChapter>();
 		this.volume = volume;
 	}
 
@@ -56,55 +58,43 @@ public class Chapter implements ChapterInterface {
 		this.author = author;
 	}
 
+	public SubChapter getSubChapter(Long id){
+		return subChapters.get(id);
+	}
+
 	public List<SubChapter> getSubChapters(){
-		return subChapters;
+		return new ArrayList<SubChapter>(subChapters.values());
 	}
 
-	public boolean addSubChapter(SubChapter subChapter) {
+	public void addSubChapter(SubChapter subChapter) {
 		Objects.requireNonNull(subChapter);
-		if(!subChapters.contains(subChapter)){
-			subChapters.add(subChapter);
-			return true;
-		}
-		else
-			return false;
+		if(subChapters.putIfAbsent(subChapter.getId(), subChapter) != null)
+			throw new IllegalArgumentException();
 	}
 
-	public boolean removeSubChapter(SubChapter subChapter){
+	public void removeSubChapter(SubChapter subChapter){
 		Objects.requireNonNull(subChapter);
-		if(subChapters.contains(subChapter)){
-			subChapters.remove(subChapter);
-			return true;
-		}
-		else
-			return false;
+		if(subChapters.remove(subChapter.getId()) == null)
+			throw new IllegalArgumentException();
 	}
 
 	@Override
 	public List<Paragraph> getParagraphs() {
-		return chapterParagraphs;
+		return new ArrayList<Paragraph>(chapterParagraphs.values());
 	}
 
 	@Override
-	public boolean addParagraph(Paragraph paragraph) {
+	public void addParagraph(Paragraph paragraph) {
 		Objects.requireNonNull(paragraph);
-		if(!chapterParagraphs.contains(paragraph)){
-			chapterParagraphs.add(paragraph);
-			return true;
-		}
-		else
-			return false;
+		if(chapterParagraphs.putIfAbsent(paragraph.getId(), paragraph) != null)
+			throw new IllegalArgumentException();
 	}
 
 	@Override
-	public boolean removeParagraph(Paragraph paragraph){
+	public void removeParagraph(Paragraph paragraph){
 		Objects.requireNonNull(paragraph);
-		if(chapterParagraphs.contains(paragraph)){
-			chapterParagraphs.remove(paragraph);
-			return true;
-		}
-		else
-			return false;
+		if(chapterParagraphs.remove(paragraph.getId()) == null)
+			throw new IllegalArgumentException();
 	}
 
 	@Override
