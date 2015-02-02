@@ -1,30 +1,30 @@
 package entreprise;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import utilisateur.User;
 
 public class Entreprise extends AbstractStructure {
 
-	private List<Department> childrenStructures;
+	private Map<String, Department> childrenStructures;
 
 	public Entreprise(String name) {
 		super(name);
-		this.childrenStructures = new ArrayList<>();
+		this.childrenStructures = new HashMap<String, Department>();
 	}
 
 	public Entreprise(String name, User chief) {
 		super(name, chief);
-		this.childrenStructures = new ArrayList<>();
+		this.childrenStructures = new HashMap<String, Department>();
 	}
-
+	
 	/*
-	 * Retourne la liste des structures filles.
+	 * Renvoie le Department correspondant au nom donné en paramètre.
 	 */
-	public List<Department> getChildrenStructures() {
-		return childrenStructures;
+	public Department getDepartment(String name) {
+		return childrenStructures.get(name);
 	}
 
 	@Override
@@ -38,29 +38,23 @@ public class Entreprise extends AbstractStructure {
 	}
 
 	@Override
-	public boolean addChildStructure(AbstractStructure structure) {
+	public void addChildStructure(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
 		if(structure instanceof Department){
 			Department department = (Department) structure;
-			if(!childrenStructures.contains(department))
-				childrenStructures.add(department);
-			return true;
+			if(childrenStructures.putIfAbsent(department.getName(), department) != null)
+				throw new IllegalArgumentException();
 		}
-		else
-			return false;
 	}
 
 	@Override
-	public boolean removeChildStructure(AbstractStructure structure) {
+	public void removeChildStructure(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
 		if(structure instanceof Department){
 			Department department = (Department) structure;
-			if(childrenStructures.contains(department))
-				childrenStructures.remove(department);
-			return true;
+			if(childrenStructures.remove(department.getName()) == null)
+				throw new IllegalArgumentException();
 		}
-		else
-			return false;
 	}
 
 }

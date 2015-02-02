@@ -15,7 +15,7 @@ public class Group extends AbstractStructure {
 
 	public Group(String name, User chief, Service parentStructure) {
 		super(name, chief);
-		this.parentStructure = parentStructure;
+		this.parentStructure = Objects.requireNonNull(parentStructure);
 	}
 
 	@Override
@@ -28,17 +28,18 @@ public class Group extends AbstractStructure {
 		Objects.requireNonNull(structure);
 		if(structure instanceof Service)
 			this.parentStructure = (Service) structure;
-		
+		else
+			throw new IllegalArgumentException();
 	}
 
 	@Override
-	public boolean addChildStructure(AbstractStructure structure) {
-		return false;
+	public void addChildStructure(AbstractStructure structure) {
+		throw new IllegalArgumentException("Groups can't have children structures !"); 		
 	}
 
 	@Override
-	public boolean removeChildStructure(AbstractStructure structure) {
-		return false;
+	public void removeChildStructure(AbstractStructure structure) {
+		throw new IllegalArgumentException("Groups can't have children structures !");		
 	}
 
 }

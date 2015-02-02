@@ -17,7 +17,7 @@ public abstract class AbstractStructure {
 
 	public AbstractStructure(String name, User chief) {
 		this.name = name;
-		this.chief = chief;
+		this.chief = Objects.requireNonNull(chief);
 	}
 
 	/*
@@ -59,15 +59,16 @@ public abstract class AbstractStructure {
 	 */
 	public abstract void setParent(AbstractStructure structure);
 
+
 	/*
 	 * Ajoute une structure fille à l'AbstractStructure.
 	 * 
 	 */
-	public abstract boolean addChildStructure(AbstractStructure structure);
+	public abstract void addChildStructure(AbstractStructure structure);
 
 	/*
 	 * Supprime une structure fille à l'AbstractStructure.
 	 */
-	public abstract boolean removeChildStructure(AbstractStructure structure);
+	public abstract void removeChildStructure(AbstractStructure structure);
 
 }

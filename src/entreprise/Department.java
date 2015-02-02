@@ -1,32 +1,33 @@
 package entreprise;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import utilisateur.User;
 
 public class Department extends AbstractStructure {
 	
 	private Entreprise parentStructure;
-	private List<Service> childrenStructures;
+	private Map<String, Service> childrenStructures;
 	
 	public Department(String name) {
 		super(name);
 		this.parentStructure = null;
-		this.childrenStructures = new ArrayList<>();
+		this.childrenStructures = new HashMap<String, Service>();
 	}
 
 	public Department(String name, User chief, Entreprise parentStructure) {
 		super(name, chief);
-		this.parentStructure = parentStructure;
-		this.childrenStructures = new ArrayList<>();
+		this.parentStructure = Objects.requireNonNull(parentStructure);
+		this.childrenStructures = new HashMap<String, Service>();
 	}
 	
 	/*
-	 * Retourne la liste des structures filles.
+	 * Renvoie le Service correspondant au nom donné en paramètre.
 	 */
-	public List<Service> getChildrenStructures() {
-		return childrenStructures;
+	public Service getService(String name) {
+		return childrenStructures.get(name);
 	}
 
 	@Override
@@ -36,20 +37,32 @@ public class Department extends AbstractStructure {
 
 	@Override
 	public void setParent(AbstractStructure structure) {
-		// TODO Auto-generated method stub
-		
+		Objects.requireNonNull(structure);
+		if(structure instanceof Entreprise){
+			this.parentStructure = (Entreprise) structure;
+		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 	@Override
-	public boolean addChildStructure(AbstractStructure structure) {
-		// TODO Auto-generated method stub
-		return false;
+	public void addChildStructure(AbstractStructure structure) {
+		Objects.requireNonNull(structure);
+		if(structure instanceof Service){
+			Service service = (Service) structure;
+			if(childrenStructures.putIfAbsent(service.getName(), service) != null)
+				throw new IllegalArgumentException();
+		}
 	}
 
 	@Override
-	public boolean removeChildStructure(AbstractStructure structure) {
-		// TODO Auto-generated method stub
-		return false;
+	public void removeChildStructure(AbstractStructure structure) {
+		Objects.requireNonNull(structure);
+		if(structure instanceof Service){
+			Service service = (Service) structure;
+			if(childrenStructures.remove(service.getName()) == null)
+				throw new IllegalArgumentException();
+		}
 	}
 
 }
