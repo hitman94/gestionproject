@@ -12,6 +12,11 @@ public class Group extends AbstractStructure {
 		super(name);
 		this.parentStructure = null;
 	}
+	
+	public Group(String name, User chief) {
+		super(name, chief);
+		this.parentStructure = null;
+	}
 
 	public Group(String name, User chief, Service parentStructure) {
 		super(name, chief);

@@ -16,6 +16,12 @@ public class Department extends AbstractStructure {
 		this.parentStructure = null;
 		this.childrenStructures = new HashMap<String, Service>();
 	}
+	
+	public Department(String name, User chief) {
+		super(name, chief);
+		this.parentStructure = null;
+		this.childrenStructures = new HashMap<String, Service>();
+	}
 
 	public Department(String name, User chief, Entreprise parentStructure) {
 		super(name, chief);

@@ -17,6 +17,12 @@ public class Service extends AbstractStructure {
 		this.childrenStructures = new HashMap<String, Group>();
 	}
 
+	public Service(String name, User chief) {
+		super(name, chief);
+		this.parentStructure = null;
+		this.childrenStructures = new HashMap<String, Group>();
+	}
+	
 	public Service(String name, User chief, Department parentStructure) {
 		super(name, chief);
 		this.parentStructure = Objects.requireNonNull(parentStructure);
