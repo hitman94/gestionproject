@@ -41,7 +41,7 @@ public class Department extends AbstractStructure {
 	/*
 	 * Renvoie la liste de Service.
 	 */
-	public List<Service> getDepartments() {
+	public List<Service> getServices() {
 		return new ArrayList<Service>(childrenStructures.values());
 	}
 
@@ -53,9 +53,8 @@ public class Department extends AbstractStructure {
 	@Override
 	public void setParent(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
-		if(structure instanceof Entreprise){
+		if(structure instanceof Entreprise)
 			this.parentStructure = (Entreprise) structure;
-		}
 		else
 			throw new IllegalArgumentException();
 	}

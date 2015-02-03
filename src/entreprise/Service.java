@@ -41,7 +41,7 @@ public class Service extends AbstractStructure {
 	/*
 	 * Renvoie la liste de Group.
 	 */
-	public List<Group> getDepartments() {
+	public List<Group> getGroups() {
 		return new ArrayList<Group>(childrenStructures.values());
 	}
 
