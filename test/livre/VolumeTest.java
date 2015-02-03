@@ -23,18 +23,18 @@ public class VolumeTest {
 		v.addChapter(chapterInterface);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddChapterInterface2Times() {
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		ChapterInterface chapterInterface = new Chapter(new Long("100"), "Chapter 1", "Chapter Author");
 		ChapterInterface chapterInterface2 = new SubChapter(new Long("1000"), "SubChapter 1", "SubChapter Author");
 		v.addChapter(chapterInterface);
+		v.addChapter(chapterInterface);
 		v.addChapter(chapterInterface2);
-		assertNotEquals(((Chapter) chapterInterface).getTitle() + " ne peut être ajouté qu'1 fois.", true, v.addChapter(chapterInterface));
-		assertNotEquals(((SubChapter) chapterInterface2).getTitle() + " ne peut être ajouté qu'1 fois.", true, v.addChapter(chapterInterface2));
+		v.addChapter(chapterInterface2);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveChapterInterface2Times() {
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		ChapterInterface chapterInterface = new Chapter(new Long("100"), "Chapter 1", "Chapter Author");
@@ -42,9 +42,9 @@ public class VolumeTest {
 		v.addChapter(chapterInterface);
 		v.addChapter(chapterInterface2);
 		v.removeChapter(chapterInterface);
+		v.removeChapter(chapterInterface);
 		v.removeChapter(chapterInterface2);
-		assertNotEquals(((Chapter) chapterInterface).getTitle() + " ne peut être supprimé qu'1 fois.", true, v.removeChapter(chapterInterface));
-		assertNotEquals(((SubChapter) chapterInterface2).getTitle() + " ne peut être supprimé qu'1 fois.", true, v.removeChapter(chapterInterface2));
+		v.removeChapter(chapterInterface2);
 	}
 
 }

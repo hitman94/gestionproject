@@ -21,21 +21,21 @@ public class BookTest {
 		b.addVolume(v);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddVolume2Times() {
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		b.addVolume(v);
-		assertNotEquals(v.getTitle() + " ne peut être ajouté qu'1 fois.", true, b.addVolume(v));
+		b.addVolume(v);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveVolume2Times() {
 		Book b = new Book(new Long("1"), "Book 1", "Book Author");
 		Volume v = new Volume(new Long("10"), "Volume 1", "Volume Author");
 		b.addVolume(v);
 		b.removeVolume(v);
-		assertNotEquals(v.getTitle() + " ne peut être supprimé qu'1 fois.", true, b.removeVolume(v));
+		b.removeVolume(v);
 	}
 
 }

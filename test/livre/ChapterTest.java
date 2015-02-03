@@ -30,38 +30,38 @@ public class ChapterTest {
 		((Chapter) chapterInterface).addParagraph(paragraph);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddSubChapter2Times() {
 		ChapterInterface chapter = new Chapter(new Long("100"), "Chapter 1", "Chapter Author");
 		ChapterInterface subChapter = new SubChapter(new Long("1000"), "SubChapter 1", "SubChapter Author");
 		((Chapter) chapter).addSubChapter((SubChapter) subChapter);
-		assertNotEquals(((SubChapter) subChapter).getTitle() + " ne peut être ajouté qu'1 fois.", true, ((Chapter) chapter).addSubChapter((SubChapter) subChapter));
+		((Chapter) chapter).addSubChapter((SubChapter) subChapter);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddParagraph2Times() {
 		ChapterInterface chapter = new Chapter(new Long("100"), "Chapter 1", "Chapter Author");
 		Paragraph paragraph = new Paragraph(new Long("10000"), "Paragraph 1", "Paragraph Author");
+		chapter.addParagraph(paragraph);		
 		chapter.addParagraph(paragraph);
-		assertNotEquals(paragraph.getTitle() + " ne peut être ajouté qu'1 fois.", true, chapter.addParagraph(paragraph));
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveSubChapter2Times() {
 		ChapterInterface chapter = new Chapter(new Long("100"), "Chapter 1", "Chapter Author");
 		ChapterInterface subChapter = new SubChapter(new Long("1000"), "SubChapter 1", "SubChapter Author");
 		((Chapter) chapter).addSubChapter((SubChapter) subChapter);
 		((Chapter) chapter).removeSubChapter((SubChapter) subChapter);
-		assertNotEquals(((SubChapter) subChapter).getTitle() + " ne peut être supprimé qu'1 fois.", true, ((Chapter) chapter).removeSubChapter((SubChapter) subChapter));
+		((Chapter) chapter).removeSubChapter((SubChapter) subChapter);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveParagraph2Times() {
 		ChapterInterface chapter = new Chapter(new Long("100"), "Chapter 1", "Chapter Author");
 		Paragraph paragraph = new Paragraph(new Long("10000"), "Paragraph 1", "Paragraph Author");
 		chapter.addParagraph(paragraph);
 		chapter.removeParagraph(paragraph);
-		assertNotEquals(paragraph.getTitle() + " ne peut être supprimé qu'1 fois.", true, chapter.removeParagraph(paragraph));
+		chapter.removeParagraph(paragraph);
 	}
 
 }
