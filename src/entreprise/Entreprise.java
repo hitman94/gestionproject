@@ -1,6 +1,8 @@
 package entreprise;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -26,15 +28,22 @@ public class Entreprise extends AbstractStructure {
 	public Department getDepartment(String name) {
 		return childrenStructures.get(name);
 	}
+	
+	/*
+	 * Renvoie la liste de Department.
+	 */
+	public List<Department> getDepartments() {
+		return new ArrayList<Department>(childrenStructures.values());
+	}
 
 	@Override
 	public AbstractStructure getParent() {
-		return null;
+		throw new IllegalArgumentException("Entreprises can't have a parent structure !");
 	}
 
 	@Override
 	public void setParent(AbstractStructure structure) {
-		return;
+		throw new IllegalArgumentException("Entreprises can't have a parent structure !");
 	}
 
 	@Override
@@ -51,8 +60,7 @@ public class Entreprise extends AbstractStructure {
 	public void removeChildStructure(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
 		if(structure instanceof Department){
-			Department department = (Department) structure;
-			if(childrenStructures.remove(department.getName()) == null)
+			if(childrenStructures.remove(structure.getName()) == null)
 				throw new IllegalArgumentException();
 		}
 	}

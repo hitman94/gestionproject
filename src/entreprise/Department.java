@@ -1,6 +1,8 @@
 package entreprise;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,6 +37,13 @@ public class Department extends AbstractStructure {
 	public Service getService(String name) {
 		return childrenStructures.get(name);
 	}
+	
+	/*
+	 * Renvoie la liste de Service.
+	 */
+	public List<Service> getDepartments() {
+		return new ArrayList<Service>(childrenStructures.values());
+	}
 
 	@Override
 	public AbstractStructure getParent() {
@@ -65,8 +74,7 @@ public class Department extends AbstractStructure {
 	public void removeChildStructure(AbstractStructure structure) {
 		Objects.requireNonNull(structure);
 		if(structure instanceof Service){
-			Service service = (Service) structure;
-			if(childrenStructures.remove(service.getName()) == null)
+			if(childrenStructures.remove(structure.getName()) == null)
 				throw new IllegalArgumentException();
 		}
 	}

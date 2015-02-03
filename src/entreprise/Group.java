@@ -39,12 +39,12 @@ public class Group extends AbstractStructure {
 
 	@Override
 	public void addChildStructure(AbstractStructure structure) {
-		throw new IllegalArgumentException("Groups can't have children structures !"); 		
+		throw new IllegalArgumentException("Groups can't have children structures !");
 	}
 
 	@Override
 	public void removeChildStructure(AbstractStructure structure) {
-		throw new IllegalArgumentException("Groups can't have children structures !");		
+		throw new IllegalArgumentException("Groups can't have children structures !");
 	}
 
 }

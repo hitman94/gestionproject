@@ -61,13 +61,12 @@ public abstract class AbstractStructure {
 
 
 	/*
-	 * Ajoute une structure fille à l'AbstractStructure.
-	 * 
+	 * Ajoute une structure fille à l'AbstractStructure. 
 	 */
 	public abstract void addChildStructure(AbstractStructure structure);
 
 	/*
-	 * Supprime une structure fille à l'AbstractStructure.
+	 * Supprime une structure fille de l'AbstractStructure.
 	 */
 	public abstract void removeChildStructure(AbstractStructure structure);
 
