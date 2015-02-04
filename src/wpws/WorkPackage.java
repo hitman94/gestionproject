@@ -2,24 +2,24 @@ package wpws;
 
 
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import livre.Book;
 import livre.Chapter;
-import livre.ChapterInterface;
 import livre.SubChapter;
 import livre.Volume;
 
 public class WorkPackage {
 	
+	private WPMaturity.State status;
 	private Set<Book> lBooks = new HashSet<Book>();
-	private Map<Volume,Set<Chapter>> mVol = new HashMap<>();
-	private Map<Chapter,Set<SubChapter>> mChap = new  HashMap<>();
+	private Set<Volume> vols = new HashSet<>();
+	private Set<Chapter> chaps = new HashSet<Chapter>();
+	private Set<SubChapter> subChaps = new HashSet<SubChapter>();
 	
 	//Attribue un livre à un workPackage
 	public void addBook(Book book){
@@ -30,44 +30,56 @@ public class WorkPackage {
 	//Attribue un volume à un workPackage
 	public void addVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		if(mVol.get(volume)!=null) {
-			mVol.put(volume, new HashSet<Chapter>());
-		}
+		vols.add(volume);
 	}
 	
-	//Attribue un chapitre à un volume
-	public void addChapterToVolume(Chapter chapterToAdd,Volume volume){
+	//Attribue un chapitre au workpackage
+	public void addChapter(Chapter chapterToAdd){
 		
-		Objects.requireNonNull(volume);
 		Objects.requireNonNull(chapterToAdd);
-		Set<Chapter> sChapter = mVol.get(volume);
-		if(sChapter !=null) {
-			if(sChapter.add(chapterToAdd))
-				mChap.put(chapterToAdd, new HashSet<SubChapter>());
-		} else {
-			throw new IllegalArgumentException();
-		}
+		chaps.add(chapterToAdd);
 	}
-	//Attribue un sous chapitre a un chapitre
-	public void addSubChapterToChapter(SubChapter subToAdd,Chapter chapter){
+	
+	
+	//Attribue un sous chapitre au workpackage
+	public void addSubChapter(SubChapter subToAdd){
 		Objects.requireNonNull(subToAdd);
-		Objects.requireNonNull(chapter);
-		Set<SubChapter> sSubChapter = mChap.get(subToAdd);
-		if(sSubChapter!=null)
-			sSubChapter.add(subToAdd);
-		else
-			throw new IllegalArgumentException();
+		subChaps.add(subToAdd);
 	}
-	//recupère une liste de chapitre ou de sous chapitre
-	//Si SubChapterNumber different de -1 recupère le sous chapitre appartenant correspondant au chapterNumber
-	//sinon recupere tous le chapitre
-	public List<ChapterInterface> getChapterInterfaceByNumber(int chapterNumber,int subChapterNumber){}
-//recupère le volume dont le titre est donné en paramètre
-	public Volume getVolume(String title){}
+	
+	/**
+	 * 
+	 * @return la liste des chapites contenus dans ce WP
+	 */
+	
+	public List<Chapter> getAllChapters(){
+		return new ArrayList<>(chaps);
+	}
+	
+	/**
+	 * 
+	 * @return la liste des sous chapites contenus dans ce WP
+	 */
+	
+	public List<SubChapter> getAllSubChapters() {
+		return new ArrayList<>(subChaps);
+	}
+
+	/**
+	 * 
+	 * @return la liste des volumes contenus dans ce WP
+	 */
+	public List<Volume> getAllVolumes(){
+		return new ArrayList<>(vols);
+	}
 	//Recupère le statut courant du workpackage
-	public WPMaturity.State getWPMaturity(){}
+	public WPMaturity.State getStatus(){
+		return this.status;
+	}
 	
 	//Ajouter un WorkPackage
-	public WPMaturity.State addWPMaturity(){}
+	public void setStatus(WPMaturity.State status){
+		this.status=status;
+	}
 
 }
