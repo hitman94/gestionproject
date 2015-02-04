@@ -31,7 +31,7 @@ public class Chapter implements ChapterInterface {
 		this.author = author;
 		this.chapterParagraphs = new HashMap<Long, Paragraph>();
 		this.subChapters = new HashMap<Long, SubChapter>();
-		this.volume = volume;
+		this.volume = Objects.requireNonNull(volume);
 	}
 
 	public Long getId() {

@@ -21,7 +21,7 @@ public class Paragraph {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.chapterInterface = chapterInterface;
+		this.chapterInterface = Objects.requireNonNull(chapterInterface);
 	}
 
 	public Long getId() {
