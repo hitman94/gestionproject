@@ -67,6 +67,8 @@ public class Department extends AbstractStructure {
 			if(childrenStructures.putIfAbsent(service.getName(), service) != null)
 				throw new IllegalArgumentException();
 		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 	@Override
@@ -76,6 +78,8 @@ public class Department extends AbstractStructure {
 			if(childrenStructures.remove(structure.getName()) == null)
 				throw new IllegalArgumentException();
 		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 }

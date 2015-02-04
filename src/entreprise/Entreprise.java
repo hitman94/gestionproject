@@ -54,6 +54,8 @@ public class Entreprise extends AbstractStructure {
 			if(childrenStructures.putIfAbsent(department.getName(), department) != null)
 				throw new IllegalArgumentException();
 		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 	@Override
@@ -63,6 +65,8 @@ public class Entreprise extends AbstractStructure {
 			if(childrenStructures.remove(structure.getName()) == null)
 				throw new IllegalArgumentException();
 		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 }

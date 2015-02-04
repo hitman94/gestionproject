@@ -67,6 +67,8 @@ public class Service extends AbstractStructure {
 			if(childrenStructures.putIfAbsent(group.getName(), group) != null)
 				throw new IllegalArgumentException();
 		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 	@Override
@@ -76,6 +78,8 @@ public class Service extends AbstractStructure {
 			if(childrenStructures.remove(structure.getName()) == null)
 				throw new IllegalArgumentException();
 		}
+		else
+			throw new IllegalArgumentException();
 	}
 
 }
