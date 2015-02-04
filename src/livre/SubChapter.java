@@ -29,7 +29,7 @@ public class SubChapter implements ChapterInterface {
 		this.title = title;
 		this.author = author;
 		this.subChapterParagraphs = new HashMap<Long, Paragraph>();
-		this.chapter = chapter;
+		this.chapter = Objects.requireNonNull(chapter);
 		this.volume = null;
 	}
 	
@@ -38,8 +38,8 @@ public class SubChapter implements ChapterInterface {
 		this.title = title;
 		this.author = author;
 		this.subChapterParagraphs = new HashMap<Long, Paragraph>();
-		this.chapter = chapter;
-		this.volume = volume;
+		this.chapter = Objects.requireNonNull(chapter);
+		this.volume = Objects.requireNonNull(volume);
 	}
 
 

@@ -31,7 +31,7 @@ public class Volume {
 		this.title = title;
 		this.author = author;
 		this.chapters = new HashMap<Long, ChapterInterface>();
-		this.book = book;
+		this.book = Objects.requireNonNull(book);
 	}
 
 	public Long getId() {
