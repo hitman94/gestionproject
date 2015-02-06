@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import utilisateur.User;
 import wpws.WorkPackage;
 import entreprise.AbstractStructure;
 
