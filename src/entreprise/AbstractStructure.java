@@ -3,12 +3,13 @@ package entreprise;
 import java.util.Objects;
 
 import utilisateur.User;
+import wpws.WorkSpace;
 
 public abstract class AbstractStructure {
 
 	private String name;
 	private User chief;
-	
+	private WorkSpace workSpace;
 
 	public AbstractStructure(String name) {
 		this.name = name;
@@ -18,6 +19,14 @@ public abstract class AbstractStructure {
 	public AbstractStructure(String name, User chief) {
 		this.name = name;
 		this.chief = Objects.requireNonNull(chief);
+	}
+	
+	public WorkSpace getWorkSpace() {
+		return workSpace;
+	}
+	
+	public void setWorkSpace(WorkSpace workSpace) {
+		this.workSpace = workSpace;
 	}
 
 	/*

@@ -8,14 +8,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 import livre.Book;
 import livre.Chapter;
 import livre.SubChapter;
 import livre.Volume;
 
+@Entity
 public class WorkPackage {
 	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@NotNull
 	private WPMaturity.State status;
+	
+	private WorkSpace assignedTo;
+	
 	private Set<Book> lBooks = new HashSet<Book>();
 	private Set<Volume> vols = new HashSet<>();
 	private Set<Chapter> chaps = new HashSet<Chapter>();
@@ -35,7 +49,6 @@ public class WorkPackage {
 	
 	//Attribue un chapitre au workpackage
 	public void addChapter(Chapter chapterToAdd){
-		
 		Objects.requireNonNull(chapterToAdd);
 		chaps.add(chapterToAdd);
 	}
@@ -80,6 +93,14 @@ public class WorkPackage {
 	//Ajouter un WorkPackage
 	public void setStatus(WPMaturity.State status){
 		this.status=status;
+	}
+	
+	public void setAssignedTo(WorkSpace assignedTo) {
+		this.assignedTo = assignedTo;
+	}
+	
+	public WorkSpace getAssignedTo() {
+		return assignedTo;
 	}
 
 }
