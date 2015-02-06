@@ -7,23 +7,24 @@ public class UserFactory {
 
 	//private String adresse;
 
-	private UserFactory ()
+	UserFactory ()
 	{
+		
 	}
 
 	//Permet de créer un utilisateur et de lui assigner des droits grâce à une Ability.
-	public void createUser(String  nom,String password, Ability ability){
-		
+	public void createUser(String name,String password, Ability ability){
+
 
 
 	}
 	//Permet de supprimer  un utilisateur mais le donner de son compte doit toujours exister
-	public void deleteUser(String ID){
+	public void deleteUser(Long id){
 
 	}
 
 	//Permet de supprimer  un utilisateur mais le donner de son compte doit toujours exister
-	public void addUser(String  nom, String prenom, String ID){
+	public void addUser(String firstName, String name,Long id){
 
 	}
 

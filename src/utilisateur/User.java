@@ -1,41 +1,41 @@
 package utilisateur;
 
 public class User {
-	private String ID;
-	private String prenom;
-	private String nom;
-	User(String ID, String prenom, String nom){
-		this.ID = ID;
-		this.prenom = prenom;
-		this.nom = nom;
+	private Long id;
+	private String name ;
+	private String firstName;
+	User(Long id, String name, String firstName){
+		this.id = id;
+		this.name = name;
+		this.firstName = firstName;
 	}
 
-	public String getID()
+	public Long getId()
 	{
-		return ID;
+		return id;
 	}
 
-	public void setId( String ID)
+	public void setId( Long id )
 	{
-		this.ID = ID;
+		this.id = id;
 	}
 
-	public String getNom ()
+	public String getFirstName ()
 	{
-		return nom;
+		return firstName;
 	}
-	public void SetNom (String nom)
+	public void setFirstName (String firstName)
 	{
-		this.nom = nom;
+		this.firstName = firstName;
 	}
-	public String getPrenom()
+	public String getName()
 	{
-		return prenom ;
+		return name ;
 	}
 
-	public void setPrenom (String prenom)
+	public void setName (String name)
 	{
-		this.prenom = prenom;
+		this.name = name;
 	}
 
 }
