@@ -16,7 +16,7 @@ import entreprise.Service;
 
 public abstract class Ability {
 
-	private WorkSpace current;
+	protected WorkSpace current;
 
 	// Recupere la liste des workPackage qui nous a été affectée
 	public List<WorkPackage> acquire() {
@@ -133,27 +133,27 @@ public abstract class Ability {
 	 */
 
 	// Cree un groupe
-	public Void createGroup(String name) {
+	public void createGroup(String name) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
 	// Ajoute un membre au group
-	public Void addUserToGroup(String name) {
+	public void addUserToGroup(User user,String name) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
 	// Attribue un jeton de promotion au groupe
-	public Void givePromotionBeanToGroup() {
+	public void givePromotionBeanToGroup(String name) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
 	// retire le jeton de promotion au groupe
-	public Void retreivePromotionBean() {
+	public void retreivePromotionBean() {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
 	// assign un WP au groupe
-	public Void assignWPToGroup(Long WPUI, String name) {
+	public void assignWPToGroup(Long WPUI, String name) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
