@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import utilisateur.User;
 
+@Entity
 public class Department extends AbstractStructure {
 	
 	private Entreprise parentStructure;

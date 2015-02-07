@@ -2,11 +2,19 @@ package livre;
 
 import java.util.Objects;
 
-
+/*
+ * Classe qui représente un Paragraph appartenant
+ * à un Chapter ou un SubChapter.
+ */
+@Entity
 public class Paragraph {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
+	@NotNull
 	private String title;
+	@NotNull
 	private String author;
 	private ChapterInterface chapterInterface;
 	

@@ -6,10 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/*
+ * Classe qui représente un SubChapter héritant d'une ChapterInterface
+ * et appartenant à un Volume et à un Chapter.
+ */
+@Entity
 public class SubChapter implements ChapterInterface {
 
+	@Id
+	@GeneratedValue
 	private Long id;
+	@NotNull
 	private String title;
+	@NotNull
 	private String author;
 	private Map<Long, Paragraph> subChapterParagraphs;
 	private Chapter chapter;

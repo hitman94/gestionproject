@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import utilisateur.User;
 
+@Entity
 public class Group extends AbstractStructure {
 	
 	private Service parentStructure;

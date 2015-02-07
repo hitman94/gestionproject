@@ -5,8 +5,10 @@ import java.util.Objects;
 import utilisateur.User;
 import wpws.WorkSpace;
 
+@Entity
 public abstract class AbstractStructure {
 
+	@NotNull
 	private String name;
 	private User chief;
 	private WorkSpace workSpace;
