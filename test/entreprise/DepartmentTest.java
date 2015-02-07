@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import comportement.CompanyChiefAbility;
+import comportement.DepartmentChiefAbility;
 import utilisateur.User;
+import utilisateur.UserFactory;
 
 public class DepartmentTest {
 
@@ -14,7 +17,7 @@ public class DepartmentTest {
 	 */
 	@Test
 	public void testDepartmentConstructor() {
-		User chief = new User("ID", "Lastname", "Firstname");
+		User chief = UserFactory.createUser("Login", "Password", new DepartmentChiefAbility());
 		AbstractStructure parent = new Entreprise("Entreprise 1");
 		AbstractStructure structure = new Department("Department 1", chief, (Entreprise) parent);
 		assertEquals("Department name isn't correct !", "Department 1", structure.getName());
