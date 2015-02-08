@@ -6,14 +6,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /*
  * Classe qui représente un Book contenant des Volumes,
  * ChapterInterfaces, etc... 
  */
+@Entity
 public class Book {
 
+	@Id
+	@GeneratedValue
 	private Long id;
+	@NotNull
 	private String title;
+	@NotNull
 	private String author;
 	private Map<Long, Volume> volumes;
 

@@ -2,13 +2,19 @@ package entreprise;
 
 import java.util.Objects;
 
-import utilisateur.User;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
+import utilisateur.User;
+import wpws.WorkSpace;
+
+@Entity
 public abstract class AbstractStructure {
 
+	@NotNull
 	private String name;
 	private User chief;
-	
+	private WorkSpace workSpace;
 
 	public AbstractStructure(String name) {
 		this.name = name;
@@ -18,6 +24,14 @@ public abstract class AbstractStructure {
 	public AbstractStructure(String name, User chief) {
 		this.name = name;
 		this.chief = Objects.requireNonNull(chief);
+	}
+	
+	public WorkSpace getWorkSpace() {
+		return workSpace;
+	}
+	
+	public void setWorkSpace(WorkSpace workSpace) {
+		this.workSpace = workSpace;
 	}
 
 	/*

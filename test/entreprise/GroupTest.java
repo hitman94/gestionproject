@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import comportement.Ability;
+
 import utilisateur.User;
+import utilisateur.UserFactory;
 
 public class GroupTest {
 
@@ -14,7 +17,7 @@ public class GroupTest {
 	 */
 	@Test
 	public void testGroupConstructor() {
-		User chief = new User("ID", "Lastname", "Firstname");
+		User chief = UserFactory.createUser("Login", "Password", new Ability());
 		AbstractStructure parent = new Service("Service 1");
 		AbstractStructure structure = new Group("Group 1", chief, (Service) parent);
 		assertEquals("Group name isn't correct !", "Group 1", structure.getName());

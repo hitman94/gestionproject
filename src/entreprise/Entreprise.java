@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+
 import utilisateur.User;
 
+@Entity
 public class Entreprise extends AbstractStructure {
 
 	private Map<String, Department> childrenStructures;

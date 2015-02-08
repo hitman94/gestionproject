@@ -1,17 +1,64 @@
 package comportement;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-public class HeadOfServiceAbility {
-	//Cree un groupe
-	public Void createGroup(String name){}
-	//Ajoute un membre au group
-	public Void addUserToGroup(String name){}
-	//Attribue un jeton de promotion au groupe
-	public Void givePromotionBeanToGroup(){}
-	//retire le jeton de promotion au groupe
-	public Void retreivePromotionBean(){}
-	//assign un  WP au groupe
-	public Void assignWPToGroup(UUID WPUI,String name){}
+import org.omg.CORBA.Current;
 
+import utilisateur.User;
+import entreprise.Group;
+
+public class HeadOfServiceAbility extends Ability {
+	List<Group> groups;
+	Group groupWithPromotionBean;
+
+	/**
+	 * permet de creer un groupe
+	 */
+
+	public HeadOfServiceAbility() {
+		groups = new ArrayList<Group>();
+	}
+
+	@Override
+	public void createGroup(String name) {
+		groups.add(new Group(name));
+	}
+
+	@Override
+	public void addUserToGroup(User user, String name) {
+		try {
+			Group g = getGroupByname(name);
+			g.addUser(user);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("There is no group name " + name);
+		}
+	}
+
+	private Group getGroupByname(String name) {
+		for (Group g : groups) {
+			if (g.getName().equals(name)) {
+
+				return g;
+			}
+		}
+		throw new IllegalArgumentException("There is no group name " + name);
+	}
+
+	@Override
+	public void givePromotionBeanToGroup(String name) {
+		try {
+			Group g = getGroupByname(name);
+			groupWithPromotionBean = g;
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("There is no group name " + name);
+		}
+	}
+
+	@Override
+	public void retreivePromotionBean() {
+		groupWithPromotionBean = null;
+	}
+
+	
 }

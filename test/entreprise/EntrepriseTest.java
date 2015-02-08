@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import comportement.CompanyChiefAbility;
+
 import utilisateur.User;
+import utilisateur.UserFactory;
 
 public class EntrepriseTest {
 
@@ -14,12 +17,11 @@ public class EntrepriseTest {
 	 */
 	@Test
 	public void testEntrepriseConstructor() {
-		User chief = new User("ID", "Lastname", "Firstname");
+		User chief = UserFactory.createUser("Login", "Password", new CompanyChiefAbility());
 		AbstractStructure structure = new Entreprise("Entreprise 1", chief);
 		assertEquals("Entreprise name isn't correct !", "Entreprise 1", structure.getName());
 		assertNotNull("Chief is null !", structure.getChief());
 	}
-	
 	
 	/*
 	 * Vérifie qu'une Entreprise ne peut pas avoir de parent.

@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import comportement.HeadOfServiceAbility;
+
 import utilisateur.User;
+import utilisateur.UserFactory;
 
 public class ServiceTest {
 
@@ -14,7 +17,7 @@ public class ServiceTest {
 	 */
 	@Test
 	public void testServiceConstructor() {
-		User chief = new User("ID", "Lastname", "Firstname");
+		User chief = UserFactory.createUser("Login", "Password", new HeadOfServiceAbility());
 		AbstractStructure parent = new Department("Department 1");
 		AbstractStructure structure = new Service("Service 1", chief, (Department) parent);
 		assertEquals("Service name isn't correct !", "Service 1", structure.getName());

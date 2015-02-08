@@ -2,8 +2,11 @@ package entreprise;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+
 import utilisateur.User;
 
+@Entity
 public class Group extends AbstractStructure {
 	
 	private Service parentStructure;

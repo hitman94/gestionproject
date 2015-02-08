@@ -2,6 +2,9 @@ package livre;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public interface ChapterInterface {
 	
 	/*
