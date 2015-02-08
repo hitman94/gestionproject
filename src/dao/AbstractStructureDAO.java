@@ -4,13 +4,17 @@ import entreprise.AbstractStructure;
 
 
 
-public class AbstractStructureDAO {
-	//retourne lâ€™AbstractStructure correspondant Ã  lâ€™id
-	public AbstractStructure getAbstractStructureDAOById(Guid ID){}
-	//suprimme lâ€™AbstractStructure correspondant
-	public boolean deleteAbstractStructure(AbstractStructure u){}
-	//sauvegarde le AbstractStructure sur la base de donnÃ©e
-	public void saveAbstractStructure(AbstractStructure u){}
-	//met Ã  jour les donnÃ©es de AbstractStructure sur la base de donnÃ©e
-	public void updateAbstractStructure(AbstractStructure u){}
+/**
+ * @author Florian
+ * Extend AbstractDAO
+ * Implémente des méthode spécifique à la dao des abstracte méthode
+ * 
+ */
+public abstract class AbstractStructureDAO<E> extends AbstractDAO<E>{
+
+	public AbstractStructureDAO(Class entity,String name) {
+		super(entity,name);
+	}
+	
+	
 }
