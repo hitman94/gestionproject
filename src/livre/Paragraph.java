@@ -2,6 +2,11 @@ package livre;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /*
  * Classe qui représente un Paragraph appartenant
  * à un Chapter ou un SubChapter.

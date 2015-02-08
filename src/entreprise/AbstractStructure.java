@@ -2,6 +2,9 @@ package entreprise;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+
 import utilisateur.User;
 import wpws.WorkSpace;
 
