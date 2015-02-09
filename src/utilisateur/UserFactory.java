@@ -14,6 +14,12 @@ public class UserFactory {
 
 	//Permet de créer un utilisateur et de lui assigner des droits grâce à une Ability.
 	public void createUser(String name,String password, Ability ability){
+		if(ability.equals("admin")){
+			
+		}
+		else if(ability.equals("editor")){
+			
+		}
 
 
 

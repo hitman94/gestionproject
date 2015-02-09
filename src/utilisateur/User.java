@@ -7,10 +7,10 @@ package utilisateur;
 public class User {
 	public static final String USER="User";
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue
 	private Long id;
 
-
+	@NotNull
 	@Size(min = 2, message="Last name too short")
 	private String name ;
 	@Size(min = 2, message="First name too short")
