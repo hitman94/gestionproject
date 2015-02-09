@@ -1,8 +1,19 @@
 package utilisateur;
 
+
+
+@Entity( name=USER)//Entity_name
+@Access(AcessType.Property) //modif by getters/setters
 public class User {
+	public static final String USER="User";
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
+
+
+	@Size(min = 2, message="Last name too short")
 	private String name ;
+	@Size(min = 2, message="First name too short")
 	private String firstName;
 	User(Long id, String name, String firstName){
 		this.id = id;
