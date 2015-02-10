@@ -1,17 +1,21 @@
 package utilisateur;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import comportement.Ability;
 
 public class userTest {
 
 	@Test
 	public void testUserConstructor() {
-		User u = new User(new Long(1),"Fatou","Ba");
-		assertEquals(new Long(1), u.getId());
-		assertEquals("Fatou", u.getName());
-		assertEquals("Ba", u.getFirstName());
+		Ability a ;//How to get user or specify user abilities??
+		User u = new User("Fatou",new Long(12344),null);
+	
+		assertEquals("Fatou", u.getUserName());
+		assertEquals(new Long(12344), u.getPassWord());
+		assertEquals(null, u.getAbility());
 	}
 
 }
