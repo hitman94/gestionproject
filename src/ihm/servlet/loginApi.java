@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author doquanghuy
  */
+//Login Api
 public class loginApi extends HttpServlet {
 
     /**
@@ -71,8 +72,7 @@ public class loginApi extends HttpServlet {
         HttpSession Httpsession =request.getSession();
 
         
-        Httpsession.setAttribute("sessionClient", sessionClient);
-        response.sendRedirect("/SocialUpemgur/");
+        Httpsession.setAttribute("sessionUser", sessionUser);
     }
 
     /**
