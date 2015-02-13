@@ -5,7 +5,10 @@
  */
 package ihm.servlet;
 
+import ihm.SessionUser;
+
 import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

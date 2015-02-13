@@ -34,7 +34,9 @@ public class CompanyChiefAbility extends Ability{
 		return false;
 	}
 	//Creer un utilisateur avec son nom et mot de passe, renvoie null si échec
-	public User createUser(String name,String pass){}
+	public User createUser(String name,String pass,List<Ability> ability){
+		return new User(name,pass,ability);
+	}
 	//Ajoute un wp à un département
 	public boolean addWPToDepartment(WorkPackage wp, Department d){
 		for(Department dep:list) {
@@ -47,7 +49,7 @@ public class CompanyChiefAbility extends Ability{
 	}
 	//Creer un chapitre, renvoie null si echec
 	public Chapter createChapter(String name){
-		return new Chapter(id, name, User.getUsername());
+		return new Chapter(name, User.getUsername());
 	}
 	//Attribut un chapitre à un WP
 	public boolean addChapterToWP(Chapter c, WorkPackage WP){
@@ -70,32 +72,23 @@ public class CompanyChiefAbility extends Ability{
 	public boolean setServiceChief(User u, Service s) {
 		throw new UnsupportedOperationException();
 	}
-	@Override
-	public SubChapter createSubChapter(String name, Chapter c) {
-		throw new UnsupportedOperationException();
-	}
+	
 	@Override
 	public boolean addSubChapterToWP(SubChapter sc, WorkPackage w) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public Void createGroup(String name) {
+	public void createGroup(String name) {
+		throw new UnsupportedOperationException();
+	}
+	
+	
+	@Override
+	public void retreivePromotionBean() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public Void addUserToGroup(String name) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public Void givePromotionBeanToGroup() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public Void retreivePromotionBean() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public Void assignWPToGroup(Long WPUI, String name) {
+	public void assignWPToGroup(Long WPUI, String name) {
 		throw new UnsupportedOperationException();
 	}
 	@Override

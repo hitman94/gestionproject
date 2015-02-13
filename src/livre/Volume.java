@@ -9,8 +9,8 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
 
 /*
  * Classe qui représente un Volume appartenant à un Book.
@@ -23,25 +23,16 @@ public class Volume {
 	private Long id;
 	@NotNull
 	private String title;
-	@NotNull
-	private String author;
-	private Map<Long, ChapterInterface> chapters;
-	private Book book;
 
-	public Volume(Long id, String title, String author) {
-		this.id = id;
-		this.title = title;
-		this.author = author;
-		this.chapters = new HashMap<Long, ChapterInterface>();
-		this.book = null;
+	@OneToMany(mappedBy="volume")
+	private Map<Long, Chapter> chapters;
+
+	public Volume() {
 	}
 
-	public Volume(Long id, String title, String author, Book book) {
-		this.id = id;
+	public Volume(String title) {
 		this.title = title;
-		this.author = author;
-		this.chapters = new HashMap<Long, ChapterInterface>();
-		this.book = Objects.requireNonNull(book);
+		this.chapters = new HashMap<Long, Chapter>();
 	}
 
 	public Long getId() {
@@ -59,66 +50,34 @@ public class Volume {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
+	
+	public void setChapters(Map<Long, Chapter> chapters) {
+		this.chapters = chapters;
 	}
 	
-	public List<ChapterInterface> getVolumes(){
-		return new ArrayList<ChapterInterface>(chapters.values());
+
+	public List<Chapter> getChapters() {
+		return new ArrayList<Chapter>(chapters.values());
 	}
 
-	public ChapterInterface getChapter(Long id){
+	public Chapter getChapter(Long id) {
 		return chapters.get(id);
 	}
 
-	public Book getBook() {
-		return book;
-	}
+	public void addChapter(Chapter chapter) {
+		Objects.requireNonNull(chapter);
 
-	public void setBook(Book book) {
-		Objects.requireNonNull(book);
-		this.book = book;
-	}
-
-	public void addChapter(ChapterInterface chapterInterface){
-		Objects.requireNonNull(chapterInterface);
-		if(chapterInterface instanceof Chapter){
-			Chapter chapter = (Chapter) chapterInterface;
-			if(chapters.putIfAbsent(chapter.getId(), chapter) != null){
-				throw new IllegalArgumentException();
-			}	
-		}
-		else if(chapterInterface instanceof SubChapter){
-			SubChapter subChapter = (SubChapter) chapterInterface;
-			if(chapters.putIfAbsent(subChapter.getId(), subChapter) != null){
-				throw new IllegalArgumentException();
-			}
-		}
-		else
+		if (chapters.putIfAbsent(chapter.getId(), chapter) != null) {
 			throw new IllegalArgumentException();
+		}
 	}
 
-	public void removeChapter(ChapterInterface chapterInterface){
-		Objects.requireNonNull(chapterInterface);
-		if(chapterInterface instanceof Chapter){
-			Chapter chapter = (Chapter) chapterInterface;
-			if(chapters.remove(chapter.getId()) == null){
-				throw new IllegalArgumentException();
-			}	
-		}
-		else if(chapterInterface instanceof SubChapter){
-			SubChapter subChapter = (SubChapter) chapterInterface;
-			if(chapters.remove(subChapter.getId()) == null){
-				throw new IllegalArgumentException();
-			}
-		}
-		else
+	public void removeChapter(Chapter chapter) {
+		Objects.requireNonNull(chapter);
+		if (chapters.remove(chapter.getId()) == null) {
 			throw new IllegalArgumentException();
+		}
+
 	}
 
 }

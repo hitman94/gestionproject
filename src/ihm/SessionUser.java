@@ -3,6 +3,9 @@
  */
 package ihm;
 
+import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+
 import utilisateur.User;
 
 /**

@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import livre.Chapter;
 import livre.SubChapter;
 import livre.Volume;
@@ -14,10 +19,17 @@ import entreprise.Department;
 import entreprise.Entreprise;
 import entreprise.Service;
 
+@Entity
 public abstract class Ability {
 
+	@Id
+	@GeneratedValue
+	private Long id;
+	
 	protected WorkSpace current;
-
+	
+	@Inject
+	protected User currentUser;
 	// Recupere la liste des workPackage qui nous a été affectée
 	public List<WorkPackage> acquire() {
 		List<WorkPackage> tmp = current.getParent().getWpList();
