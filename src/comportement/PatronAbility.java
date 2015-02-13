@@ -1,30 +1,69 @@
 package comportement;
 
+import entreprise.Entreprise;
 import livre.Volume;
+import utilisateur.User;
 import wpws.WorkPackage;
 
-public class PatronAbility {
-	// Creer un volume en donnant son titre
+
+@Entity
+public class PatronAbility extends Ability {
+
+	
+	public PatronAbility() {
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * create volume with given title
+	 */
+	@Override
 	public Volume createVolume(String title) {
+		return new Volume(title);
 	}
 
-	// Ajoute un volume à un WP
+	/**
+	 * add the given volume to WP
+	 */
+	@Override
 	public boolean addVolumeToWP(Volume v, WorkPackage p) {
+	
+		 p.addVolume(v);
+		 return true;
 	}
 
-	// Creer une entrprise la renvoie renvoie null si echec
-	public Company createCompany(String name) {
+
+	/**
+	 * create a company with the given name
+	 */
+	@Override
+	public Entreprise createCompany(String name) {
+		return new Entreprise(name);
 	}
 
-	// Attribut un workpackage à une entreprise
-	public boolean addWPToCompany(Workpackage wp, Company c) {
+	/**
+	 * add WP TO Company
+	 */
+	// @Override
+	// public boolean addWPToCompany(WorkPackage wp, Entreprise c) {
+	//
+	// }
+
+	/**
+	 * set chief to user
+	 */
+	@Override
+	public boolean nominateCompanyChief(User u, Entreprise c) {
+		
+		 c.setChief(u);
+		 return true;
 	}
 
-	// Attribut un chef à une entreprise
-	public boolean nominateCompanyChief(User u, Company c) {
-	}
-
-	// Creer un livre avec son nom
+	/**
+	 * create a book
+	 */
+	@Override
 	public boolean createBook(String name) {
+		
+		return new Book(name);
 	}
 }

@@ -106,9 +106,9 @@ public abstract class Ability {
 	}
 
 	// Attribut un workpackage à une entreprise
-	public boolean addWPToCompany(WorkPackage wp, Entreprise c) {
-		throw new UnsupportedOperationException("Illegall Operation");
-	}
+//	public boolean addWPToCompany(WorkPackage wp, Entreprise c) {
+//		throw new UnsupportedOperationException("Illegall Operation");
+//	}
 
 	// Attribut un chef à une entreprise
 	public boolean nominateCompanyChief(User u, Entreprise c) {
