@@ -81,4 +81,12 @@ public class User {
 	public void setAbility(Ability ability) {
 		this.ability = ability;
 	}
+	
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+	
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
 }

@@ -13,9 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import livre.Book;
 import livre.Chapter;
-import livre.SubChapter;
 import livre.Volume;
 
 @Entity
@@ -30,16 +28,9 @@ public class WorkPackage {
 	
 	private WorkSpace assignedTo;
 	
-	private Set<Book> lBooks = new HashSet<Book>();
 	private Set<Volume> vols = new HashSet<>();
 	private Set<Chapter> chaps = new HashSet<Chapter>();
-	private Set<SubChapter> subChaps = new HashSet<SubChapter>();
 	
-	//Attribue un livre à un workPackage
-	public void addBook(Book book){
-		Objects.requireNonNull(book);
-		lBooks.add(book);
-	}
 	
 	//Attribue un volume à un workPackage
 	public void addVolume(Volume volume){
@@ -53,13 +44,6 @@ public class WorkPackage {
 		chaps.add(chapterToAdd);
 	}
 	
-	
-	//Attribue un sous chapitre au workpackage
-	public void addSubChapter(SubChapter subToAdd){
-		Objects.requireNonNull(subToAdd);
-		subChaps.add(subToAdd);
-	}
-	
 	/**
 	 * 
 	 * @return la liste des chapites contenus dans ce WP
@@ -68,16 +52,6 @@ public class WorkPackage {
 	public List<Chapter> getAllChapters(){
 		return new ArrayList<>(chaps);
 	}
-	
-	/**
-	 * 
-	 * @return la liste des sous chapites contenus dans ce WP
-	 */
-	
-	public List<SubChapter> getAllSubChapters() {
-		return new ArrayList<>(subChaps);
-	}
-
 	/**
 	 * 
 	 * @return la liste des volumes contenus dans ce WP
