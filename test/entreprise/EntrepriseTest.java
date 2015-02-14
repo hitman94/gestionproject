@@ -1,13 +1,15 @@
 package entreprise;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import livre.Volume;
 
 import org.junit.Test;
 
-import comportement.CompanyChiefAbility;
-
 import utilisateur.User;
-import utilisateur.UserFactory;
+
+import comportement.CompanyChiefAbility;
+import comportement.ContributorAbility;
 
 public class EntrepriseTest {
 
@@ -17,43 +19,49 @@ public class EntrepriseTest {
 	 */
 	@Test
 	public void testEntrepriseConstructor() {
-		User chief = UserFactory.createUser("Login", "Password", new CompanyChiefAbility());
-		AbstractStructure structure = new Entreprise("Entreprise 1", chief);
-		assertEquals("Entreprise name isn't correct !", "Entreprise 1", structure.getName());
-		assertNotNull("Chief is null !", structure.getChief());
+		User chief = new User("Tom", "1234", new CompanyChiefAbility());
+		Volume volume = new Volume("Volume 1");
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		assertEquals("Entreprise name isn't correct !", "Entreprise 1", entreprise.getName());
+		assertNotNull("Chief is null !", entreprise.getChief());
+		assertNotNull("Volume is null !", entreprise.getVolume());
 	}
 	
 	/*
-	 * Vérifie qu'une Entreprise ne peut pas avoir de parent.
+	 * Vérifie qu'une Entreprise ne peut pas avoir de chief null.
 	 */	
-	@Test(expected=IllegalArgumentException.class)
-	public void testEntrepriseSetParent(){
-		AbstractStructure structure = new Entreprise("Entreprise 1");
-		AbstractStructure structure2 = new Entreprise("Entreprise 2");
-		structure.setParent(structure2);
+	@Test(expected=NullPointerException.class)
+	public void testEntrepriseSetChiefNull(){
+		User chief = new User("Tom", "1234", new CompanyChiefAbility());
+		User newChief = null;
+		Volume volume = new Volume("Volume 1");
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		entreprise.setChief(newChief);
 	}
 	
 	/*
-	 * Vérifie qu'une Entreprise accepte un Department en tant que
-	 * structure fille.
+	 * Vérifie qu'une Entreprise accepte un membre non null.
 	 */	
 	@Test
-	public void testEntrepriseAddChild(){
-		AbstractStructure structure = new Entreprise("Entreprise 1");
-		AbstractStructure structure2 = new Department("Department 1");
-		structure.addChildStructure(structure2);
-		assertEquals("Children List size isn't correct !", 1, ((Entreprise) structure).getDepartments().size());
+	public void testEntrepriseAddMember(){
+		User chief = new User("Tom", "1234", new CompanyChiefAbility());
+		User u = new User("Toto", "123456", new ContributorAbility());
+		Volume volume = new Volume("Volume 1");
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		entreprise.addMember(u);
+		assertEquals("Members list size is not correct !", 1, entreprise.getMembers().size());
 	}
 	
 	/*
-	 * Vérifie qu'une Entreprise n'accepte que les Department en tant que
-	 * structure fille.
+	 * Vérifie qu'une Entreprise n'accepte pas un membre null.
 	 */	
-	@Test(expected=IllegalArgumentException.class)
-	public void testEntrepriseAddWrongChild(){
-		AbstractStructure structure = new Entreprise("Entreprise 1");
-		AbstractStructure structure2 = new Group("Group 1");
-		structure.addChildStructure(structure2);
+	@Test(expected=NullPointerException.class)
+	public void testEntrepriseAddNullMember(){
+		User chief = new User("Tom", "1234", new CompanyChiefAbility());
+		User u = null;
+		Volume volume = new Volume("Volume 1");
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		entreprise.addMember(u);
 	}
 
 }

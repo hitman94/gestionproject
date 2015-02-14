@@ -1,6 +1,8 @@
 package entreprise;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class Entreprise{
 	private User chief;
 	
 	@OneToMany(mappedBy="entreprise")
-	private List<User> members;
+	private Set<User> members;
 	
 	@OneToOne
 	private Volume volume;
@@ -31,17 +33,15 @@ public class Entreprise{
 	private WorkSpace workspace;
 	
 	public Entreprise() {
-	}
-	
-	public Entreprise(String name) {
-		this.name=name;
-		this.workspace = new WorkSpace();
+		
 	}
 
-	public Entreprise(String name, User chief) {
-		this.name=name;
-		this.chief=chief;
+	public Entreprise(String name, User chief, Volume volume) {
+		this.name = name;
+		this.chief = Objects.requireNonNull(chief);
+		this.volume = Objects.requireNonNull(volume);
 		this.workspace = new WorkSpace();
+		this.members = new HashSet<User>();
 	}
 	
 	public String getName() {
@@ -53,6 +53,7 @@ public class Entreprise{
 	}
 	
 	public void setChief(User chief) {
+		Objects.requireNonNull(chief);
 		this.chief = chief;
 	}
 	
@@ -60,19 +61,30 @@ public class Entreprise{
 		return chief;
 	}
 	
-	public List<User> getMembers() {
+	public Set<User> getMembers() {
 		return members;
 	}
 	
-	public void addMembers(User u) {
+	public void addMember(User u) {
+		Objects.requireNonNull(u);
 		members.add(u);
 	}
 	
+	public Volume getVolume() {
+		return volume;
+	}
+
+	public void setVolume(Volume volume) {
+		Objects.requireNonNull(volume);
+		this.volume = volume;
+	}
+
 	public WorkSpace getWorkspace() {
 		return workspace;
 	}
 	
 	public void setWorkspace(WorkSpace workspace) {
+		Objects.requireNonNull(workspace);
 		this.workspace = workspace;
 	}
 

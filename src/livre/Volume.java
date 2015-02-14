@@ -28,6 +28,7 @@ public class Volume {
 	private Map<Long, Chapter> chapters;
 
 	public Volume() {
+		
 	}
 
 	public Volume(String title) {
@@ -55,7 +56,6 @@ public class Volume {
 		this.chapters = chapters;
 	}
 	
-
 	public List<Chapter> getChapters() {
 		return new ArrayList<Chapter>(chapters.values());
 	}
@@ -66,18 +66,14 @@ public class Volume {
 
 	public void addChapter(Chapter chapter) {
 		Objects.requireNonNull(chapter);
-
-		if (chapters.putIfAbsent(chapter.getId(), chapter) != null) {
+		if (chapters.putIfAbsent(chapter.getId(), chapter) != null)
 			throw new IllegalArgumentException();
-		}
 	}
 
 	public void removeChapter(Chapter chapter) {
 		Objects.requireNonNull(chapter);
-		if (chapters.remove(chapter.getId()) == null) {
+		if (chapters.remove(chapter.getId()) == null)
 			throw new IllegalArgumentException();
-		}
-
 	}
 
 }

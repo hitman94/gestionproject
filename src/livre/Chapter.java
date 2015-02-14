@@ -26,15 +26,10 @@ public class Chapter {
 	private Volume volume;
 
 	public Chapter() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
-	public Chapter(String title, String author) {
-		this.title = title;
-		this.volume = null;
-	}
-
-	public Chapter(String title, String author, Volume volume) {
+	public Chapter(String title, Volume volume) {
 		this.title = title;
 		this.volume = Objects.requireNonNull(volume);
 	}

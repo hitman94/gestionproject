@@ -1,6 +1,6 @@
 package utilisateur;
 
-import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,10 +26,10 @@ public class User {
 	private Long id;
 
 	@NotNull
-	@Size(min = 2, message = "User name name too short")
+	@Size(min = 2, message = "User name too short")
 	private String userName;
 	@NotNull
-	@Size(min = 4, message = "passWord must contain more than 4 caractere")
+	@Size(min = 4, message = "passWord must contain more than 4 characters")
 	private String passWord;
 
 	@NotNull
@@ -47,7 +46,7 @@ public class User {
 	public User(String userName, String passWord, Ability ability) {
 		this.userName = userName;
 		this.passWord = passWord;
-		this.ability = ability;
+		this.ability = Objects.requireNonNull(ability);
 	}
 
 	public Long getId() {
@@ -79,6 +78,7 @@ public class User {
 	}
 
 	public void setAbility(Ability ability) {
+		Objects.requireNonNull(ability);
 		this.ability = ability;
 	}
 	
@@ -87,6 +87,7 @@ public class User {
 	}
 	
 	public void setEntreprise(Entreprise entreprise) {
+		Objects.requireNonNull(entreprise);
 		this.entreprise = entreprise;
 	}
 }
