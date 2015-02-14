@@ -1,18 +1,21 @@
 package comportement;
 
-import entreprise.Entreprise;
+import javax.persistence.Entity;
+
 import livre.Volume;
 import utilisateur.User;
 import wpws.WorkPackage;
+import entreprise.Entreprise;
 
 
 @Entity
 public class PatronAbility extends Ability {
 
-	
+
 	public PatronAbility() {
-		// TODO Auto-generated constructor stub
+
 	}
+
 	/**
 	 * create volume with given title
 	 */
@@ -26,18 +29,15 @@ public class PatronAbility extends Ability {
 	 */
 	@Override
 	public boolean addVolumeToWP(Volume v, WorkPackage p) {
-	
-		 p.addVolume(v);
-		 return true;
+		return p.addVolume(v);
 	}
-
 
 	/**
 	 * create a company with the given name
 	 */
 	@Override
-	public Entreprise createCompany(String name) {
-		return new Entreprise(name);
+	public Entreprise createCompany(String name, User chief, Volume volume) {
+		return new Entreprise(name, chief, volume);
 	}
 
 	/**
@@ -53,17 +53,8 @@ public class PatronAbility extends Ability {
 	 */
 	@Override
 	public boolean nominateCompanyChief(User u, Entreprise c) {
-		
-		 c.setChief(u);
-		 return true;
+		c.setChief(u);
+		return true;
 	}
 
-	/**
-	 * create a book
-	 */
-	@Override
-	public boolean createBook(String name) {
-		
-		return new Book(name);
-	}
 }

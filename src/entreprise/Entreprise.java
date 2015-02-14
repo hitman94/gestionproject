@@ -14,6 +14,8 @@ import livre.Volume;
 import utilisateur.User;
 import wpws.WorkSpace;
 
+import comportement.CompanyChiefAbility;
+
 @Entity
 public class Entreprise{
 
@@ -54,6 +56,7 @@ public class Entreprise{
 	
 	public void setChief(User chief) {
 		Objects.requireNonNull(chief);
+		chief.setAbility(new CompanyChiefAbility());
 		this.chief = chief;
 	}
 	

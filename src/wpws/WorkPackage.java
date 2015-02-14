@@ -33,15 +33,15 @@ public class WorkPackage {
 	
 	
 	//Attribue un volume à un workPackage
-	public void addVolume(Volume volume){
+	public boolean addVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		vols.add(volume);
+		return vols.add(volume);
 	}
 	
 	//Attribue un chapitre au workpackage
-	public void addChapter(Chapter chapterToAdd){
+	public boolean addChapter(Chapter chapterToAdd){
 		Objects.requireNonNull(chapterToAdd);
-		chaps.add(chapterToAdd);
+		return chaps.add(chapterToAdd);
 	}
 	
 	/**

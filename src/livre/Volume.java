@@ -53,7 +53,7 @@ public class Volume {
 	}
 	
 	public void setChapters(Map<Long, Chapter> chapters) {
-		this.chapters = chapters;
+		this.chapters = new HashMap<Long, Chapter>(chapters);
 	}
 	
 	public List<Chapter> getChapters() {

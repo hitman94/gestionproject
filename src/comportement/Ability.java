@@ -21,10 +21,10 @@ public abstract class Ability {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Inject
 	protected User currentUser;
-	
+
 	// Recupere la liste des workPackage qui nous a été affectée
 	public List<WorkPackage> acquire() {
 		List<WorkPackage> tmp = currentUser.getEntreprise().getWorkspace().getWpList();
@@ -56,37 +56,6 @@ public abstract class Ability {
 	}
 
 	/**
-	 * CompanyChiefAbility Methods
-	 */
-
-
-
-	// Creer un utilisateur avec son nom et mot de passe, renvoie null si échec
-	public User createUser(String name, String pass) {
-		throw new UnsupportedOperationException("Illegall Operation");
-	}
-
-
-	// Creer un chapitre, renvoie null si echec
-	public Chapter createChapter(String name) {
-		throw new UnsupportedOperationException("Illegall Operation");
-	}
-
-	// Attribut un chapitre à un WP
-	public boolean addChapterToWP(Chapter c, WorkPackage WP) {
-		throw new UnsupportedOperationException("Illegall Operation");
-	}
-
-	/**
-	 * Contributor method
-	 */
-
-	public List<File> getFiles() {
-		throw new UnsupportedOperationException("Illegall Operation");
-	}
-
-
-	/**
 	 * PatronAbility
 	 */
 
@@ -101,22 +70,47 @@ public abstract class Ability {
 	}
 
 	// Creer une entrprise la renvoie renvoie null si echec
-	public Entreprise createCompany(String name) {
+	public Entreprise createCompany(String name, User chief, Volume volume) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
 	// Attribut un workpackage à une entreprise
-//	public boolean addWPToCompany(WorkPackage wp, Entreprise c) {
-//		throw new UnsupportedOperationException("Illegall Operation");
-//	}
+	//	public boolean addWPToCompany(WorkPackage wp, Entreprise c) {
+	//		throw new UnsupportedOperationException("Illegall Operation");
+	//	}
 
 	// Attribut un chef à une entreprise
 	public boolean nominateCompanyChief(User u, Entreprise c) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
 
-	// Creer un livre avec son nom
-	public boolean createBook(String name) {
+
+	/**
+	 * CompanyChiefAbility Methods
+	 */
+
+	// Creer un utilisateur avec son nom et mot de passe, renvoie null si échec
+	public User createUser(String name, String pass, Ability ability) {
 		throw new UnsupportedOperationException("Illegall Operation");
 	}
+
+
+	// Creer un chapitre, renvoie null si echec
+	public Chapter createChapter(String name, Volume volume) {
+		throw new UnsupportedOperationException("Illegall Operation");
+	}
+
+	// Attribut un chapitre à un WP
+	public boolean addChapterToWP(Chapter c, WorkPackage wp) {
+		throw new UnsupportedOperationException("Illegall Operation");
+	}
+
+	/**
+	 * Contributor method
+	 */
+
+	public List<File> getFiles() {
+		throw new UnsupportedOperationException("Illegall Operation");
+	}
+
 }

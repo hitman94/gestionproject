@@ -20,6 +20,8 @@ public class Chapter {
 	private Long id;
 	@NotNull
 	private String title;
+
+	private String content;
 	
 	@ManyToOne
 	@NotNull
@@ -31,6 +33,7 @@ public class Chapter {
 
 	public Chapter(String title, Volume volume) {
 		this.title = title;
+		this.content = new String();
 		this.volume = Objects.requireNonNull(volume);
 	}
 
@@ -48,6 +51,14 @@ public class Chapter {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Volume getVolume(){
