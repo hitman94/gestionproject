@@ -26,4 +26,41 @@ public class userTest {
 			throw new IllegalArgumentException();
 	}
 
+	@Test 
+	public void testNullUserName(){
+
+	}
+	@Test
+	public void testNullPassWord(){
+
+	}
+	@Test 
+	public void testUserBelongToEntreprise(){
+		//test si le user appartient à l'entreprise
+	}
+	@Test
+	public void testUserBelongToGroupe(){
+		//entreprise.getmember()
+
+	}
+	@Test
+	public void testUserIsChef(){
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
