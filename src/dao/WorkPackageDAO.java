@@ -12,6 +12,4 @@ public class WorkPackageDAO extends AbstractDAO<WorkPackage>{
 	public WorkPackageDAO() {
 		super(WorkPackage.class, "WorkPackage");
 	}
-	
-	
 }
