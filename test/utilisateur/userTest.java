@@ -18,14 +18,12 @@ public class userTest {
 		assertEquals("12344", u.getPassWord());
 		assertEquals("CompanyChiefAbility", a.getClass().getSimpleName());
 	}
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testNullAbility(){	
 		CompanyChiefAbility a = null;
-		assertFalse(throwException());
+		User u =new  User("Fatou","12344",a) ;
+		if(u.getAbility()==null)
+			throw new IllegalArgumentException();
 	}
-	private boolean throwException(){
-		throw new IllegalArgumentException();
-	}
-	
 
 }
