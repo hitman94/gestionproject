@@ -41,17 +41,18 @@ public class userTest {
 			throw new IllegalArgumentException();
 
 	}
-	
-	@Test 
-	/*public void createUserTest(){
-		// Test pour verifier que les utilisateurs n'ont pas les mêmes nom
-		//pour la création d'un utilisateur
+
+	/*	@Test 
+       public void createUserTest(){
+		// Test pour verifier que les utilisateurs n'ont pas les mï¿½mes nom
+		//pour la crï¿½ation d'un utilisateur
 		CompanyChiefAbility a = null;
 		User u =new  User("Fatou","12344",a);
 		u.
 		if(u.equals(u))
 			throw new IllegalArgumentException();	
 	}*/
+
 	@Test 
 	public void testUserBelongToEntreprise(){
 		//test si le user appartient Ã  l'entreprise
@@ -68,7 +69,7 @@ public class userTest {
 		CompanyChiefAbility a = new CompanyChiefAbility();
 		User u =new  User("Fatou","12344", a);	
 	}
-	
+
 	@Test
 	public void testUserIsChef(){
 		// test si l'utilisateur est un chef
@@ -78,5 +79,5 @@ public class userTest {
 		e.addMember(u);
 		assertEquals(u, e.getChief());	
 	}
-	
+
 }
