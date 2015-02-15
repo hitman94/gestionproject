@@ -74,7 +74,7 @@ public class userTest {
 		// test si l'utilisateur est un chef
 		Entreprise e = null;
 		CompanyChiefAbility a = new CompanyChiefAbility();
-		User u =new  User("Fatou","12344", a) ;
+		User u =new  User("Fatou","12344", a);
 		e.addMember(u);
 		assertEquals(u, e.getChief());	
 	}
