@@ -38,8 +38,8 @@ public class User {
 	private Entreprise entreprise;
 
 	
-	//DO comment, an user who can have many ability, like i remember the teacher who has said
-	//so, from here, must be list<Ability> with anotation OneToMany
+	//DO comment, after review, for simple, an user has one ABILITY
+	// So need to change to OneToOne Anotation 
 	@NotNull
 	private Ability ability;
 
