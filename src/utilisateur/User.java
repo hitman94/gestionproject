@@ -37,6 +37,9 @@ public class User {
 	@JoinColumn(name = "COMPANY_NAME")
 	private Entreprise entreprise;
 
+	
+	//DO comment, an user who can have many ability, like i remember the teacher who has said
+	//so, from here, must be list<Ability> with anotation OneToMany
 	@NotNull
 	private Ability ability;
 
