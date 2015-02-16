@@ -95,6 +95,9 @@ public class loginApi extends HttpServlet {
         	if(user.getPassWord().equals(pass))
             {
             	sessionUser.setIsConnected(true);
+            	
+            	//Set instance user
+            	sessionUser.setUser(user);
             	sessionUser.getMessage().setTypeMsg(0);
             	sessionUser.getMessage().setMessage("Login successful");
             }else
