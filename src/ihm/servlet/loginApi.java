@@ -8,13 +8,17 @@ package ihm.servlet;
 import ihm.SessionUser;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.persistence.Query;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import utilisateur.User;
 
 /**
  *
@@ -75,7 +79,45 @@ public class loginApi extends HttpServlet {
         HttpSession Httpsession =request.getSession();
 
         
+        //Create persitence to Name DB
+        EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory("Name DB");
+        EntityManager em = entityManagerFactory.createEntityManager();
+        User user = null;
+        
+        //Make query
+        Query query = em.createQuery("Select u from USER u where u.userName = '"+username+"'");        
+        List<User> list = query.getResultList();
+        
+        //If query size list = 1 continues, if size list = 0 or >1 fails
+        // Make sure userName is unique
+        if(list.size()==1)
+        {
+        	if(user.getPassWord().equals(pass))
+            {
+            	sessionUser.setIsConnected(true);
+            	sessionUser.getMessage().setTypeMsg(0);
+            	sessionUser.getMessage().setMessage("Login successful");
+            }else
+            {
+            	sessionUser.setIsConnected(false);
+            	sessionUser.getMessage().setTypeMsg(1);
+            	sessionUser.getMessage().setMessage("Login fail");
+            }
+        }else
+        {
+        	sessionUser.setIsConnected(false);
+        	sessionUser.getMessage().setTypeMsg(1);
+        	sessionUser.getMessage().setMessage("Login fail");
+        	
+        }
+                
+        em.close();
+        entityManagerFactory.close();
+        
         Httpsession.setAttribute("sessionUser", sessionUser);
+        // after finish check login, pass to homepage
+        response.sendRedirect("/URL homepage/");
+        
     }
 
     /**
