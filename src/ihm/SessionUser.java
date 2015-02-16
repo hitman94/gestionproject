@@ -54,7 +54,12 @@ public class SessionUser {
     
     public Message getMessage()
     {
-        return message;
+    	if(message==null)
+    	{
+    		message=new Message(0,"");
+    	}
+    	return message;
+        
     }
     
     public void setMessage(Message message)
