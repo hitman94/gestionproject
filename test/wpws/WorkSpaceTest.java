@@ -38,31 +38,31 @@ public class WorkSpaceTest {
 	public void testWSStatus() {
 		WorkSpace ws = new WorkSpace();
 		WorkPackage wp1 = new WorkPackage();
-		wp1.setStatus(WSMaturity.State.Start);
+		wp1.setStatus(WPMaturity.State.Start);
 		WorkPackage wp2 = new WorkPackage();
-		wp2.setStatus(WSMaturity.State.Start);
+		wp2.setStatus(WPMaturity.State.Start);
 		WorkPackage wp3 = new WorkPackage();
-		wp3.setStatus(WSMaturity.State.Start);		
+		wp3.setStatus(WPMaturity.State.Start);		
 		ws.addWP(wp1);
 		ws.addWP(wp2);
 		ws.addWP(wp3);
 		
 		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.Start));
-		wp1.setStatus(WSMaturity.State.Start);
-		wp2.setStatus(WSMaturity.State.InProgress);
-		wp3.setStatus(WSMaturity.State.InProgress);
+		wp1.setStatus(WPMaturity.State.Start);
+		wp2.setStatus(WPMaturity.State.InProgress);
+		wp3.setStatus(WPMaturity.State.InProgress);
 		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.Start));
-		wp1.setStatus(WSMaturity.State.InProgress);
-		wp2.setStatus(WSMaturity.State.InProgress);
-		wp3.setStatus(WSMaturity.State.InProgress);		
+		wp1.setStatus(WPMaturity.State.InProgress);
+		wp2.setStatus(WPMaturity.State.InProgress);
+		wp3.setStatus(WPMaturity.State.InProgress);		
 		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.InProgress));
-		wp1.setStatus(WSMaturity.State.InProgress);
-		wp2.setStatus(WSMaturity.State.Done);
-		wp3.setStatus(WSMaturity.State.InProgress);		
+		wp1.setStatus(WPMaturity.State.InProgress);
+		wp2.setStatus(WPMaturity.State.Done);
+		wp3.setStatus(WPMaturity.State.InProgress);		
 		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.InProgress));
-		wp1.setStatus(WSMaturity.State.Done);
-		wp2.setStatus(WSMaturity.State.Done);
-		wp3.setStatus(WSMaturity.State.Done);		
+		wp1.setStatus(WPMaturity.State.Done);
+		wp2.setStatus(WPMaturity.State.Done);
+		wp3.setStatus(WPMaturity.State.Done);		
 		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.Done));
 		
 		
@@ -78,9 +78,9 @@ public class WorkSpaceTest {
 	public void testIfWSStatusChange() {
 		final WorkSpace ws = new WorkSpace();
 		WorkPackage wp1 = new WorkPackage();
-		wp1.setStatus(WSMaturity.State.InProgress);
+		wp1.setStatus(WPMaturity.State.InProgress);
 		WorkPackage wp2 = new WorkPackage();
-		wp2.setStatus(WSMaturity.State.InProgress);
+		wp2.setStatus(WPMaturity.State.InProgress);
 			
 		ws.addWP(wp1);
 		ws.addWP(wp2);
@@ -90,7 +90,7 @@ public class WorkSpaceTest {
 			
 			public void run() {
 				WorkPackage wp3 = new WorkPackage();
-				wp3.setStatus(WSMaturity.State.Start);
+				wp3.setStatus(WPMaturity.State.Start);
 				ws.addWP(wp3);
 				
 			}

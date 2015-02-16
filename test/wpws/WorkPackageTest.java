@@ -49,27 +49,15 @@ public class WorkPackageTest {
 	//Tester que les changements de statut du WP sont effectués correctement.
 	@Test
 	public void testIfWPStatusChange() {
-
 		final WorkSpace ws = new WorkSpace();
 		WorkPackage wp1 = new WorkPackage();
-		wp1.setStatus(WSMaturity.State.InProgress);
+		wp1.setStatus(WPMaturity.State.InProgress);
 		WorkPackage wp2 = new WorkPackage();
-		wp2.setStatus(WSMaturity.State.InProgress);
+		wp2.setStatus(WPMaturity.State.InProgress);
 
 		ws.addWP(wp1);
 		ws.addWP(wp2);
 
 		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.InProgress));
-		new Thread(new Runnable() {
-
-			public void run() {
-				WorkPackage wp3 = new WorkPackage();
-				wp3.setStatus(WSMaturity.State.Start);
-				ws.addWP(wp3);
-
-			}
-		}).start();
-		Assert.assertTrue(ws.getWSMaturity().equals(WSMaturity.State.Start));
 	}
-
 }
