@@ -8,7 +8,6 @@ import utilisateur.User;
 public class VolumeDAO  extends AbstractDAO<Volume>{
 
 	public VolumeDAO() {
-
-			super(Volume.class,"volume");
+			super(Volume.class,"Volume");
 	}
 }
