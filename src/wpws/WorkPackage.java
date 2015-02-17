@@ -18,37 +18,43 @@ import livre.Volume;
 
 @Entity
 public class WorkPackage {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@NotNull
 	private WPMaturity.State status;
-	
+
 	private WorkSpace assignedTo;
-	
+
 	private Set<Volume> vols = new HashSet<>();
 	private Set<Chapter> chaps = new HashSet<Chapter>();
-	
-	
+
+
 	//Attribue un volume à un workPackage
 	public boolean addVolume(Volume volume){
 		Objects.requireNonNull(volume);
-		return vols.add(volume);
+		if(vols.contains(volume))
+			throw new IllegalArgumentException();
+		else 
+			return vols.add(volume);
 	}
-	
+
 	//Attribue un chapitre au workpackage
 	public boolean addChapter(Chapter chapterToAdd){
 		Objects.requireNonNull(chapterToAdd);
-		return chaps.add(chapterToAdd);
+		if(chaps.contains(chapterToAdd))
+			throw new IllegalArgumentException();
+		else 
+			return chaps.add(chapterToAdd);
 	}
-	
+
 	/**
 	 * 
 	 * @return la liste des chapites contenus dans ce WP
 	 */
-	
+
 	public List<Chapter> getAllChapters(){
 		return new ArrayList<>(chaps);
 	}
@@ -63,16 +69,16 @@ public class WorkPackage {
 	public WPMaturity.State getStatus(){
 		return this.status;
 	}
-	
+
 	//Ajouter un WorkPackage
 	public void setStatus(WPMaturity.State status){
 		this.status=status;
 	}
-	
+
 	public void setAssignedTo(WorkSpace assignedTo) {
 		this.assignedTo = assignedTo;
 	}
-	
+
 	public WorkSpace getAssignedTo() {
 		return assignedTo;
 	}
