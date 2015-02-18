@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import wpws.WPMaturity.State;
 import livre.Chapter;
 import livre.Volume;
 
@@ -40,7 +41,18 @@ public class WorkPackage {
 	@JoinColumn(name="WP_ID")
 	private Set<Chapter> chaps = new HashSet<Chapter>();
 	
+	public WorkPackage(){
+		
+	}
 	
+	public WorkPackage(WorkSpace assignedTo) {
+		this.status = State.Start;
+		this.assignedTo = assignedTo;
+		this.vols = new HashSet<Volume>();
+		this.chaps = new HashSet<Chapter>();
+	}
+
+
 	//Attribue un volume à un workPackage
 	public boolean addVolume(Volume volume){
 		Objects.requireNonNull(volume);

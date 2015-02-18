@@ -3,6 +3,7 @@ package wpws;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -34,6 +35,10 @@ public class WorkSpace {
 		
 	}
 
+	public WorkSpace(WorkSpace parent){
+		this.parent = Objects.requireNonNull(parent);
+		this.wpList = new HashSet<WorkPackage>();
+	}
 	
 	/**
 	 * recupere l'identifiant unique du workspace
@@ -48,20 +53,19 @@ public class WorkSpace {
 	}
 	
 	public void setWpList(Set<WorkPackage> wpList) {
-		this.wpList = wpList;
+		this.wpList = new HashSet<WorkPackage>(wpList);
 	}
 	
-	public Set<WorkPackage> getWpList() {
-		return wpList;
+	public List<WorkPackage> getWpList() {
+		return new ArrayList<WorkPackage>(wpList);
 	}
+	
 	/**
 	 * recup�re la maturite du WS
 	 * 
 	 * @return
 	 */
 	
-	
-
 	public WSMaturity.State getWSMaturity() {
 
 		// algorithme basic

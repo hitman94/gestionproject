@@ -40,8 +40,9 @@ public class Volume {
 		
 	}
 
-	public Volume(String title) {
+	public Volume(String title, WorkPackage workPackage) {
 		this.title = title;
+		this.assignedTo = Objects.requireNonNull(workPackage);
 		this.chapters = new HashMap<Long, Chapter>();
 	}
 
