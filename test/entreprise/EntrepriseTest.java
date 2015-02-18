@@ -2,14 +2,13 @@ package entreprise;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import livre.Volume;
 
 import org.junit.Test;
 
 import utilisateur.User;
 
-import comportement.CompanyChiefAbility;
-import comportement.ContributorAbility;
+import comportement.Ability;
+import comportement.Role;
 
 public class EntrepriseTest {
 
@@ -19,12 +18,10 @@ public class EntrepriseTest {
 	 */
 	@Test
 	public void testEntrepriseConstructor() {
-		User chief = new User("Tom", "1234", new CompanyChiefAbility());
-		Volume volume = new Volume("Volume 1");
-		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		assertEquals("Entreprise name isn't correct !", "Entreprise 1", entreprise.getName());
 		assertNotNull("Chief is null !", entreprise.getChief());
-		assertNotNull("Volume is null !", entreprise.getVolume());
 	}
 	
 	/*
@@ -32,10 +29,9 @@ public class EntrepriseTest {
 	 */	
 	@Test(expected=NullPointerException.class)
 	public void testEntrepriseSetChiefNull(){
-		User chief = new User("Tom", "1234", new CompanyChiefAbility());
+		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
 		User newChief = null;
-		Volume volume = new Volume("Volume 1");
-		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		entreprise.setChief(newChief);
 	}
 	
@@ -44,10 +40,9 @@ public class EntrepriseTest {
 	 */	
 	@Test
 	public void testEntrepriseAddMember(){
-		User chief = new User("Tom", "1234", new CompanyChiefAbility());
-		User u = new User("Toto", "123456", new ContributorAbility());
-		Volume volume = new Volume("Volume 1");
-		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
+		User u = new User("Toto", "123456", new Ability(Role.User));
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		entreprise.addMember(u);
 		assertEquals("Members list size is not correct !", 1, entreprise.getMembers().size());
 	}
@@ -57,10 +52,9 @@ public class EntrepriseTest {
 	 */	
 	@Test(expected=NullPointerException.class)
 	public void testEntrepriseAddNullMember(){
-		User chief = new User("Tom", "1234", new CompanyChiefAbility());
+		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
 		User u = null;
-		Volume volume = new Volume("Volume 1");
-		Entreprise entreprise = new Entreprise("Entreprise 1", chief, volume);
+		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		entreprise.addMember(u);
 	}
 
