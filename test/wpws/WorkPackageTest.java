@@ -1,13 +1,9 @@
 package wpws;
 
 import static org.junit.Assert.*;
-
-import java.util.Iterator;
 import java.util.List;
-
 import livre.Chapter;
 import livre.Volume;
-
 import org.junit.*;
 
 public class WorkPackageTest {
@@ -18,9 +14,6 @@ public class WorkPackageTest {
 		Volume v = new Volume("volume 1");
 		wp.addVolume(v);
 		wp.addVolume(v);
-		List<Volume>l=wp.getAllVolumes();
-		if(l.indexOf(0)==l.indexOf(1))
-			throw new IllegalArgumentException();
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAdd2Chapitre(){
@@ -30,9 +23,6 @@ public class WorkPackageTest {
 		Chapter c = new Chapter("Chapitre 1",v);
 		wp.addChapter(c);
 		wp.addChapter(c);
-		List<Chapter>l=wp.getAllChapters();
-		if(l.indexOf(0)==l.indexOf(1))
-			throw new IllegalArgumentException();
 	}
 
 	//Verifie que le bon volume est recupéré
