@@ -28,7 +28,7 @@ public class WorkPackage {
 	
 	@NotNull
 	private WPMaturity.State status;
-	
+
 	@ManyToOne
 	@JoinColumn(name="WS_ID")
 	private WorkSpace assignedTo;
@@ -72,16 +72,16 @@ public class WorkPackage {
 	public WPMaturity.State getStatus(){
 		return this.status;
 	}
-	
+
 	//Ajouter un WorkPackage
 	public void setStatus(WPMaturity.State status){
 		this.status=status;
 	}
-	
+
 	public void setAssignedTo(WorkSpace assignedTo) {
 		this.assignedTo = assignedTo;
 	}
-	
+
 	public WorkSpace getAssignedTo() {
 		return assignedTo;
 	}

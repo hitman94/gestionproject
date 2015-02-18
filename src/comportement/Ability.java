@@ -1,5 +1,7 @@
 package comportement;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -16,10 +18,15 @@ public class Ability {
 	private Role role;
 	
 	public Ability() {
-		// TODO Auto-generated constructor stub
+
+	}
+	
+	public Ability(Role role) {
+		this.role = Objects.requireNonNull(role);
 	}
 	
 	public void setRole(Role role) {
+		Objects.requireNonNull(role);
 		this.role = role;
 	}
 	
@@ -35,5 +42,4 @@ public class Ability {
 		return id;
 	}
 	
-
 }
