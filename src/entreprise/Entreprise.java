@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import comportement.Ability;
+import comportement.Role;
 import utilisateur.User;
 import wpws.WorkSpace;
 
@@ -50,7 +52,7 @@ public class Entreprise{
 	
 	public void setChief(User chief) {
 		Objects.requireNonNull(chief);
-		chief.setAbility(new CompanyChiefAbility());
+		chief.setAbility(new Ability(Role.CompanyChief));
 		this.chief = chief;
 	}
 	
