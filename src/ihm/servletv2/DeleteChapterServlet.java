@@ -40,7 +40,7 @@ public class DeleteChapterServlet extends HttpServlet {
 		String idChapter = request.getParameter("idChapter");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.CompanyChief){
+		if(user == null || user.getAbility().getRole() != Role.CompanyChief || idChapter == null){
 			response.setStatus(400);
 			return;
 		}

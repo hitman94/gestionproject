@@ -46,14 +46,15 @@ public class CreateVolumeServlet extends HttpServlet {
 		String idWP = request.getParameter("idWorkPackage");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.Patron){
+		if(user == null || user.getAbility().getRole() != Role.Patron
+				|| volumeTitle == null || idWP == null){
 			response.setStatus(400);
 			return;
 		}
 
 		if(user.getAbility().getRole() == Role.Patron){
-			response.setStatus(200);
 			volumeDAO.persist(new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP))));
+			response.setStatus(200);
 		}
 	}
 

@@ -40,14 +40,14 @@ public class DeleteVolumeServlet extends HttpServlet {
 		String idVolume = request.getParameter("idVolume");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.Patron){
+		if(user == null || user.getAbility().getRole() != Role.Patron || idVolume == null){
 			response.setStatus(400);
 			return;
 		}
 
 		if(user.getAbility().getRole() == Role.Patron){
-			response.setStatus(200);
 			volumeDAO.remove(volumeDAO.findById(new Long(idVolume)));
+			response.setStatus(200);
 		}
 	}
 

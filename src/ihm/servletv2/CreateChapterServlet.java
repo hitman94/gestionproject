@@ -46,7 +46,8 @@ public class CreateChapterServlet extends HttpServlet {
 		String idVolume = request.getParameter("idVolume");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.CompanyChief){
+		if(user == null || user.getAbility().getRole() != Role.CompanyChief
+				|| chapterTitle == null || idVolume == null){
 			response.setStatus(400);
 			return;
 		}
