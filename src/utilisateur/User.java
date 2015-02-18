@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import comportement.Ability;
+
 import entreprise.Entreprise;
 
 @Entity(name = User.USER)
@@ -41,6 +43,7 @@ public class User {
 	//DO comment, after review, for simple, an user has one ABILITY
 	// So need to change to OneToOne Anotation 
 	@NotNull
+	@OneToOne
 	private Ability ability;
 
 	public User() {

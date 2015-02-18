@@ -9,8 +9,12 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import wpws.WorkPackage;
 
 /*
  * Classe qui représente un Volume appartenant à un Book.
@@ -26,6 +30,11 @@ public class Volume {
 
 	@OneToMany(mappedBy="volume")
 	private Map<Long, Chapter> chapters;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="WP_ID")
+	private WorkPackage assignedTo;
 
 	public Volume() {
 		

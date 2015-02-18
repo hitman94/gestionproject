@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 /**
@@ -22,48 +23,17 @@ public class WorkSpace {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@OneToMany(mappedBy="assignedTo")
 	private Set<WorkPackage> wpList;	
-	private Set<WorkPackage> tmpList;
+	
+	@OneToOne
 	private WorkSpace parent;
 
 	public WorkSpace() {
-		wpList = new HashSet<WorkPackage>();
-		tmpList=new HashSet<>();
+		
 	}
 
-	/**
-	 * recupere la liste des WP du Workspace
-	 * 
-	 * @return
-	 */
-	
-	public boolean updateWP(WorkPackage p) {
-		wpList.remove(p);
-		return wpList.add(p);
-	}
-	
-	public List<WorkPackage> getWpList() {
-		return new ArrayList<WorkPackage>(wpList);
-	}
-
-	public boolean addWP(WorkPackage wp) {
-		return wpList.add(wp);
-	}
-
-	public boolean removeWP(WorkPackage wp) {
-		return wpList.remove(wp);
-	}
-	
-	public boolean addWPTmpZone(WorkPackage wp) {
-		return tmpList.add(wp);
-	}
-	public boolean removeWPTmpZone(WorkPackage wp) {
-		return tmpList.remove(wp);
-	}
-	
-	public Set<WorkPackage> getTmpZone() {
-		return tmpList;
-	}
 	
 	/**
 	 * recupere l'identifiant unique du workspace
@@ -71,6 +41,18 @@ public class WorkSpace {
 	 */
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public void setWpList(Set<WorkPackage> wpList) {
+		this.wpList = wpList;
+	}
+	
+	public Set<WorkPackage> getWpList() {
+		return wpList;
 	}
 	/**
 	 * recup�re la maturite du WS

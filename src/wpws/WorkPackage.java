@@ -11,6 +11,9 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import livre.Chapter;
@@ -26,9 +29,15 @@ public class WorkPackage {
 	@NotNull
 	private WPMaturity.State status;
 	
+	@ManyToOne
+	@JoinColumn(name="WS_ID")
 	private WorkSpace assignedTo;
 	
+	@OneToMany(mappedBy="assignedTo")
 	private Set<Volume> vols = new HashSet<>();
+	
+	@OneToMany
+	@JoinColumn(name="WP_ID")
 	private Set<Chapter> chaps = new HashSet<Chapter>();
 	
 	

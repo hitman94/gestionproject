@@ -10,11 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import livre.Volume;
 import utilisateur.User;
 import wpws.WorkSpace;
-
-import comportement.CompanyChiefAbility;
 
 @Entity
 public class Entreprise{
@@ -23,13 +20,11 @@ public class Entreprise{
 	private String name;
 	
 	@NotNull
+	@OneToOne
 	private User chief;
 	
 	@OneToMany(mappedBy="entreprise")
 	private Set<User> members;
-	
-	@OneToOne
-	private Volume volume;
 	
 	@OneToOne
 	private WorkSpace workspace;
@@ -38,10 +33,9 @@ public class Entreprise{
 		
 	}
 
-	public Entreprise(String name, User chief, Volume volume) {
+	public Entreprise(String name, User chief) {
 		this.name = name;
 		this.chief = Objects.requireNonNull(chief);
-		this.volume = Objects.requireNonNull(volume);
 		this.workspace = new WorkSpace();
 		this.members = new HashSet<User>();
 	}
@@ -73,14 +67,6 @@ public class Entreprise{
 		members.add(u);
 	}
 	
-	public Volume getVolume() {
-		return volume;
-	}
-
-	public void setVolume(Volume volume) {
-		Objects.requireNonNull(volume);
-		this.volume = volume;
-	}
 
 	public WorkSpace getWorkspace() {
 		return workspace;
