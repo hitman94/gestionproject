@@ -1,8 +1,11 @@
 package ihm.servletv2;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
-import javax.management.relation.Role;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import livre.Chapter;
+import utilisateur.User;
+
 import comportement.Ability;
 
-import utilisateur.User;
+import dao.ChapterDAO;
 
 /**
  * Servlet implementation class UploadFileServlet
@@ -21,6 +27,9 @@ import utilisateur.User;
 public class UploadFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	@Inject
+	ChapterDAO dao;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,8 +56,27 @@ public class UploadFileServlet extends HttpServlet {
 		
 		//Si c'est bien un utilisateur ( car seul les utilisateurs ont le droit de soumettre un travail )
 		//Alors on commence le traitement de mise à jour
+		
 		if(user.getAbility() == Ability.User) { 
-			
+			 Chapter chapter = dao.findById(new Long(chapterId));//On récupère le chapitre qu'on modifie
+			 String path=getServletContext().getRealPath("/chapters/");
+			 File toSave = new File(path+"/"+chapterId+".txt");
+			 toSave.delete();
+			 FileOutputStream out=null;
+			 try  {
+			  out= new FileOutputStream(toSave);
+			 InputStream in = file.getInputStream();
+			 int toRead;
+			 while((toRead=in.read()) !=-1)
+				 out.write((char)toRead);
+			 
+			 chapter.setTakenDate(-1L);//On met a jour la takenDate à -1 pour dire qu'on peut a nouveau l'éditer
+			 dao.update(chapter);//On met à jour la BDD
+			 } finally {
+				 if(out!=null)
+					 out.close();
+			 }
+			 
 			
 		}
 	}

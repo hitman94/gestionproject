@@ -4,6 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 
 import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -17,7 +19,8 @@ import javax.persistence.Query;
  * @param <E>
  *	
  */
-
+@Stateless
+@Named
 public abstract class AbstractDAO<E> {
 
 	protected Class<E> entity;

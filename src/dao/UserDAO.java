@@ -2,12 +2,11 @@ package dao;
 
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -19,10 +18,11 @@ import utilisateur.User;
 
 /**
  * @author Florian
- * Dao utilisé pour les Users
- * Spécifie des méthodes propres à des utilisateurs
+ * Dao utilisï¿½ pour les Users
+ * Spï¿½cifie des mï¿½thodes propres ï¿½ des utilisateurs
  */
-@Stateful
+@Stateless
+@Named
 public class UserDAO extends AbstractDAO<User>{
 
 		public UserDAO() {
@@ -33,7 +33,7 @@ public class UserDAO extends AbstractDAO<User>{
 		
 		
 		/**Retourne un User correspondant au Username et password transmit en argument 
-		 * Méthode utilisé en cas de connexion à l'application
+		 * Mï¿½thode utilisï¿½ en cas de connexion ï¿½ l'application
 		 * @param username User Name de l'utilisateur
 		 * @param password PassWord de l'utilisateur
 		 * @return Le User correspondant au password et username, sinon NULL
@@ -51,9 +51,9 @@ public class UserDAO extends AbstractDAO<User>{
 		}
 		
 		/**
-		 * Verifie si le username est déja présent dans la base de donnée
-		 * @param username Username à tester
-		 * @return true si déja présent, false sinon
+		 * Verifie si le username est dï¿½ja prï¿½sent dans la base de donnï¿½e
+		 * @param username Username ï¿½ tester
+		 * @return true si dï¿½ja prï¿½sent, false sinon
 		 */
 		public boolean checkUserName(String username) {
 			Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username");
@@ -69,9 +69,9 @@ public class UserDAO extends AbstractDAO<User>{
 		}
 		
 		/**
-		 * Récupère une list de User associer à une entreprise
+		 * Rï¿½cupï¿½re une list de User associer ï¿½ une entreprise
 		 * @param id ID de l'entreprise
-		 * @return une liste des User ou null si aucun User n'est associer à l'id
+		 * @return une liste des User ou null si aucun User n'est associer ï¿½ l'id
 		 */
 		@SuppressWarnings("unchecked")
 		public List<User> usersFromEntreprise(Long id) {

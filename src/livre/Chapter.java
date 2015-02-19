@@ -69,5 +69,13 @@ public class Chapter {
 		Objects.requireNonNull(volume);
 		this.volume = volume;
 	}
+	
+	public void setTakenDate(Long takenDate) {
+		this.takenDate = takenDate;
+	}
+	
+	public Long getTakenDate() {
+		return takenDate;
+	}
 
 }
