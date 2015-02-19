@@ -32,6 +32,9 @@ public class Chapter {
 	@ManyToOne
 	@JoinColumn(name="WP_ID")
 	private WorkPackage wp;
+	
+	@NotNull
+	private Long takenDate=-1L;
 
 	public Chapter() {
 	
