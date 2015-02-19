@@ -30,17 +30,12 @@ public class UploadFileServlet extends HttpServlet {
 	@Inject
 	ChapterDAO dao;
 	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public UploadFileServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chapterId = request.getParameter("chapterId"); // On recupere l'id du chapitre a mettre à jour
 		Part file = request.getPart("file"); //On récupere le fichier que l'utilisateur a envoyé ( c'est le contenu du chapitre )
@@ -60,7 +55,7 @@ public class UploadFileServlet extends HttpServlet {
 		if(user.getAbility() == Ability.User) { 
 			 Chapter chapter = dao.findById(new Long(chapterId));//On récupère le chapitre qu'on modifie
 			 String path=getServletContext().getRealPath("/chapters/");
-			 File toSave = new File(path+"/"+chapterId+".txt");
+			 File toSave = new File(path+"/"+chapterId+".docx");
 			 toSave.delete();
 			 FileOutputStream out=null;
 			 try  {
@@ -81,11 +76,9 @@ public class UploadFileServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
