@@ -37,8 +37,7 @@ public class WorkPackage {
 	@OneToMany(mappedBy="assignedTo")
 	private Set<Volume> vols = new HashSet<>();
 	
-	@OneToMany
-	@JoinColumn(name="WP_ID")
+	@OneToMany(mappedBy="wp")
 	private Set<Chapter> chaps = new HashSet<Chapter>();
 	
 	public WorkPackage(){

@@ -12,8 +12,8 @@ import javax.persistence.Query;
 
 /**
  * @author Florian
- *	Super class d'une DAO spécifique
- *	Definie les méthodes commune à chaques DAO
+ *	Super class d'une DAO spï¿½cifique
+ *	Definie les mï¿½thodes commune ï¿½ chaques DAO
  * @param <E>
  *	
  */
@@ -23,7 +23,7 @@ public abstract class AbstractDAO<E> {
 	protected Class<E> entity;
 	protected String entityName;
 	
-	@PersistenceContext(unitName = "modelTest")
+	@PersistenceContext(unitName = "gestionproject")
 	protected EntityManager em;
 	
 	

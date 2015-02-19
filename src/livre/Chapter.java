@@ -5,8 +5,11 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import wpws.WorkPackage;
 
 /*
  * Classe qui représente un Chapter héritant d'une ChapterInterface
@@ -23,7 +26,12 @@ public class Chapter {
 	
 	@ManyToOne
 	@NotNull
+	@JoinColumn(name="VOL_ID")
 	private Volume volume;
+	
+	@ManyToOne
+	@JoinColumn(name="WP_ID")
+	private WorkPackage wp;
 
 	public Chapter() {
 	

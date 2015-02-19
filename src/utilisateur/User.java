@@ -4,7 +4,10 @@ import java.util.Objects;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,15 +17,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import comportement.Ability;
-
 import entreprise.Entreprise;
 
-@Entity(name = User.USER)
-// Entity_name
-@Access(AccessType.PROPERTY)
+@Entity
 // modif by getters/setters
 public class User {
-	public static final String USER = "User";
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -34,7 +33,6 @@ public class User {
 	@Size(min = 4, message = "passWord must contain more than 4 characters")
 	private String passWord;
 
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_NAME")
 	private Entreprise entreprise;
@@ -43,7 +41,7 @@ public class User {
 	//DO comment, after review, for simple, an user has one ABILITY
 	// So need to change to OneToOne Anotation 
 	@NotNull
-	@OneToOne
+	@Enumerated(EnumType.STRING)
 	private Ability ability;
 
 	public User() {

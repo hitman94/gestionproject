@@ -9,52 +9,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utilisateur.User;
 import comportement.Ability;
-import comportement.Role;
-import dao.VolumeDAO;
+
+import utilisateur.User;
+import dao.UserDAO;
 
 /**
- * Servlet implementation class DeleteVolumeServlet
+ * Servlet implementation class CreateUserServlet
  */
-@WebServlet("/DeleteVolumeServlet")
-public class DeleteVolumeServlet extends HttpServlet {
+@WebServlet("/CreateUserServlet")
+public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
+	
 	@Inject
-	private VolumeDAO volumeDAO;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public DeleteVolumeServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	UserDAO dao;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CreateUserServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idVolume = request.getParameter("idVolume");
-		User user = (User) request.getAttribute("user");
-
-		if(user == null || user.getAbility() != Ability.Patron || idVolume == null){
-			response.setStatus(400);
-			return;
-		}
-
-		if(user.getAbility() == Ability.Patron){
-			volumeDAO.remove(volumeDAO.findById(new Long(idVolume)));
-			response.setStatus(200);
-		}
+		dao.persist(new User("test", "bob", Ability.User));
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
