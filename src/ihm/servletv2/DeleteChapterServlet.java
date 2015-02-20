@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import utilisateur.User;
 
-import comportement.Role;
+import comportement.Ability;
 
 import dao.ChapterDAO;
 
@@ -40,12 +40,13 @@ public class DeleteChapterServlet extends HttpServlet {
 		String idChapter = request.getParameter("idChapter");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.CompanyChief || idChapter == null){
-			response.setStatus(400);
-			return;
-		}
+		if(user == null  || idChapter == null)
+			response.sendError(400, "Un des paramètres est incorrect.");
+		
+		if(user.getAbility() != Ability.CompanyChief)
+			response.sendError(400, "L'utilisateur n'est pas un CompanyChief");			
 
-		if(user.getAbility().getRole() == Role.CompanyChief){
+		if(user.getAbility() == Ability.CompanyChief){
 			response.setStatus(200);
 			chapterDAO.remove(chapterDAO.findById(new Long(idChapter)));
 		}

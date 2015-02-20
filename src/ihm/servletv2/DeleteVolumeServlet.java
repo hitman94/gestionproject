@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utilisateur.User;
+
 import comportement.Ability;
-import comportement.Role;
+
 import dao.VolumeDAO;
 
 /**
@@ -39,10 +40,11 @@ public class DeleteVolumeServlet extends HttpServlet {
 		String idVolume = request.getParameter("idVolume");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility() != Ability.Patron || idVolume == null){
-			response.setStatus(400);
-			return;
-		}
+		if(user == null  || idVolume == null)
+			response.sendError(400, "Un des paramètres est incorrect.");
+		
+		if(user.getAbility() != Ability.Patron)
+			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");	
 
 		if(user.getAbility() == Ability.Patron){
 			volumeDAO.remove(volumeDAO.findById(new Long(idVolume)));
