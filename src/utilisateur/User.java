@@ -19,8 +19,7 @@ import entreprise.Entreprise;
 
 @Entity(name = User.USER)
 // Entity_name
-@Access(AccessType.PROPERTY)
-// modif by getters/setters
+
 public class User {
 	public static final String USER = "User";
 	@Id
@@ -34,25 +33,22 @@ public class User {
 	@Size(min = 4, message = "passWord must contain more than 4 characters")
 	private String passWord;
 
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_NAME")
 	private Entreprise entreprise;
 
-	
+
 	//DO comment, after review, for simple, an user has one ABILITY
 	// So need to change to OneToOne Anotation 
-	@NotNull
 	@OneToOne
 	private Ability ability;
 
 	public User() {
 	}
 
-	public User(String userName, String passWord, Ability ability) {
+	public User(String userName, String passWord) {
 		this.userName = userName;
 		this.passWord = passWord;
-		this.ability = Objects.requireNonNull(ability);
 	}
 
 	public Long getId() {
@@ -87,11 +83,11 @@ public class User {
 		Objects.requireNonNull(ability);
 		this.ability = ability;
 	}
-	
+
 	public Entreprise getEntreprise() {
 		return entreprise;
 	}
-	
+
 	public void setEntreprise(Entreprise entreprise) {
 		Objects.requireNonNull(entreprise);
 		this.entreprise = entreprise;
