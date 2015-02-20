@@ -8,7 +8,6 @@ import org.junit.Test;
 import utilisateur.User;
 
 import comportement.Ability;
-import comportement.Role;
 
 public class EntrepriseTest {
 
@@ -18,7 +17,7 @@ public class EntrepriseTest {
 	 */
 	@Test
 	public void testEntrepriseConstructor() {
-		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
+		User chief = new User("Tom", "1234", Ability.CompanyChief);
 		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		assertEquals("Entreprise name isn't correct !", "Entreprise 1", entreprise.getName());
 		assertNotNull("Chief is null !", entreprise.getChief());
@@ -29,7 +28,7 @@ public class EntrepriseTest {
 	 */	
 	@Test(expected=NullPointerException.class)
 	public void testEntrepriseSetChiefNull(){
-		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
+		User chief = new User("Tom", "1234", Ability.CompanyChief);
 		User newChief = null;
 		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		entreprise.setChief(newChief);
@@ -40,8 +39,8 @@ public class EntrepriseTest {
 	 */	
 	@Test
 	public void testEntrepriseAddMember(){
-		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
-		User u = new User("Toto", "123456", new Ability(Role.User));
+		User chief = new User("Tom", "1234", Ability.CompanyChief);
+		User u = new User("Toto", "123456", Ability.User);
 		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		entreprise.addMember(u);
 		assertEquals("Members list size is not correct !", 1, entreprise.getMembers().size());
@@ -52,7 +51,7 @@ public class EntrepriseTest {
 	 */	
 	@Test(expected=NullPointerException.class)
 	public void testEntrepriseAddNullMember(){
-		User chief = new User("Tom", "1234", new Ability(Role.CompanyChief));
+		User chief = new User("Tom", "1234", Ability.CompanyChief);
 		User u = null;
 		Entreprise entreprise = new Entreprise("Entreprise 1", chief);
 		entreprise.addMember(u);
