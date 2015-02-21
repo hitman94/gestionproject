@@ -32,6 +32,7 @@ public class RemoveUserServlet extends HttpServlet {
 						"L'utilisateur n'existe pas");
 			} else {
 				userdao.remove(userToDelete);
+				resp.setStatus(200);
 
 			}
 		}
