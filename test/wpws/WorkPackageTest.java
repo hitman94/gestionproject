@@ -23,7 +23,7 @@ public class WorkPackageTest {
 		//tester qu'on a pas 2 chapitre idem
 		WorkPackage wp = new WorkPackage(null);
 		Volume v = new Volume("volume 1", wp);
-		Chapter c = new Chapter("Chapitre 1",v);
+		Chapter c = new Chapter("Chapitre 1",v, wp);
 		wp.addChapter(c);
 		wp.addChapter(c);
 	}
@@ -33,8 +33,8 @@ public class WorkPackageTest {
 	public void testGetVolume(){
 		WorkPackage wp = new WorkPackage(null);
 		Volume v = new Volume("volume 1", wp);
-		Chapter c1 = new Chapter("Chapitre 1",v);
-		Chapter c2 = new Chapter("Chapitre 2",v);
+		Chapter c1 = new Chapter("Chapitre 1",v, wp);
+		Chapter c2 = new Chapter("Chapitre 2",v, wp);
 		wp.addChapter(c1);
 		assertEquals("volume 1",c1.getVolume().getTitle());
 		assertEquals("volume 1",c2.getVolume().getTitle());

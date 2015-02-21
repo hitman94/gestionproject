@@ -55,10 +55,10 @@ public class CreateChapterServlet extends HttpServlet {
 		if(user == null || chapterTitle == null || idVolume == null || workPackageId == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
 
-		if(user.getAbility() != Ability.CompanyChief)
+		else if(user.getAbility() != Ability.CompanyChief)
 			response.sendError(400, "L'utilisateur n'est pas un CompanyChief");
 
-		if(user.getAbility() == Ability.CompanyChief){
+		else if(user.getAbility() == Ability.CompanyChief){
 			Chapter toAdd = new Chapter(chapterTitle, volumeDAO.findById(new Long(idVolume)), wpDao.findById(new Long(workPackageId)));
 			chapterDAO.persist(toAdd);
 

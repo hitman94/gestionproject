@@ -51,10 +51,10 @@ public class DeleteChapterServlet extends HttpServlet {
 		if(user == null  || idChapter == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
 
-		if(user.getAbility() != Ability.CompanyChief)
+		else if(user.getAbility() != Ability.CompanyChief)
 			response.sendError(400, "L'utilisateur n'est pas un CompanyChief");			
 
-		if(user.getAbility() == Ability.CompanyChief){
+		else if(user.getAbility() == Ability.CompanyChief){
 			response.setStatus(200);
 			Chapter toDelete=chapterDAO.findById(new Long(idChapter));
 			toDelete.getVolume().removeChapter(toDelete);

@@ -48,10 +48,10 @@ public class DeleteVolumeServlet extends HttpServlet {
 		if(user == null  || idVolume == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
 		
-		if(user.getAbility() != Ability.Patron)
+		else if(user.getAbility() != Ability.Patron)
 			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");	
 
-		if(user.getAbility() == Ability.Patron){
+		else if(user.getAbility() == Ability.Patron){
 			Volume v=volumeDAO.findById(new Long(idVolume));
 			v.getWp().removeVolume(v);
 			wpDao.update(v.getWp());
