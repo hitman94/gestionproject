@@ -44,7 +44,7 @@ public class CreateVolumeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String volumeTitle = request.getParameter("title");
 		String idWP = request.getParameter("idWorkPackage");
-		User user = (User) request.getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 
 		if(user == null || volumeTitle == null || idWP == null)
 			response.sendError(400, "Un des paramètres est incorrect.");

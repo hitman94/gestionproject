@@ -38,7 +38,7 @@ public class DeleteVolumeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idVolume = request.getParameter("idVolume");
-		User user = (User) request.getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 
 		if(user == null  || idVolume == null)
 			response.sendError(400, "Un des paramètres est incorrect.");

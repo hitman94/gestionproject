@@ -44,7 +44,7 @@ public class CreateChapterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chapterTitle = request.getParameter("title");
 		String idVolume = request.getParameter("idVolume");
-		User user = (User) request.getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 
 		if(user == null || chapterTitle == null || idVolume == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
