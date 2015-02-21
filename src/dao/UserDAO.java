@@ -41,7 +41,7 @@ public class UserDAO extends AbstractDAO<User>{
 		public User connexion(String username, String password) {
 			Query q = em.createQuery("SELECT u FROM User u WHERE u.userName=:username AND u.passWord=:password");
 			q.setParameter("username", username);
-			q.setParameter("password", DigestUtils.sha1Hex(password));
+			q.setParameter("password",password);
 			try {
 				User u = (User) q.getSingleResult();
 				return u;
@@ -74,7 +74,7 @@ public class UserDAO extends AbstractDAO<User>{
 		 * @return une liste des User ou null si aucun User n'est associer � l'id
 		 */
 		@SuppressWarnings("unchecked")
-		public List<User> usersFromEntreprise(String id) {
+		public List<User> usersFromEntreprise(Long id) {
 			Query q = em.createQuery("SELECT u FROM User AS u WHERE u.entreprise.name=:name");
 			q.setParameter("name", id);
 			try {

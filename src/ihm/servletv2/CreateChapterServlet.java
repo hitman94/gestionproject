@@ -50,7 +50,7 @@ public class CreateChapterServlet extends HttpServlet {
 		String chapterTitle = request.getParameter("title");
 		String workPackageId = request.getParameter("wpId");
 		String idVolume = request.getParameter("idVolume");
-		User user = (User) request.getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 
 		if(user == null || chapterTitle == null || idVolume == null || workPackageId == null)
 			response.sendError(400, "Un des paramètres est incorrect.");

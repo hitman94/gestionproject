@@ -8,25 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.codec.digest.DigestUtils;
 
 import utilisateur.User;
-import dao.UserDAO;
+import wpws.WorkPackage;
+import wpws.WorkSpace;
+import comportement.Ability;
+import dao.WorkPackageDAO;
 
 /**
- * Servlet implementation class ConnectionServlet
+ * Servlet implementation class DeleteWorkPackageServlet
  */
-@WebServlet("/ConnectionServlet")
-public class ConnectionServlet extends HttpServlet {
+@WebServlet("/DeleteWorkPackageServlet")
+public class DeleteWorkPackageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      @Inject
-      private UserDAO dao;
+       
+	@Inject
+	private WorkPackageDAO workPackageDAO;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConnectionServlet() {
+    public DeleteWorkPackageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +36,23 @@ public class ConnectionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		password = DigestUtils.sha1Hex(password);
-		User user = dao.connexion(username, password);
-		if(user!=null){
-			response.setStatus(200);
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-		}else{
-			response.sendError(400, "Password ou Username incorrect");
-		}
+		String idWP = request.getParameter("idWorkPackage");
+		User user = (User) request.getSession().getAttribute("user");
+			if( user == null){
+				response.sendError(400, "Aucun utilisateur connecté");
+				return;
+			}
+			if(user.getAbility() == Ability.User){
+				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
+				return;
+			}
+			WorkPackage wp = workPackageDAO.findById(new Long(idWP));
+			if(wp == null){
+				response.sendError(400, "Aucun workpackage ne correspond à l'id " + idWP);
+				return;
+			}
+			workPackageDAO.remove(wp);
+		
 	}
 
 	/**

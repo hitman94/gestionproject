@@ -46,7 +46,7 @@ public class DeleteChapterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idChapter = request.getParameter("idChapter");
-		User user = (User) request.getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 
 		if(user == null  || idChapter == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
