@@ -81,7 +81,7 @@ public class Chapter {
 	}
 	
 	public void setWp(WorkPackage wp) {
-		this.wp = wp;
+		this.wp = Objects.requireNonNull(wp);
 	}
 	
 	public WorkPackage getWp() {
