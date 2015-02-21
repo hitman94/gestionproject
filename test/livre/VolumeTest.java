@@ -26,18 +26,18 @@ public class VolumeTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddChapter2Times() {
-		WorkPackage workPackage = new WorkPackage();
-		Volume v = new Volume("Volume 1", workPackage);
-		Chapter chapter = new Chapter("Chapter 1", v);
+		WorkPackage wp = new WorkPackage();
+		Volume v = new Volume("Volume 1", wp);
+		Chapter chapter = new Chapter("Chapter 1", v, wp);
 		v.addChapter(chapter);
 		v.addChapter(chapter);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveChapter2Times() {
-		WorkPackage workPackage = new WorkPackage();
-		Volume v = new Volume("Volume 1", workPackage);
-		Chapter chapter = new Chapter("Chapter 1", v);
+		WorkPackage wp = new WorkPackage();
+		Volume v = new Volume("Volume 1", wp);
+		Chapter chapter = new Chapter("Chapter 1", v, wp);
 		v.addChapter(chapter);
 		v.removeChapter(chapter);
 		v.removeChapter(chapter);
