@@ -46,9 +46,10 @@ public class User {
 	public User() {
 	}
 
-	public User(String userName, String passWord) {
+	public User(String userName, String passWord,Ability ability) {
 		this.userName = userName;
 		this.passWord = passWord;
+		this.ability=ability;
 	}
 
 	public Long getId() {
