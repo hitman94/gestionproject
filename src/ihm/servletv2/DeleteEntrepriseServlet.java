@@ -39,11 +39,11 @@ public class DeleteEntrepriseServlet extends HttpServlet {
 		String idEntreprise = request.getParameter("idEntreprise");
 		User user = (User) request.getSession().getAttribute("user");
 			if( user == null){
-				response.sendError(400, "Aucun utilisateur connect�");
+				response.sendError(400, "Aucun utilisateur connecté");
 				return;
 			}
 			if(user.getAbility() != Ability.Patron){
-				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour cr�er un workPackage");
+				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
 				return;
 			}
 			Entreprise ent = entrepriseDAO.findById(new Long(idEntreprise));

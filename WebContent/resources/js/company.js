@@ -15,10 +15,10 @@ $(document).ready(function() {
 	        url: "CreateCompanyServlet",
 	        data: { companyName : companyName, idChief:idChief},
 	        success: function (data) {
-	        	window.location.replace("company.jsp");
+	        	window.location.replace("companies.jsp");
 	        },
-	        error: function (data){
-	        	$('#errorsZone').html("Erreur lors de la creation de l'entreprise.");
+	        error: function (data , status, error){
+	        	$('#errorsZone').html("Erreur lors de la creation de l'entreprise.</br>" + error);
 	        	$('#errorsZone').show(500);
 	        }
 	        

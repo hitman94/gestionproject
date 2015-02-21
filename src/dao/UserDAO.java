@@ -76,8 +76,8 @@ public class UserDAO extends AbstractDAO<User>{
 		 */
 		@SuppressWarnings("unchecked")
 		public List<User> usersFromEntreprise(Long id) {
-			Query q = em.createQuery("SELECT u FROM User AS u WHERE u.entreprise.name=:name");
-			q.setParameter("name", id);
+			Query q = em.createQuery("SELECT u FROM User AS u WHERE u.entreprise.id=:id");
+			q.setParameter("id", id);
 			try {
 				List<User> result = q.getResultList();
 				return result;
