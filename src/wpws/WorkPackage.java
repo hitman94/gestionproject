@@ -86,11 +86,11 @@ public class WorkPackage {
 
 	//Ajouter un WorkPackage
 	public void setStatus(WPMaturity.State status){
-		this.status=status;
+		this.status = status;
 	}
 
 	public void setAssignedTo(WorkSpace assignedTo) {
-		this.assignedTo = assignedTo;
+		this.assignedTo = Objects.requireNonNull(assignedTo);
 	}
 
 	public WorkSpace getAssignedTo() {
