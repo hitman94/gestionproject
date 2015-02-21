@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -12,13 +13,16 @@ import javax.validation.constraints.NotNull;
 
 import utilisateur.User;
 import wpws.WorkSpace;
-
 import comportement.Ability;
 
 @Entity
 public class Entreprise{
 
 	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@NotNull
 	private String name;
 	
 	@NotNull
@@ -42,6 +46,14 @@ public class Entreprise{
 		this.members = new HashSet<User>();
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
