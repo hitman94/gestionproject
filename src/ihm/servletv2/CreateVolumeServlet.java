@@ -49,10 +49,10 @@ public class CreateVolumeServlet extends HttpServlet {
 		if(user == null || volumeTitle == null || idWP == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
 		
-		if(user.getAbility() != Ability.Patron)
+		else if(user.getAbility() != Ability.Patron)
 			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
 
-		if(user.getAbility() == Ability.Patron){
+		else if(user.getAbility() == Ability.Patron){
 			Volume toAdd=new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP)));
 			volumeDAO.persist(toAdd);
 			toAdd.getWp().addVolume(toAdd);
