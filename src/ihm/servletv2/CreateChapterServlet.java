@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import livre.Chapter;
 import utilisateur.User;
 
-import comportement.Role;
+import comportement.Ability;
 
 import dao.ChapterDAO;
 import dao.VolumeDAO;
@@ -46,13 +46,13 @@ public class CreateChapterServlet extends HttpServlet {
 		String idVolume = request.getParameter("idVolume");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.CompanyChief
-				|| chapterTitle == null || idVolume == null){
-			response.setStatus(400);
-			return;
-		}
+		if(user == null || chapterTitle == null || idVolume == null)
+			response.sendError(400, "Un des paramètres est incorrect.");
+		
+		if(user.getAbility() != Ability.CompanyChief)
+			response.sendError(400, "L'utilisateur n'est pas un CompanyChief");
 
-		if(user.getAbility().getRole() == Role.CompanyChief){
+		if(user.getAbility() == Ability.CompanyChief){
 			response.setStatus(200);
 			chapterDAO.persist(new Chapter(chapterTitle, volumeDAO.findById(new Long(idVolume))));
 		}

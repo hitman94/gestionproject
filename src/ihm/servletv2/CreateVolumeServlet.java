@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import livre.Volume;
 import utilisateur.User;
 
-import comportement.Role;
+import comportement.Ability;
 
 import dao.VolumeDAO;
 import dao.WorkPackageDAO;
@@ -46,13 +46,13 @@ public class CreateVolumeServlet extends HttpServlet {
 		String idWP = request.getParameter("idWorkPackage");
 		User user = (User) request.getAttribute("user");
 
-		if(user == null || user.getAbility().getRole() != Role.Patron
-				|| volumeTitle == null || idWP == null){
-			response.setStatus(400);
-			return;
-		}
+		if(user == null || volumeTitle == null || idWP == null)
+			response.sendError(400, "Un des paramètres est incorrect.");
+		
+		if(user.getAbility() != Ability.Patron)
+			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
 
-		if(user.getAbility().getRole() == Role.Patron){
+		if(user.getAbility() == Ability.Patron){
 			volumeDAO.persist(new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP))));
 			response.setStatus(200);
 		}

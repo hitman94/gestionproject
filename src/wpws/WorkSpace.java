@@ -36,7 +36,7 @@ public class WorkSpace {
 	}
 
 	public WorkSpace(WorkSpace parent){
-		this.parent = Objects.requireNonNull(parent);
+		this.parent = parent;
 		this.wpList = new HashSet<WorkPackage>();
 	}
 	
@@ -58,6 +58,14 @@ public class WorkSpace {
 	
 	public List<WorkPackage> getWpList() {
 		return new ArrayList<WorkPackage>(wpList);
+	}
+	
+	public void setParent(WorkSpace parent) {
+		this.parent = Objects.requireNonNull(parent);
+	}
+	
+	public WorkSpace getParent() {
+		return parent;
 	}
 	
 	/**
@@ -85,11 +93,13 @@ public class WorkSpace {
 		return WSMaturity.State.Done;
 	}
 	
-	public void setParent(WorkSpace parent) {
-		this.parent = parent;
+	public boolean addWP(WorkPackage wp){
+		Objects.requireNonNull(wp);
+		return wpList.add(wp);
 	}
 	
-	public WorkSpace getParent() {
-		return parent;
+	public boolean removeWP(WorkPackage wp){
+		Objects.requireNonNull(wp);
+		return wpList.remove(wp);
 	}
 }

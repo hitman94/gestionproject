@@ -70,12 +70,12 @@ public class Chapter {
 		this.volume = volume;
 	}
 	
-	public void setTakenDate(Long takenDate) {
-		this.takenDate = takenDate;
-	}
-	
 	public Long getTakenDate() {
 		return takenDate;
+	}
+	
+	public void setTakenDate(Long takenDate) {
+		this.takenDate = takenDate;
 	}
 
 }

@@ -69,7 +69,6 @@ public class Entreprise{
 		members.add(u);
 	}
 	
-
 	public WorkSpace getWorkspace() {
 		return workspace;
 	}
