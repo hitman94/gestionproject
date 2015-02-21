@@ -12,7 +12,6 @@
 <script src="resources/js/jquery-1.11.2.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/control.js"></script>
-<script src="resources/js/login.js"></script>
 </head>
 <body>
 	<f:view>
@@ -27,16 +26,42 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">ImgUpem</a>
+					<a class="navbar-brand" href="#">ICBM</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 
 					<c:choose>
 						<c:when test="${ sessionScope.user != null}">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="index.jsp">Accueil</a></li>
-								<li><a href="#">Contact</a></li>
-							</ul>
+						
+							<c:choose>
+								<c:when test="${ sessionScope.user.ability == 'Patron'}">
+									<ul class="nav navbar-nav">
+										<li class="active"><a href="index.jsp">Accueil</a></li>
+										<li><a href="#">Ajouter des entreprises</a></li>
+										<li><a href="#">Creer des utilisateurs</a></li>
+										<li><a href="#">Creer des volumes</a></li>
+										<li><a href="#">Creer des workPackages</a></li>
+									</ul>
+								</c:when>
+								<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
+									<ul class="nav navbar-nav">
+										<li class="active"><a href="index.jsp">Accueil</a></li>
+										<li><a href="#">Ajouter des entreprises</a></li>
+										<li><a href="#">Creer des utilisateurs</a></li>
+										<li><a href="#">Creer des volumes</a></li>
+										<li><a href="#">Creer des workPackages</a></li>
+									</ul>
+								</c:when>
+								<c:when test="${ sessionScope.user.ability == 'User'}">
+									<ul class="nav navbar-nav">
+										<li class="active"><a href="index.jsp">Accueil</a></li>
+										<li><a href="#">Ajouter des entreprises</a></li>
+										<li><a href="#">Creer des utilisateurs</a></li>
+										<li><a href="#">Creer des volumes</a></li>
+										<li><a href="#">Creer des workPackages</a></li>
+									</ul>
+								</c:when>
+							</c:choose>
 							<div class=" navbar-form navbar-right">
 								<div class="dropdown">
 									<button class="btn btn-success dropdown-toggle" type="button"
@@ -48,9 +73,7 @@
 									<ul class="dropdown-menu" role="menu"
 										aria-labelledby="dropdownLogin">
 										<li role="presentation"><a role="menuitem" tabindex="-1"
-											href="myimages.jsp">Mes images</a></li>
-										<li role="presentation"><a role="menuitem" tabindex="-1"
-											href="#">Déconnection</a></li>
+											href="#" id="deconnectSubmit">Déconnection</a></li>
 									</ul>
 								</div>
 
@@ -58,26 +81,10 @@
 							</div>
 						</c:when>
 						<c:otherwise>
-
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="index.jsp">Accueil</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="register.jsp">Inscription</a></li>
-							</ul>
-							<form class="navbar-form navbar-right">
-								<div class="form-group">
-									<input type="text" placeholder="Username" id="usernameLogin"
-										class="form-control" data-toggle="tooltip"
-										data-placement="bottom"
-										title="Utilisateur/mot de passe incorrect" />
-								</div>
-								<div class="form-group">
-									<input type="password" placeholder="Password"
-										id="passwordLogin" class="form-control" />
-								</div>
-								<button type="button" id="submitLogin"
-									class="form-control btn btn-success">Sign in</button>
-							</form>
+							<script>
+							window.location.replace("index.jsp");
+							</script>
+							
 						</c:otherwise>
 					</c:choose>
 
