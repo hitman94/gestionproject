@@ -1,5 +1,6 @@
 package ihm.servletv2;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -11,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import livre.Chapter;
 import utilisateur.User;
-
+import wpws.WorkPackage;
 import comportement.Ability;
-
 import dao.ChapterDAO;
 import dao.VolumeDAO;
+import dao.WorkPackageDAO;
 
 /**
  * Servlet implementation class CreateChapterServlet
@@ -29,6 +30,9 @@ public class CreateChapterServlet extends HttpServlet {
 	
 	@Inject
 	private VolumeDAO volumeDAO;
+	
+	@Inject
+	private WorkPackageDAO wpDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,6 +47,7 @@ public class CreateChapterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chapterTitle = request.getParameter("title");
+		String workPackageId = request.getParameter("wpId");
 		String idVolume = request.getParameter("idVolume");
 		User user = (User) request.getAttribute("user");
 
@@ -53,8 +58,19 @@ public class CreateChapterServlet extends HttpServlet {
 			response.sendError(400, "L'utilisateur n'est pas un CompanyChief");
 
 		if(user.getAbility() == Ability.CompanyChief){
-			response.setStatus(200);
-			chapterDAO.persist(new Chapter(chapterTitle, volumeDAO.findById(new Long(idVolume))));
+			Chapter toAdd = new Chapter(chapterTitle, volumeDAO.findById(new Long(idVolume)), wpDao.findById(new Long(workPackageId)));
+			chapterDAO.persist(toAdd);
+			
+			toAdd.getVolume().addChapter(toAdd);
+			toAdd.getWp().addChapter(toAdd);
+			
+			volumeDAO.update(toAdd.getVolume());
+			wpDao.update(toAdd.getWp());
+			
+			 String path=getServletContext().getRealPath("/chapters/");
+			 File toCreate = new File(path+"/"+toAdd.getId()+".docx");
+			 toCreate.createNewFile();
+			 response.setStatus(200);
 		}
 	}
 
@@ -62,7 +78,7 @@ public class CreateChapterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

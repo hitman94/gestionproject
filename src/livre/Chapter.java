@@ -31,6 +31,7 @@ public class Chapter {
 	
 	@ManyToOne
 	@JoinColumn(name="WP_ID")
+	@NotNull
 	private WorkPackage wp;
 	
 	@NotNull
@@ -40,9 +41,10 @@ public class Chapter {
 	
 	}
 
-	public Chapter(String title, Volume volume) {
+	public Chapter(String title, Volume volume,WorkPackage p) {
 		this.title = title;
 		this.volume = Objects.requireNonNull(volume);
+		this.wp=Objects.requireNonNull(p);
 	}
 
 	public Long getId() {
@@ -76,6 +78,14 @@ public class Chapter {
 	
 	public void setTakenDate(Long takenDate) {
 		this.takenDate = takenDate;
+	}
+	
+	public void setWp(WorkPackage wp) {
+		this.wp = wp;
+	}
+	
+	public WorkPackage getWp() {
+		return wp;
 	}
 
 }

@@ -53,7 +53,10 @@ public class CreateVolumeServlet extends HttpServlet {
 			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
 
 		if(user.getAbility() == Ability.Patron){
-			volumeDAO.persist(new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP))));
+			Volume toAdd=new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP)));
+			volumeDAO.persist(toAdd);
+			toAdd.getWp().addVolume(toAdd);
+			workPackageDAO.update(toAdd.getWp());
 			response.setStatus(200);
 		}
 	}
@@ -62,7 +65,7 @@ public class CreateVolumeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

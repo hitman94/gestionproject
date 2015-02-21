@@ -1,5 +1,6 @@
 package ihm.servletv2;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -9,11 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import livre.Chapter;
 import utilisateur.User;
-
 import comportement.Ability;
-
 import dao.ChapterDAO;
+import dao.VolumeDAO;
+import dao.WorkPackageDAO;
 
 /**
  * Servlet implementation class DeleteChapterServlet
@@ -25,6 +27,12 @@ public class DeleteChapterServlet extends HttpServlet {
 	@Inject
 	private ChapterDAO chapterDAO;
        
+	@Inject
+	private VolumeDAO volDao;
+	
+	@Inject
+	private WorkPackageDAO wpDao;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,7 +56,15 @@ public class DeleteChapterServlet extends HttpServlet {
 
 		if(user.getAbility() == Ability.CompanyChief){
 			response.setStatus(200);
-			chapterDAO.remove(chapterDAO.findById(new Long(idChapter)));
+			Chapter toDelete=chapterDAO.findById(new Long(idChapter));
+			toDelete.getVolume().removeChapter(toDelete);
+			toDelete.getWp().removeChapter(toDelete);
+			chapterDAO.remove(toDelete);
+			volDao.update(toDelete.getVolume());
+			wpDao.update(toDelete.getWp());
+			 String path=getServletContext().getRealPath("/chapters/");
+			 File toRemove = new File(path+"/"+idChapter+".docx");
+			 toRemove.delete();
 		}
 	}
 
@@ -56,7 +72,7 @@ public class DeleteChapterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

@@ -34,7 +34,7 @@ public class WorkPackage {
 	@JoinColumn(name="WS_ID")
 	private WorkSpace assignedTo;
 	
-	@OneToMany(mappedBy="assignedTo")
+	@OneToMany(mappedBy="wp")
 	private Set<Volume> vols = new HashSet<>();
 	
 	@OneToMany(mappedBy="wp")
@@ -62,6 +62,16 @@ public class WorkPackage {
 	public boolean addChapter(Chapter chapterToAdd){
 		Objects.requireNonNull(chapterToAdd);
 		return chaps.add(chapterToAdd);
+	}
+	
+	public boolean removeChapter(Chapter chapterToAdd) {
+		Objects.requireNonNull(chapterToAdd);
+		return chaps.remove(chapterToAdd);
+	}
+	
+	public boolean removeVolume(Volume v) {
+		Objects.requireNonNull(v);
+		return vols.remove(v);
 	}
 	
 	/**
