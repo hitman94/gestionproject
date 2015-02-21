@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class Entreprise{
 	@OneToMany(mappedBy="entreprise")
 	private Set<User> members;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private WorkSpace workspace;
 	
 	public Entreprise() {

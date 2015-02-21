@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,7 +21,7 @@ import comportement.Ability;
 import entreprise.Entreprise;
 
 @Entity
-// modif by getters/setters
+@NamedQuery(name="findUserWithoutCompany", query="SELECT u FROM User u WHERE u.entreprise=null")
 public class User {
 	@Id
 	@GeneratedValue

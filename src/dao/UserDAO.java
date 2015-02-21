@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -83,6 +84,11 @@ public class UserDAO extends AbstractDAO<User>{
 			} catch (NoResultException e) {
 				return null;
 			} 
+		}
+		
+		public List<User> userWithoutCompanies() {
+			TypedQuery<User> q = em.createNamedQuery("findUserWithoutCompany", User.class);
+			return q.getResultList();
 		}
 
 }
