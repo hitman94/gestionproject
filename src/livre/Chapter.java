@@ -5,8 +5,11 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import wpws.WorkPackage;
 
 /*
  * Classe qui représente un Chapter héritant d'une ChapterInterface
@@ -23,15 +26,25 @@ public class Chapter {
 	
 	@ManyToOne
 	@NotNull
+	@JoinColumn(name="VOL_ID")
 	private Volume volume;
+	
+	@ManyToOne
+	@JoinColumn(name="WP_ID")
+	@NotNull
+	private WorkPackage wp;
+	
+	@NotNull
+	private Long takenDate=-1L;
 
 	public Chapter() {
 	
 	}
 
-	public Chapter(String title, Volume volume) {
+	public Chapter(String title, Volume volume,WorkPackage p) {
 		this.title = title;
 		this.volume = Objects.requireNonNull(volume);
+		this.wp=Objects.requireNonNull(p);
 	}
 
 	public Long getId() {
@@ -57,6 +70,22 @@ public class Chapter {
 	public void setVolume(Volume volume) {
 		Objects.requireNonNull(volume);
 		this.volume = volume;
+	}
+	
+	public Long getTakenDate() {
+		return takenDate;
+	}
+	
+	public void setTakenDate(Long takenDate) {
+		this.takenDate = takenDate;
+	}
+	
+	public void setWp(WorkPackage wp) {
+		this.wp = Objects.requireNonNull(wp);
+	}
+	
+	public WorkPackage getWp() {
+		return wp;
 	}
 
 }

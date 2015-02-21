@@ -2,8 +2,8 @@ package dao;
 
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
@@ -19,10 +19,11 @@ import utilisateur.User;
 
 /**
  * @author Florian
- * Dao utilisé pour les Users
- * Spécifie des méthodes propres à des utilisateurs
+ * Dao utilisï¿½ pour les Users
+ * Spï¿½cifie des mï¿½thodes propres ï¿½ des utilisateurs
  */
-@Stateful
+@Stateless
+@Named
 public class UserDAO extends AbstractDAO<User>{
 
 		public UserDAO() {
@@ -33,15 +34,15 @@ public class UserDAO extends AbstractDAO<User>{
 		
 		
 		/**Retourne un User correspondant au Username et password transmit en argument 
-		 * Méthode utilisé en cas de connexion à l'application
+		 * Mï¿½thode utilisï¿½ en cas de connexion ï¿½ l'application
 		 * @param username User Name de l'utilisateur
 		 * @param password PassWord de l'utilisateur
 		 * @return Le User correspondant au password et username, sinon NULL
 		 */
 		public User connexion(String username, String password) {
-			Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username AND u.passWord=:password");
+			Query q = em.createQuery("SELECT u FROM User u WHERE u.userName=:username AND u.passWord=:password");
 			q.setParameter("username", username);
-			q.setParameter("password", DigestUtils.sha1Hex(password));
+			q.setParameter("password",password);
 			try {
 				User u = (User) q.getSingleResult();
 				return u;
@@ -51,12 +52,12 @@ public class UserDAO extends AbstractDAO<User>{
 		}
 		
 		/**
-		 * Verifie si le username est déja présent dans la base de donnée
-		 * @param username Username à tester
-		 * @return true si déja présent, false sinon
+		 * Verifie si le username est dï¿½ja prï¿½sent dans la base de donnï¿½e
+		 * @param username Username ï¿½ tester
+		 * @return true si dï¿½ja prï¿½sent, false sinon
 		 */
 		public boolean checkUserName(String username) {
-			Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username");
+			Query q = em.createQuery("SELECT u FROM User u WHERE u.userName=:username");
 			q.setParameter("username", username);
 			try {
 				q.getSingleResult();
@@ -69,20 +70,25 @@ public class UserDAO extends AbstractDAO<User>{
 		}
 		
 		/**
-		 * Récupère une list de User associer à une entreprise
+		 * Rï¿½cupï¿½re une list de User associer ï¿½ une entreprise
 		 * @param id ID de l'entreprise
-		 * @return une liste des User ou null si aucun User n'est associer à l'id
+		 * @return une liste des User ou null si aucun User n'est associer ï¿½ l'id
 		 */
 		@SuppressWarnings("unchecked")
 		public List<User> usersFromEntreprise(Long id) {
-			Query q = em.createQuery("SELECT u FROM User u WHERE u.COMPANY_NAME=:COMPANY_NAME");
-			q.setParameter("COMPANY_NAME", id);
+			Query q = em.createQuery("SELECT u FROM User AS u WHERE u.entreprise.id=:id");
+			q.setParameter("id", id);
 			try {
 				List<User> result = q.getResultList();
 				return result;
 			} catch (NoResultException e) {
 				return null;
 			} 
+		}
+		
+		public List<User> userWithoutCompanies() {
+			TypedQuery<User> q = em.createNamedQuery("findUserWithoutCompany", User.class);
+			return q.getResultList();
 		}
 
 }

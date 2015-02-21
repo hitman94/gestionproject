@@ -4,21 +4,26 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import comportement.Ability;
-import comportement.Role;
 import utilisateur.User;
 import wpws.WorkSpace;
+import comportement.Ability;
 
 @Entity
 public class Entreprise{
 
 	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@NotNull
 	private String name;
 	
 	@NotNull
@@ -28,7 +33,7 @@ public class Entreprise{
 	@OneToMany(mappedBy="entreprise")
 	private Set<User> members;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private WorkSpace workspace;
 	
 	public Entreprise() {
@@ -42,6 +47,14 @@ public class Entreprise{
 		this.members = new HashSet<User>();
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -52,7 +65,7 @@ public class Entreprise{
 	
 	public void setChief(User chief) {
 		Objects.requireNonNull(chief);
-		chief.setAbility(new Ability(Role.CompanyChief));
+		chief.setAbility(Ability.CompanyChief);
 		this.chief = chief;
 	}
 	
@@ -69,7 +82,6 @@ public class Entreprise{
 		members.add(u);
 	}
 	
-
 	public WorkSpace getWorkspace() {
 		return workspace;
 	}
