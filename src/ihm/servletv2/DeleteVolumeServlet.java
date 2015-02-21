@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import livre.Volume;
 import utilisateur.User;
 
 import comportement.Ability;
 
 import dao.VolumeDAO;
+import dao.WorkPackageDAO;
 
 /**
  * Servlet implementation class DeleteVolumeServlet
@@ -24,6 +26,9 @@ public class DeleteVolumeServlet extends HttpServlet {
 
 	@Inject
 	private VolumeDAO volumeDAO;
+	
+	@Inject
+	private WorkPackageDAO wpDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -47,7 +52,10 @@ public class DeleteVolumeServlet extends HttpServlet {
 			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");	
 
 		if(user.getAbility() == Ability.Patron){
-			volumeDAO.remove(volumeDAO.findById(new Long(idVolume)));
+			Volume v=volumeDAO.findById(new Long(idVolume));
+			v.getWp().removeVolume(v);
+			wpDao.update(v.getWp());
+			volumeDAO.remove(v);
 			response.setStatus(200);
 		}
 	}
@@ -56,7 +64,7 @@ public class DeleteVolumeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

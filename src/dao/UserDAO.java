@@ -39,7 +39,7 @@ public class UserDAO extends AbstractDAO<User>{
 		 * @return Le User correspondant au password et username, sinon NULL
 		 */
 		public User connexion(String username, String password) {
-			Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username AND u.passWord=:password");
+			Query q = em.createQuery("SELECT u FROM User u WHERE u.userName=:username AND u.passWord=:password");
 			q.setParameter("username", username);
 			q.setParameter("password",password);
 			try {
@@ -56,7 +56,7 @@ public class UserDAO extends AbstractDAO<User>{
 		 * @return true si d�ja pr�sent, false sinon
 		 */
 		public boolean checkUserName(String username) {
-			Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username");
+			Query q = em.createQuery("SELECT u FROM User u WHERE u.userName=:username");
 			q.setParameter("username", username);
 			try {
 				q.getSingleResult();

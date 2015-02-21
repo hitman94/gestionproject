@@ -34,7 +34,7 @@ public class Volume {
 	
 	@ManyToOne
 	@JoinColumn(name="WP_ID")
-	private WorkPackage assignedTo;
+	private WorkPackage wp;
 
 	public Volume() {
 		
@@ -42,7 +42,7 @@ public class Volume {
 
 	public Volume(String title, WorkPackage workPackage) {
 		this.title = title;
-		this.assignedTo = Objects.requireNonNull(workPackage);
+		this.wp = Objects.requireNonNull(workPackage);
 		this.chapters = new HashMap<Long, Chapter>();
 	}
 
@@ -84,6 +84,14 @@ public class Volume {
 		Objects.requireNonNull(chapter);
 		if (chapters.remove(chapter.getId()) == null)
 			throw new IllegalArgumentException();
+	}
+	
+	public WorkPackage getWp() {
+		return wp;
+	}
+	
+	public void setWp(WorkPackage assignedTo) {
+		this.wp = assignedTo;
 	}
 
 }
