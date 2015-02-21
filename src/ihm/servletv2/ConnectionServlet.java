@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import utilisateur.User;
 import dao.UserDAO;
 
@@ -35,6 +37,7 @@ public class ConnectionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		password = DigestUtils.sha1Hex(password);
 		User user = dao.connexion(username, password);
 		if(user!=null){
 			response.setStatus(200);
