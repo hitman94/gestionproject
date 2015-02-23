@@ -4,6 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 
 import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -12,18 +14,19 @@ import javax.persistence.Query;
 
 /**
  * @author Florian
- *	Super class d'une DAO spécifique
- *	Definie les méthodes commune à chaques DAO
+ *	Super class d'une DAO spï¿½cifique
+ *	Definie les mï¿½thodes commune ï¿½ chaques DAO
  * @param <E>
  *	
  */
-
+@Stateless
+@Named
 public abstract class AbstractDAO<E> {
 
 	protected Class<E> entity;
 	protected String entityName;
 	
-	@PersistenceContext(unitName = "modelTest")
+	@PersistenceContext(unitName = "gestionproject")
 	protected EntityManager em;
 	
 	

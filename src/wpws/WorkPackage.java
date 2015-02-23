@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import wpws.WPMaturity.State;
 import livre.Chapter;
 import livre.Volume;
 
@@ -33,14 +34,24 @@ public class WorkPackage {
 	@JoinColumn(name="WS_ID")
 	private WorkSpace assignedTo;
 	
-	@OneToMany(mappedBy="assignedTo")
+	@OneToMany(mappedBy="wp")
 	private Set<Volume> vols = new HashSet<>();
 	
-	@OneToMany
-	@JoinColumn(name="WP_ID")
+	@OneToMany(mappedBy="wp")
 	private Set<Chapter> chaps = new HashSet<Chapter>();
 	
+	public WorkPackage(){
+		
+	}
 	
+	public WorkPackage(WorkSpace assignedTo) {
+		this.status = State.Start;
+		this.assignedTo = assignedTo;
+		this.vols = new HashSet<Volume>();
+		this.chaps = new HashSet<Chapter>();
+	}
+
+
 	//Attribue un volume à un workPackage
 	public boolean addVolume(Volume volume){
 		Objects.requireNonNull(volume);
@@ -51,6 +62,16 @@ public class WorkPackage {
 	public boolean addChapter(Chapter chapterToAdd){
 		Objects.requireNonNull(chapterToAdd);
 		return chaps.add(chapterToAdd);
+	}
+	
+	public boolean removeChapter(Chapter chapterToAdd) {
+		Objects.requireNonNull(chapterToAdd);
+		return chaps.remove(chapterToAdd);
+	}
+	
+	public boolean removeVolume(Volume v) {
+		Objects.requireNonNull(v);
+		return vols.remove(v);
 	}
 	
 	/**
@@ -75,11 +96,11 @@ public class WorkPackage {
 
 	//Ajouter un WorkPackage
 	public void setStatus(WPMaturity.State status){
-		this.status=status;
+		this.status = status;
 	}
 
 	public void setAssignedTo(WorkSpace assignedTo) {
-		this.assignedTo = assignedTo;
+		this.assignedTo = Objects.requireNonNull(assignedTo);
 	}
 
 	public WorkSpace getAssignedTo() {
