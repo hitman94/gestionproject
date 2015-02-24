@@ -49,30 +49,32 @@ public class CreateUserServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String role = request.getParameter("role");
 
 		User user = (User) request.getSession().getAttribute("user");
+		System.out.println(username + " == " + password + "  === "
+				+ (Ability.CompanyChief.equals(Ability.CompanyChief)));
+		if (checkValidity(username) && checkValidity(password)) {
 
-		if (checkValidity(username) && checkValidity(password)
-				&& checkValidity(role)) {
+			// Ability roleAbility = Ability.valueOf(role);
 
-			Ability roleAbility = Ability.valueOf(role);
 			Ability userAb = user.getAbility();
 			if (userAb.equals(Ability.User)) {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 						"Vous n'avez pas les droits suffissants pour creer un utilisateur quelconques");
-			} else if (roleAbility.equals(Ability.Patron)) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"Vous n'avez pas les droits requis pour creer un utilisateur ayant les droits "
-								+ roleAbility);
-
 			} else {
-				dao.persist(new User(username, DigestUtils.sha1Hex(password),
-						roleAbility));
+				if (userAb.equals(Ability.Patron)) {
+					dao.persist(new User(username, DigestUtils
+							.sha1Hex(password), Ability.CompanyChief));
+				} else {
+					dao.persist(new User(username, DigestUtils
+							.sha1Hex(password), Ability.User));
+				}
+
 				response.setStatus(200);
 			}
 
 		} else {
+
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"La requete est mal formee");
 		}
