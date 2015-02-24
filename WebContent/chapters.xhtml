@@ -19,15 +19,32 @@
 						<div class="col-md-6">
 							<div class="row">
 
-								<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
+								<c:forEach items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}" var="wp">
 									<div class="col-md-12">
 										<div class="jumbotron">
 											<div class="container">
-												<h1></h1>
-												<p>
-													<a class="btn btn-primary btn-lg" href="#" role="button">Learn
-														more </a>
-												</p>
+												<h2><h:outputText value="${wp.name}" /></h2>
+												
+													<a class="btn btn-primary" href="#" role="button" onclick="showChapters(${wp.id})">Voir les chapitres</a>
+												
+												<div id="${wp.id}" style="display:none;">
+													<ul>
+													<c:forEach items="${chapterDAO.chapterFroWp(wp.id)}" var="chapter">
+													<c:choose>
+														<c:when test="${chapter.takenDate == -1}">
+															<li><a href="#" onclick="downloadChapter(${chapter.id})"><h:outputText value="${chapter.title}" /></a></li>
+														</c:when>
+														<c:otherwise>
+															<li><h:outputText value="${chapter.title}" /></li>
+														</c:otherwise>
+													
+													</c:choose>
+													
+													</c:forEach>
+													</ul>
+												</div>
+												
+												
 											</div>
 										</div>
 									</div>
@@ -64,11 +81,52 @@
 
 										</select>
 									</div>
-									<button type="button" id="submitCompany"
-										class="form-control btn btn-success">Créer
-										l'entreprise</button>
+									<button type="button" id="submitWork"
+										class="form-control btn btn-success">Remettre mon travail</button>
 								</form>
 							</c:if>
+							
+							<c:if test="${ sessionScope.user.ability == 'CompagnyChief' }">
+								<form class="form">
+									<legend>Creer un chapitre</legend>
+									<div class="form-group">
+
+										<input type="text" placeholder="Nom du chapitre"
+											name="chapterName" id="chapterName" class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="chefC">Selectionnez le WorkPackage auquel assigner le chapitre</label> <select class="form-control"
+											id="idWp">
+											<c:forEach
+												items="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id)}"
+												var="chapter">
+
+												<option value="${chapter.id}"><h:outputText
+														value="${chapter.title}" /></option>
+
+											</c:forEach>
+
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="chefC">Selectionnez le volume auquel assigner le chapitre</label> <select class="form-control"
+											id="idChapter">
+											<c:forEach
+												items="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id)}"
+												var="chapter">
+
+												<option value="${chapter.id}"><h:outputText
+														value="${chapter.title}" /></option>
+
+											</c:forEach>
+
+										</select>
+									</div>
+									<button type="button" id="submitWork"
+										class="form-control btn btn-success">Remettre mon travail</button>
+								</form>
+							</c:if>
+							
 						</div>
 					</div>
 

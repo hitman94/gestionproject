@@ -21,4 +21,14 @@ public class WorkPackageDAO extends AbstractDAO<WorkPackage>{
 		super(WorkPackage.class, "WorkPackage");
 	}
 	
+	public List<WorkPackage> getWpFromCompany(Long entId) {
+		Query q = em.createQuery("SELECT w FROM WorkPackage w WHERE w.assignedTo.ent.id=:id");
+		q.setParameter("id", entId);
+		try {
+			List<WorkPackage> result = q.getResultList();
+			return result;
+		} catch (NoResultException e) {
+			return null;
+		} 
+	}
 }

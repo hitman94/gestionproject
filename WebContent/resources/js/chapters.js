@@ -2,6 +2,22 @@
  * 
  */
 
+function showChapters(id) {
+	$('#'+id).css("display","");
+}
+function downloadChapter(chapterId) {
+	$.ajax({
+        type: 'POST',
+        url: "DownloadFileServlet",
+        data: { chapterId : chapterId},
+        success: function (data) {
+        },
+        error: function (data , status, error){
+
+        }
+        
+         });
+}
 $(document).ready(function() {
 	$('#errorsZone').hide();
 	
