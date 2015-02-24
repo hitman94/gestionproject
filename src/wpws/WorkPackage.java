@@ -24,14 +24,14 @@ import livre.Volume;
 
 @Entity
 public class WorkPackage {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@NotNull
 	private String name;
-	
+
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private WPMaturity status;
@@ -39,17 +39,17 @@ public class WorkPackage {
 	@ManyToOne
 	@JoinColumn(name="WS_ID")
 	private WorkSpace assignedTo;
-	
+
 	@OneToMany(mappedBy="wp")
 	private Set<Volume> vols = new HashSet<>();
-	
+
 	@OneToMany(mappedBy="wp")
 	private Set<Chapter> chaps = new HashSet<Chapter>();
-	
+
 	public WorkPackage(){
-		
+
 	}
-	
+
 	public WorkPackage(WorkSpace assignedTo,String name) {
 		this.status = WPMaturity.Start;
 		this.assignedTo = assignedTo;
@@ -64,28 +64,28 @@ public class WorkPackage {
 		Objects.requireNonNull(volume);
 		return vols.add(volume);
 	}
-	
+
 	//Attribue un chapitre au workpackage
 	public boolean addChapter(Chapter chapterToAdd){
 		Objects.requireNonNull(chapterToAdd);
 		return chaps.add(chapterToAdd);
 	}
-	
+
 	public boolean removeChapter(Chapter chapterToAdd) {
 		Objects.requireNonNull(chapterToAdd);
 		return chaps.remove(chapterToAdd);
 	}
-	
+
 	public boolean removeVolume(Volume v) {
 		Objects.requireNonNull(v);
 		return vols.remove(v);
 	}
-	
+
 	/**
 	 * 
 	 * @return la liste des chapites contenus dans ce WP
 	 */
-	
+
 	public List<Chapter> getAllChapters(){
 		return new ArrayList<>(chaps);
 	}
@@ -113,20 +113,22 @@ public class WorkPackage {
 	public WorkSpace getAssignedTo() {
 		return assignedTo;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+
 
 	public String getName() {
 		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
-public void setName(String name) {
-	this.name = name;
-}
 }
