@@ -13,51 +13,44 @@
 
 			<f:view>
 				<div class="container">
-					
+
 					<div class="row">
-					<h2>Liste des WorkPackages:</h2>
+						<h2>Liste des WorkPackages:</h2>
 						<div class="col-md-6">
 							<div class="row">
 								<c:choose>
-								<c:when test="${ sessionScope.user.ability == 'Patron'}">
-									<c:forEach items="${workPackageDAO.findAll()}" var="workpackage">
-										<div class="col-md-12">
-											<dl>
-												<dt>
-													<h:outputText value="${workpackage.name}"></h:outputText>
-												</dt>
-												<dd>
-													<h:outputText value="Option : Editer / Supprimer"></h:outputText>
-												</dd>
-											</dl>
-										</div>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<div id="test">
-									<dl>
-												<dt>
-													<h:outputText value="${sessionScope.user.entreprise.id}"></h:outputText>
-												</dt>
-												<dd>
-													<h:outputText value="Option : Editer / Supprimer"></h:outputText>
-												</dd>
-											</dl>
-									</div>
-									<c:forEach items="${sessionScope.user.entreprise}" var="workpackage">
-										<div class="col-md-12">
-											<dl>
-												<dt>
-													<h:outputText value="${workpackage.name}"></h:outputText>
-												</dt>
-												<dd>
-													<h:outputText value="Option : Editer / Supprimer"></h:outputText>
-												</dd>
-											</dl>
-										</div>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
+									<c:when test="${ sessionScope.user.ability == 'Patron'}">
+										<c:forEach items="${workPackageDAO.findAll()}"
+											var="workpackage">
+											<div class="col-md-12">
+												<dl>
+													<dt>
+														<h:outputText value="${workpackage.name}"></h:outputText>
+													</dt>
+													<dd>
+														<h:outputText value="Option : Editer / Supprimer"></h:outputText>
+													</dd>
+												</dl>
+											</div>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach
+											items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
+											var="workpackage">
+											<div class="col-md-12">
+												<dl>
+													<dt>
+														<h:outputText value="${workpackage.name}"></h:outputText>
+													</dt>
+													<dd>
+														<h:outputText value="Option : Editer / Supprimer"></h:outputText>
+													</dd>
+												</dl>
+											</div>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 
 							</div>
 
@@ -71,19 +64,32 @@
 									<input type="text" placeholder="Nom du workPackage"
 										name="nameWP" id="nameWP" class="form-control" />
 								</div>
-								<div class="form-group">
-									<label for="entrepriseWP">Selectionnez
-										l'entreprise du Work Package:</label> <select class="form-control" id="entrepriseWP">
-										<c:forEach items="${entrepriseDAO.findAll()}"
-											var="entreprise">
-											<option value="${entreprise.workspace.id}"><h:outputText value="${entreprise.name}"/></option>
-										</c:forEach>
+								<c:choose>
+									<c:when test="${ sessionScope.user.ability == 'Patron'}">
 
-									</select>
-								</div>
+										<div class="form-group">
+											<label for="entrepriseWP">Selectionnez l'entreprise
+												du Work Package:</label> <select class="form-control"
+												id="entrepriseWP">
+												<c:forEach items="${entrepriseDAO.findAll()}"
+													var="entreprise">
+													<option value="${entreprise.workspace.id}"><h:outputText
+															value="${entreprise.name}" /></option>
+												</c:forEach>
+
+											</select>
+										</div>
+									</c:when>
+										<c:otherwise>
+											<div class="form-group">
+												<input type="hidden" value="${sessionScope.user.entreprise.workspace.id}"
+													name="entrepriseWP" id="entrepriseWP" class="form-control" />
+											</div>
+										</c:otherwise>
+								</c:choose>
 								<button type="button" id="submitWP"
-									class="form-control btn btn-success">Créer
-									le WorkPackage</button>
+									class="form-control btn btn-success">Créer le
+									WorkPackage</button>
 							</form>
 						</div>
 					</div>

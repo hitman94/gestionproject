@@ -8,8 +8,6 @@ $(document).ready(function() {
 	$("#submitWP").click(function() {
 		var idWorkSpace=document.getElementById("entrepriseWP").value;
 		var nameWP = document.getElementById("nameWP").value;
-		
-		
 		$.ajax({
 	        type: 'POST',
 	        url: "CreateWorkPackageServlet",
