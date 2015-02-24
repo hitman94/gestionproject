@@ -19,7 +19,7 @@
 						<h2>Liste des volumes:</h2>
 						<div class="col-md-6">
 							<div class="row">
-
+								
 								<c:forEach items="${volumeDAO.findAll()}" var="volume">
 									<div class="col-md-12">
 										<dl>
@@ -27,7 +27,9 @@
 												<h:outputText value="${volume.title}"></h:outputText>
 											</dt>
 											<dd>
-												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
+												<h:outputText value="Option :   " />
+												<a href="#" onclick="supprimerVolume(${volume.id})"><h:outputText
+														value="   Supprimer" /></a>
 											</dd>
 										</dl>
 									</div>
@@ -42,11 +44,11 @@
 
 
 
-<div class="col-md-offset-1 col-md-5"
+						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
 
-						<h2>Creation d'un volume :</h2>
-						
+							<h2>Creation d'un volume :</h2>
+
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
