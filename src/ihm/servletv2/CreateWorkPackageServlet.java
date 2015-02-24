@@ -25,10 +25,11 @@ public class CreateWorkPackageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@Inject
-	 private WorkSpaceDAO workSpaceDao;
+	private WorkPackageDAO workPackageDAO;
 	
 	@Inject
-	private WorkPackageDAO workPackageDAO;
+	private WorkSpaceDAO workSpaceDao;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

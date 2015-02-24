@@ -20,11 +20,12 @@
 						<div class="col-md-6">
 							<div class="row">
 
-								<c:forEach items="${userDAO.usersFromEntreprise(id)}" var="entreprise">
+								<c:forEach items="${userDAO.usersFromEntreprise(id)}" var="user">
 									<div class="col-md-12">
 										<dl>
 											<dt>
-												<h:outputText value="${user.username}"></h:outputText>
+												<h:outputText value="${id}"></h:outputText>
+												<h:outputText value="${user.userName}"></h:outputText>
 											</dt>
 											<dd>
 												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
