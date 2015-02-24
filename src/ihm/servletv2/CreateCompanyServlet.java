@@ -23,49 +23,62 @@ import entreprise.Entreprise;
 @WebServlet("/CreateCompanyServlet")
 public class CreateCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Inject
 	private EntrepriseDAO entrepriseDAO;
-    
+
 	@Inject
 	private UserDAO userDAO;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateCompanyServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CreateCompanyServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("companyName");
 		String idChief = request.getParameter("idChief");
 		User chief = userDAO.findById(new Long(idChief));
+
 		User user = (User) request.getSession().getAttribute("user");
-		if(chief!=null){
-			if( user == null){
+		if (chief != null) {
+			if (user == null) {
 				response.sendError(400, "Aucun utilisateur connect�");
 				return;
 			}
-			if(user.getAbility() != Ability.Patron){
-				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
+			if (user.getAbility() != Ability.Patron) {
+				response.sendError(400,
+						"L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
 				return;
 			}
 			Entreprise ent = new Entreprise(name, chief);
 			entrepriseDAO.persist(ent);
-		}else{
-			response.sendError(400,"l'id " + idChief + "ne correspond à aucun utilisateur dans la base de données");
+			chief.setEntreprise(ent);
+			userDAO.update(chief);
+		} else {
+			response.sendError(
+					400,
+					"l'id "
+							+ idChief
+							+ "ne correspond à aucun utilisateur dans la base de données");
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		}
+	}
 
 }

@@ -53,8 +53,7 @@ public class CreateUserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		User user = (User) request.getSession().getAttribute("user");
-		System.out.println(username + " == " + password + "  === "
-				+ (Ability.CompanyChief.equals(Ability.CompanyChief)));
+		
 		if (checkValidity(username) && checkValidity(password)) {
 
 			// Ability roleAbility = Ability.valueOf(role);
