@@ -1,6 +1,7 @@
 package ihm.servletv2;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import comportement.Ability;
 import utilisateur.User;
+import comportement.Ability;
 import dao.UserDAO;
+import entreprise.Entreprise;
 
 /**
  * this servlet will manage the register of a new user
@@ -66,8 +68,17 @@ public class CreateUserServlet extends HttpServlet {
 					dao.persist(new User(username, DigestUtils
 							.sha1Hex(password), Ability.CompanyChief));
 				} else {
-					dao.persist(new User(username, DigestUtils
-							.sha1Hex(password), Ability.User));
+					Entreprise entreprise = user.getEntreprise();
+					if (Objects.isNull(entreprise)) {
+						dao.persist(new User(username, DigestUtils
+								.sha1Hex(password), Ability.User));
+					} else {
+						User u2 = new User(username,
+								DigestUtils.sha1Hex(password), Ability.User);
+						u2.setEntreprise(entreprise);
+						dao.persist(u2);
+					}
+
 				}
 
 				response.setStatus(200);
