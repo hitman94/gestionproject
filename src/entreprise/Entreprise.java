@@ -1,6 +1,7 @@
 package entreprise;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,11 +9,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import utilisateur.User;
+import wpws.WorkPackage;
 import wpws.WorkSpace;
 import comportement.Ability;
 
@@ -34,6 +37,8 @@ public class Entreprise{
 	private Set<User> members;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="WS_ID")
+	@NotNull
 	private WorkSpace workspace;
 	
 	public Entreprise() {

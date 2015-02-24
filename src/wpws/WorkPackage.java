@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import wpws.WPMaturity.State;
+import entreprise.Entreprise;
 import livre.Chapter;
 import livre.Volume;
 
@@ -31,7 +33,8 @@ public class WorkPackage {
 	private String name;
 	
 	@NotNull
-	private WPMaturity.State status;
+	@Enumerated(EnumType.STRING)
+	private WPMaturity status;
 
 	@ManyToOne
 	@JoinColumn(name="WS_ID")
@@ -48,7 +51,7 @@ public class WorkPackage {
 	}
 	
 	public WorkPackage(WorkSpace assignedTo,String name) {
-		this.status = State.Start;
+		this.status = WPMaturity.Start;
 		this.assignedTo = assignedTo;
 		this.vols = new HashSet<Volume>();
 		this.chaps = new HashSet<Chapter>();
@@ -94,12 +97,12 @@ public class WorkPackage {
 		return new ArrayList<>(vols);
 	}
 	//Recupère le statut courant du workpackage
-	public WPMaturity.State getStatus(){
+	public WPMaturity getStatus(){
 		return this.status;
 	}
 
 	//Ajouter un WorkPackage
-	public void setStatus(WPMaturity.State status){
+	public void setStatus(WPMaturity status){
 		this.status = status;
 	}
 
@@ -109,6 +112,14 @@ public class WorkPackage {
 
 	public WorkSpace getAssignedTo() {
 		return assignedTo;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

@@ -50,7 +50,9 @@
 										l'entreprise:</label> <select class="form-control" id="chefC">
 										<c:forEach items="${userDAO.userWithoutCompanies()}"
 											var="user">
-											<option value="${user.id}"><h:outputText value="${user.userName}"/></option>
+											<c:if test="${ sessionScope.user.id != user.id }">
+												<option value="${user.id}"><h:outputText value="${user.userName}"/></option>
+											</c:if>
 										</c:forEach>
 
 									</select>

@@ -1,11 +1,6 @@
 package wpws;
 
-public interface WSMaturity {
-
-	/**
-	 * statut du WS
-	 */
-	public enum State {
+	public enum WSMaturity {
 		Create, Start, InProgress, Done;
 	}
-}
+

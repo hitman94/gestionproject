@@ -37,6 +37,7 @@ public class CreateWorkPackageServlet extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idWS = request.getParameter("idWorkSpace");
+		String nameWS = request.getParameter("name");
 		WorkSpace ws = workSpaceDao.findById(new Long(idWS));
 		User user = (User) request.getSession().getAttribute("user");
 		if(ws != null){
@@ -48,7 +49,7 @@ public class CreateWorkPackageServlet extends HttpServlet {
 				response.sendError(400, "L'utilisateur connect� n'as pas les droits requis pour cr�er un workPackage");
 				return;
 			}
-			WorkPackage wp = new WorkPackage(ws);
+			WorkPackage wp = new WorkPackage(ws,nameWS);
 			workPackageDAO.persist(wp);
 		}else{
 			response.sendError(400,"l'id " + idWS + "ne correspond � aucun workspace de la base de donn�es");

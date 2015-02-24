@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import entreprise.Entreprise;
+
 
 /**
  * Le workspace est compos�e d'un identifiant unique et d'une collection de workpackage qui le compose
@@ -27,6 +29,9 @@ public class WorkSpace {
 	
 	@OneToMany(mappedBy="assignedTo")
 	private Set<WorkPackage> wpList;	
+
+	@OneToOne(mappedBy="workspace")
+	private Entreprise ent;
 	
 	@OneToOne
 	private WorkSpace parent;
@@ -74,23 +79,23 @@ public class WorkSpace {
 	 * @return
 	 */
 	
-	public WSMaturity.State getWSMaturity() {
+	public WSMaturity getWSMaturity() {
 
 		// algorithme basic
 		// la maturit� du ws depend de celle des wp$
 		// si un wp est a un etat inferieur alors le ws est a cette etape
 		// lews est done lorsque tous les wp sont done
 		for (WorkPackage wp : wpList) {
-			wpws.WPMaturity.State wpMaturity = wp.getStatus();
-			if (wpMaturity.equals(WPMaturity.State.Start)) {
-				return WSMaturity.State.Start;
+			wpws.WPMaturity wpMaturity = wp.getStatus();
+			if (wpMaturity.equals(WPMaturity.Start)) {
+				return WSMaturity.Start;
 
-			} else if (wpMaturity.equals(WPMaturity.State.InProgress)) {
-				return WSMaturity.State.InProgress;
+			} else if (wpMaturity.equals(WPMaturity.InProgress)) {
+				return WSMaturity.InProgress;
 			}
 
 		}
-		return WSMaturity.State.Done;
+		return WSMaturity.Done;
 	}
 	
 	public boolean addWP(WorkPackage wp){
