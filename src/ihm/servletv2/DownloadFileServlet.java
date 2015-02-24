@@ -49,7 +49,7 @@ public class DownloadFileServlet extends HttpServlet {
 		if(user.getAbility() == Ability.User) { 
 			 Chapter chapter = dao.findById(new Long(chapterId));
 			 
-			 if(chapter.getTakenDate() == -1) {
+			 if(chapter.getTakenDate() != -1) {
 				 response.setStatus(400);
 				return;
 			 }

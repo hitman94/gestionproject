@@ -17,7 +17,7 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 	}
 	
 	public List<Chapter> chapterFromEntreprise(Long id) {
-		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.assignedTo.id=:id");
+		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.assignedTo.ent.id=:id");
 		q.setParameter("id", id);
 		try {
 			List<Chapter> result = q.getResultList();

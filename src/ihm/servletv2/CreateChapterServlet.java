@@ -56,17 +56,17 @@ public class CreateChapterServlet extends HttpServlet {
 			response.sendError(400, "Un des paramètres est incorrect.");
 
 		else if(user.getAbility() != Ability.CompanyChief)
-			response.sendError(400, "L'utilisateur n'est pas un CompanyChief");
+			response.sendError(400, "L'utilisateur n'est pas un chef d'entreprise");
 
 		else if(user.getAbility() == Ability.CompanyChief){
 			Chapter toAdd = new Chapter(chapterTitle, volumeDAO.findById(new Long(idVolume)), wpDao.findById(new Long(workPackageId)));
 			chapterDAO.persist(toAdd);
 
-			toAdd.getVolume().addChapter(toAdd);
-			toAdd.getWp().addChapter(toAdd);
-
-			volumeDAO.update(toAdd.getVolume());
-			wpDao.update(toAdd.getWp());
+//			toAdd.getVolume().addChapter(toAdd);
+//			toAdd.getWp().addChapter(toAdd);
+//
+//			volumeDAO.update(toAdd.getVolume());
+//			wpDao.update(toAdd.getWp());
 
 			String path=getServletContext().getRealPath("/chapters/");
 			File toCreate = new File(path+"/"+toAdd.getId()+".docx");

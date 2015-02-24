@@ -42,4 +42,27 @@ $(document).ready(function() {
 		
 		
 	});
+	
+	$("#submitChapter").click(function() {		
+		var title=document.getElementById("chapterName").value;
+		var idWp=document.getElementById("idWp").value;
+		var idVol = document.getElementById("idVol").value;
+		
+		
+		$.ajax({
+	        type: 'POST',
+	        url: "CreateChapterServlet",
+	        data: { title : title, wpId:idWp, idVolume:idVol},
+	        success: function (data) {
+	        	window.location.replace("chapters.jsp");
+	        },
+	        error: function (data , status, error){
+	        	$('#errorsZone').html("Erreur lors de la creation du chapitre.</br>" + error);
+	        	$('#errorsZone').show(500);
+	        }
+	        
+	         });
+		
+		
+	});
 });

@@ -15,7 +15,7 @@
 				<div class="container">
 
 					<div class="row">
-						<h2>Liste des entreprises:</h2>
+						<h2>Liste des chapitres:</h2>
 						<div class="col-md-6">
 							<div class="row">
 
@@ -86,7 +86,7 @@
 								</form>
 							</c:if>
 							
-							<c:if test="${ sessionScope.user.ability == 'CompagnyChief' }">
+							<c:if test="${ sessionScope.user.ability == 'CompanyChief' }">
 								<form class="form">
 									<legend>Creer un chapitre</legend>
 									<div class="form-group">
@@ -95,35 +95,35 @@
 											name="chapterName" id="chapterName" class="form-control" />
 									</div>
 									<div class="form-group">
-										<label for="chefC">Selectionnez le WorkPackage auquel assigner le chapitre</label> <select class="form-control"
+										<label for="idWp">Selectionnez le WorkPackage auquel assigner le chapitre</label> <select class="form-control"
 											id="idWp">
 											<c:forEach
-												items="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id)}"
-												var="chapter">
+												items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
+												var="wp">
 
-												<option value="${chapter.id}"><h:outputText
-														value="${chapter.title}" /></option>
+												<option value="${wp.id}"><h:outputText
+														value="${wp.name}" /></option>
 
 											</c:forEach>
 
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="chefC">Selectionnez le volume auquel assigner le chapitre</label> <select class="form-control"
-											id="idChapter">
+										<label for="idVol">Selectionnez le volume auquel assigner le chapitre</label> <select class="form-control"
+											id="idVol">
 											<c:forEach
-												items="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id)}"
-												var="chapter">
+												items="${volumeDAO.volumeFromEntreprise(sessionScope.user.entreprise.id)}"
+												var="volume">
 
-												<option value="${chapter.id}"><h:outputText
-														value="${chapter.title}" /></option>
+												<option value="${volume.id}"><h:outputText
+														value="${volume.title}" /></option>
 
 											</c:forEach>
 
 										</select>
 									</div>
-									<button type="button" id="submitWork"
-										class="form-control btn btn-success">Remettre mon travail</button>
+									<button type="button" id="submitChapter"
+										class="form-control btn btn-success">Creer le chapitre</button>
 								</form>
 							</c:if>
 							
