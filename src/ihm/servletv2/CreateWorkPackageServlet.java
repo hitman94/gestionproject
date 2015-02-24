@@ -38,7 +38,7 @@ public class CreateWorkPackageServlet extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idWS = request.getParameter("idWorkSpace");
-		String nameWS = request.getParameter("name");
+		String nameWS = request.getParameter("nameWP");
 		WorkSpace ws = workSpaceDao.findById(new Long(idWS));
 		User user = (User) request.getSession().getAttribute("user");
 		if(ws != null){
