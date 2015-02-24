@@ -1,6 +1,7 @@
 package ihm.servletv2;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import comportement.Ability;
 import utilisateur.User;
+import comportement.Ability;
 import dao.UserDAO;
+import entreprise.Entreprise;
 
 /**
  * this servlet will manage the register of a new user
@@ -49,30 +51,41 @@ public class CreateUserServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String role = request.getParameter("role");
 
 		User user = (User) request.getSession().getAttribute("user");
+		System.out.println(username + " == " + password + "  === "
+				+ (Ability.CompanyChief.equals(Ability.CompanyChief)));
+		if (checkValidity(username) && checkValidity(password)) {
 
-		if (checkValidity(username) && checkValidity(password)
-				&& checkValidity(role)) {
+			// Ability roleAbility = Ability.valueOf(role);
 
-			Ability roleAbility = Ability.valueOf(role);
 			Ability userAb = user.getAbility();
 			if (userAb.equals(Ability.User)) {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 						"Vous n'avez pas les droits suffissants pour creer un utilisateur quelconques");
-			} else if (roleAbility.equals(Ability.Patron)) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"Vous n'avez pas les droits requis pour creer un utilisateur ayant les droits "
-								+ roleAbility);
-
 			} else {
-				dao.persist(new User(username, DigestUtils.sha1Hex(password),
-						roleAbility));
+				if (userAb.equals(Ability.Patron)) {
+					dao.persist(new User(username, DigestUtils
+							.sha1Hex(password), Ability.CompanyChief));
+				} else {
+					Entreprise entreprise = user.getEntreprise();
+					if (Objects.isNull(entreprise)) {
+						dao.persist(new User(username, DigestUtils
+								.sha1Hex(password), Ability.User));
+					} else {
+						User u2 = new User(username,
+								DigestUtils.sha1Hex(password), Ability.User);
+						u2.setEntreprise(entreprise);
+						dao.persist(u2);
+					}
+
+				}
+
 				response.setStatus(200);
 			}
 
 		} else {
+
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"La requete est mal formee");
 		}

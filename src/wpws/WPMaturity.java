@@ -1,12 +1,7 @@
 package wpws;
 
-public interface WPMaturity {
-	
-	/**
-	 * status du WP
-	 *
-	 */
-	public enum State {
+
+	public enum WPMaturity {
 		Create,Start,InProgress,Done;
 	}
-}
+

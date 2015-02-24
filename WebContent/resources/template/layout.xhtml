@@ -36,29 +36,26 @@
 							<c:choose>
 								<c:when test="${ sessionScope.user.ability == 'Patron'}">
 									<ul class="nav navbar-nav">
-										<li class="active"><a href="index.jsp">Accueil</a></li>
+										<li class="active"><a href="home.jsp">Accueil</a></li>
 										<li><a href="companies.jsp">Ajouter des entreprises</a></li>
-										<li><a href="#">Creer des utilisateurs</a></li>
+										<li><a href="registerForm.jsp">Creer des utilisateurs</a></li>
 										<li><a href="#">Creer des volumes</a></li>
 										<li><a href="#">Creer des workPackages</a></li>
 									</ul>
 								</c:when>
 								<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
 									<ul class="nav navbar-nav">
-										<li class="active"><a href="index.jsp">Accueil</a></li>
+										<li class="active"><a href="home.jsp">Accueil</a></li>
 										<li><a href="#">Ajouter des entreprises</a></li>
-										<li><a href="#">Creer des utilisateurs</a></li>
+										<li><a href="registerForm.jsp">Creer des utilisateurs</a></li>
 										<li><a href="#">Creer des volumes</a></li>
 										<li><a href="#">Creer des workPackages</a></li>
 									</ul>
 								</c:when>
 								<c:when test="${ sessionScope.user.ability == 'User'}">
 									<ul class="nav navbar-nav">
-										<li class="active"><a href="index.jsp">Accueil</a></li>
-										<li><a href="#">Ajouter des entreprises</a></li>
-										<li><a href="#">Creer des utilisateurs</a></li>
-										<li><a href="#">Creer des volumes</a></li>
-										<li><a href="#">Creer des workPackages</a></li>
+										<li class="active"><a href="home.jsp">Accueil</a></li>
+										<li><a href="chapters.jsp">Espace de travail</a></li>
 									</ul>
 								</c:when>
 							</c:choose>
