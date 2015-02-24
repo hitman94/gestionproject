@@ -51,14 +51,21 @@ public class CreateCompanyServlet extends HttpServlet {
 				response.sendError(400, "Aucun utilisateur connect�");
 				return;
 			}
-			if(user.getAbility() != Ability.Patron){
-				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
+			if (user.getAbility() != Ability.Patron) {
+				response.sendError(400,
+						"L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
 				return;
 			}
 			Entreprise ent = new Entreprise(name, chief);
 			entrepriseDAO.persist(ent);
-		}else{
-			response.sendError(400,"l'id " + idChief + "ne correspond à aucun utilisateur dans la base de données");
+			chief.setEntreprise(ent);
+			userDAO.update(chief);
+		} else {
+			response.sendError(
+					400,
+					"l'id "
+							+ idChief
+							+ "ne correspond à aucun utilisateur dans la base de données");
 		}
 	}
 
