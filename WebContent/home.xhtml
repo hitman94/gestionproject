@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <head>
 </head>
 <body>
@@ -10,49 +14,59 @@
 			<f:view>
 				<div class="jumbotron">
 					<div class="container">
-						<h1>Hello, world!</h1>
-						<p>This is a template for a simple marketing or informational
-							website. It includes a large callout called a jumbotron and three
-							supporting pieces of content. Use it as a starting point to
-							create something more unique.</p>
-						<p>
-							<a class="btn btn-primary btn-lg" href="register.jsp" role="button">Learn
-								more </a>
-						</p>
+						<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
+						<hr />
+						<h4>Vous pouvez consulter ici l'avancement des différents
+							WorkPackages.</h4>
 					</div>
 				</div>
 
 				<div class="container">
-					<!-- Example row of columns -->
 					<div class="row">
-						<div class="col-md-4">
-<!-- 							<img src="images/test.png" class="img-responsive" /> -->
-							<p>Description</p>
+						<c:set var="nbStart" scope="session" value="0" />
+						<c:set var="nbCreate" scope="session" value="0" />
+						<c:set var="nbInProgress" scope="session" value="0" />
+						<c:set var="nbDone" scope="session" value="0" />
+						<div class="col-md-5">
+							<h4>Liste des WorkPackages</h4>
+							<div class="row">
+
+
+								<c:forEach items="${WorkPackageDAO.findAll()}" var="wp">
+									<div class="col-md-12">
+										<dl>
+											<dt>
+												<h:outputText value="${wp.name}"></h:outputText>
+											</dt>
+											<dt>
+												<h:outputText value="${wp.status}"></h:outputText>
+
+												<c:set var="salary" scope="" value="2" />
+												<c:choose>
+													<c:when test="${salary == 1}">AAA</c:when>
+													<c:when test="${salary == 2}">BBB</c:when>
+													<c:when test="${salary == 3}">CCC</c:when>
+													<c:otherwise>undefined</c:otherwise>
+												</c:choose>
+											</dt>
+										</dl>
+									</div>
+								</c:forEach>
+
+							</div>
 						</div>
-						<div class="col-md-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce
-								dapibus, tellus ac cursus commodo, tortor mauris condimentum
-								nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-								malesuada magna mollis euismod. Donec sed odio dui.</p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View
-									details </a>
-							</p>
-						</div>
-						<div class="col-md-4">
-							<h2>Heading</h2>
-							<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis
-								in, egestas eget quam. Vestibulum id ligula porta felis euismod
-								semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-								condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View
-									details</a>
-							</p>
+						<div class="col-md-7">
+							<h4>Etat actuel des différents workPackages</h4>
+							<div class="row">
+								<div id="wpChartDiv">
+									<canvas id="wpChart" width="300" height="200"></canvas>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				<script type="text/javascript" src="resources/js/barChart.js"></script>
+
 			</f:view>
 
 		</ui:define>

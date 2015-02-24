@@ -25,38 +25,35 @@ public class CreateWorkPackageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@Inject
-	 private WorkSpaceDAO workSpaceDao;
+	private WorkPackageDAO workPackageDAO;
 	
 	@Inject
-	private WorkPackageDAO workPackageDAO;
+	private WorkSpaceDAO workSpaceDao;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CreateWorkPackageServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idWS = request.getParameter("idWorkSpace");
+		String nameWS = request.getParameter("name");
 		WorkSpace ws = workSpaceDao.findById(new Long(idWS));
 		User user = (User) request.getSession().getAttribute("user");
 		if(ws != null){
 			if( user == null){
-				response.sendError(400, "Aucun utilisateur connecté");
+				response.sendError(400, "Aucun utilisateur connectï¿½");
 				return;
 			}
 			if(user.getAbility() == Ability.User){
-				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
+				response.sendError(400, "L'utilisateur connectï¿½ n'as pas les droits requis pour crï¿½er un workPackage");
 				return;
 			}
-			WorkPackage wp = new WorkPackage(ws);
+			WorkPackage wp = new WorkPackage(ws,nameWS);
 			workPackageDAO.persist(wp);
 		}else{
-			response.sendError(400,"l'id " + idWS + "ne correspond à aucun workspace de la base de données");
+			response.sendError(400,"l'id " + idWS + "ne correspond ï¿½ aucun workspace de la base de donnï¿½es");
 		}
 		
 	}

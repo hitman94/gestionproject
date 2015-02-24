@@ -13,17 +13,20 @@
 
 			<f:view>
 				<div class="container">
-					
+
 					<div class="row">
-					<h2>Liste des entreprises:</h2>
+
+						<h2>Liste des utilisateurs:</h2>
 						<div class="col-md-6">
 							<div class="row">
-								
-								<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
+								<c:forEach
+									items="${userDAO.usersFromEntreprise(sessionScope.user.entreprise.id)}"
+									var="user">
 									<div class="col-md-12">
 										<dl>
 											<dt>
-												<h:outputText value="${entreprise.name}"></h:outputText>
+
+												<h:outputText value="${user.userName}"></h:outputText>
 											</dt>
 											<dd>
 												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
@@ -32,38 +35,32 @@
 									</div>
 								</c:forEach>
 
-
 							</div>
+
+
 						</div>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
-							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
+								<div role="alert" id="infoZone" style='display: none'></div>
 								<div class="form-group">
-									<input type="text" placeholder="Nom de l'entreprise"
-										name="companyName" id="companyName" class="form-control" />
+									<input type="text" placeholder="Nom de l'utilisateur"
+										name="username" id="username" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="chefC">Selectionnez le chef de
-										l'entreprise:</label> <select class="form-control" id="chefC">
-										<c:forEach items="${userDAO.userWithoutCompanies()}"
-											var="user">
-											<c:if test="${ sessionScope.user.id != user.id }">
-												<option value="${user.id}"><h:outputText value="${user.userName}"/></option>
-											</c:if>
-										</c:forEach>
-
-									</select>
+									<input type="password" placeholder="Mot de passe"
+										name="password" id="password" class="form-control" />
 								</div>
-								<button type="button" id="submitCompany"
+								<button type="button" id="submit"
 									class="form-control btn btn-success">Créer
-									l'entreprise</button>
+									l'utilisateur</button>
+
 							</form>
 						</div>
 					</div>
 
 				</div>
-				<SCRIPT type="text/javascript" src="resources/js/company.js"></SCRIPT>
+				<SCRIPT type="text/javascript" src="resources/js/registerForm.js"></SCRIPT>
 			</f:view>
 
 		</ui:define>
