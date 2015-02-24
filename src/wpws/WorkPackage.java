@@ -28,6 +28,9 @@ public class WorkPackage {
 	private Long id;
 	
 	@NotNull
+	private String name;
+	
+	@NotNull
 	private WPMaturity.State status;
 
 	@ManyToOne
@@ -44,11 +47,12 @@ public class WorkPackage {
 		
 	}
 	
-	public WorkPackage(WorkSpace assignedTo) {
+	public WorkPackage(WorkSpace assignedTo,String name) {
 		this.status = State.Start;
 		this.assignedTo = assignedTo;
 		this.vols = new HashSet<Volume>();
 		this.chaps = new HashSet<Chapter>();
+		this.name = name;
 	}
 
 
