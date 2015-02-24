@@ -13,17 +13,18 @@
 
 			<f:view>
 				<div class="container">
-					
+
 					<div class="row">
-					<h2>Liste des entreprises:</h2>
+
+						<h2>Liste des volumes:</h2>
 						<div class="col-md-6">
 							<div class="row">
-								
-								<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
+
+								<c:forEach items="${volumeDAO.findAll()}" var="volume">
 									<div class="col-md-12">
 										<dl>
 											<dt>
-												<h:outputText value="${entreprise.name}"></h:outputText>
+												<h:outputText value="${volume.title}"></h:outputText>
 											</dt>
 											<dd>
 												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
@@ -35,27 +36,34 @@
 
 							</div>
 						</div>
+
+
+
+
+
+
+
+
+						<h2>Creation d'un volume :</h2>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
-									<input type="text" placeholder="Nom de l'entreprise"
-										name="companyName" id="companyName" class="form-control" />
+									<input type="text" placeholder="nom du volume"
+										name="volumeName" id="volumeName" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="chefC">Selectionnez le chef de
-										l'entreprise:</label> <select class="form-control" id="chefC">
-										<c:forEach items="${userDAO.userWithoutCompanies()}"
-											var="user">
-											<option value="${user.id}"><h:outputText value="${user.userName}"/></option>
+									<label for="wp">Selectionnez le workpackage:</label> <select
+										class="form-control" id="wp">
+										<c:forEach items="${ workPackageDAO.findAll() }" var="wp">
+											<option value="${wp.id}">
+												<h:outputText value="${wp.name}" /></option>
 										</c:forEach>
-
 									</select>
 								</div>
-								<button type="button" id="submitCompany"
-									class="form-control btn btn-success">Créer
-									l'entreprise</button>
+								<button type="button" id="submitwp"
+									class="form-control btn btn-success">Créer le volume</button>
 							</form>
 						</div>
 					</div>

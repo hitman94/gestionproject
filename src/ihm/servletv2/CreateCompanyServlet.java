@@ -44,6 +44,7 @@ public class CreateCompanyServlet extends HttpServlet {
 		String name = request.getParameter("companyName");
 		String idChief = request.getParameter("idChief");
 		User chief = userDAO.findById(new Long(idChief));
+	
 		User user = (User) request.getSession().getAttribute("user");
 		if(chief!=null){
 			if( user == null){

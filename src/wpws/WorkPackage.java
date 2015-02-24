@@ -111,4 +111,11 @@ public class WorkPackage {
 		return assignedTo;
 	}
 
+	public String getName() {
+		return name;
+	}
+	
+public void setName(String name) {
+	this.name = name;
+}
 }
