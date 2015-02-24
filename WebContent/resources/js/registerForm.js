@@ -1,7 +1,7 @@
 $('document').ready(
 		function() {
-			
-			$('#username').on('click',function(){
+
+			$('#username').on('click', function() {
 				$("#infoZone").css("display", "none");
 			});
 			$("#submit").click(
@@ -21,11 +21,13 @@ $('document').ready(
 								$("#infoZone").addClass("alert alert-info");
 
 								$("#infoZone").html(
-										"<p> L'utilisateur" + name
+										"<p> L'utilisateur " + name
 												+ " a été crée</p>");
 								$("#infoZone").css("display", "");
-								$("#infoZone").show(500);
-								
+								setTimeout(function() {
+									window.location.replace("registerForm.jsp")
+								}, 3000);
+
 							},
 							error : function(data, status, error) {
 								$("#infoZone").addClass("alert alert-danger");
