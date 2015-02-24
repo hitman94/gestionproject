@@ -2,8 +2,15 @@
  * 
  */
 
+
+var activeWp=null;
+
 function showChapters(id) {
 	$('#'+id).css("display","");
+	if(activeWp != null) {
+		$('#'+activeWp).css("display","none");
+		activeWp=id;
+	}
 }
 function downloadChapter(chapterId) {
 	$.ajax({
@@ -11,6 +18,7 @@ function downloadChapter(chapterId) {
         url: "DownloadFileServlet",
         data: { chapterId : chapterId},
         success: function (data) {
+        	window.location.replace("chapters/"+chapterId+".docx");
         },
         error: function (data , status, error){
 
