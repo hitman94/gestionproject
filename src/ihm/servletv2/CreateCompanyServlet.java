@@ -23,34 +23,31 @@ import entreprise.Entreprise;
 @WebServlet("/CreateCompanyServlet")
 public class CreateCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	@Inject
 	private EntrepriseDAO entrepriseDAO;
-
+    
 	@Inject
 	private UserDAO userDAO;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CreateCompanyServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public CreateCompanyServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("companyName");
 		String idChief = request.getParameter("idChief");
 		User chief = userDAO.findById(new Long(idChief));
-
+	
 		User user = (User) request.getSession().getAttribute("user");
-		if (chief != null) {
-			if (user == null) {
+		if(chief!=null){
+			if( user == null){
 				response.sendError(400, "Aucun utilisateur connect�");
 				return;
 			}
@@ -73,12 +70,10 @@ public class CreateCompanyServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
+		}
 
 }

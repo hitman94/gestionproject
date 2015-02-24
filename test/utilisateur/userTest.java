@@ -1,33 +1,32 @@
 package utilisateur;
-
 import static org.junit.Assert.*;
+import javax.validation.constraints.AssertTrue;
 import org.junit.Test;
-
 import comportement.Ability;
-import comportement.CompanyChiefAbility;
 import entreprise.Entreprise;
 
 public class userTest {
 
 	@Test
 	public void testUserConstructor() {
-		CompanyChiefAbility a = new CompanyChiefAbility();
+		Ability a = Ability.CompanyChief;
 		//Utilisateurs, Chef d'entreprise et Patron du Livre
-		User u =new  User("Fatou","12344",a) ;
+		User u =new  User("Fatou","12344",Ability.CompanyChief) ;
 		assertEquals("Fatou", u.getUserName());
 		assertEquals("12344", u.getPassWord());
-		assertEquals("CompanyChiefAbility", a.getClass().getSimpleName());
+		//assertTrue(u.getAbility().equals(a));
+		assertEquals(Ability.CompanyChief,u.getAbility());
 	}
 	@Test(expected = NullPointerException.class)
 	public void testNullAbility(){	
-		CompanyChiefAbility a = null;
+		Ability a = null;
 		User u =new  User("Fatou","12344",a) ;
-		if(u.getAbility()==null)
-			throw new IllegalArgumentException();
+		//if(u.getAbility()==null)
+			//throw new IllegalArgumentException();
 	}
 	@Test 
 	public void testNullUserName(){
-		CompanyChiefAbility a = null;
+		Ability a = null;
 		User u =new  User("","12344",a) ;
 		if(u.getUserName()==null)
 			throw new IllegalArgumentException();
@@ -35,7 +34,7 @@ public class userTest {
 	@Test
 	public void testNullPassWord(){
 		// test pour verifier que le mot de passe n'est pas null
-		CompanyChiefAbility a = null;
+		Ability a = null;
 		User u =new  User("Fatou","",a) ;
 		if(u.getPassWord()== null)
 			throw new IllegalArgumentException();
@@ -56,9 +55,8 @@ public class userTest {
 	@Test 
 	public void testUserBelongToEntreprise(){
 		//test si le user appartient à l'entreprise
-		Entreprise e = null;
-		CompanyChiefAbility a = new CompanyChiefAbility();
-		User u =new  User("Fatou","12344", a) ;
+		Entreprise e = new Entreprise();
+		User u =new  User("Fatou","12344", Ability.User) ;
 		e.addMember(u);
 		assertEquals(u, e.getMembers());
 	}
@@ -66,16 +64,14 @@ public class userTest {
 	public void testUserBelongToGroupe(){
 		//test pour verifier s'il fait partie de la liste des utilisateurs
 		Entreprise e = null;
-		CompanyChiefAbility a = new CompanyChiefAbility();
-		User u =new  User("Fatou","12344", a);	
+		User u =new  User("Fatou","12344", Ability.User);	
 	}
 
 	@Test
 	public void testUserIsChef(){
 		// test si l'utilisateur est un chef
 		Entreprise e = null;
-		CompanyChiefAbility a = new CompanyChiefAbility();
-		User u =new  User("Fatou","12344", a);
+		User u =new  User("Fatou","12344", Ability.CompanyChief);
 		e.addMember(u);
 		assertEquals(u, e.getChief());	
 	}
