@@ -29,16 +29,18 @@
 											</dt>
 											<dd>
 												<h:outputText value="Option :  "></h:outputText>
-												<a href="#" onclick="editerVolume(${volume.id})">Editer</a>
+												<a href="#" onclick="showEditVolume(${volume.id})">Editer</a>
+
 												<a href="#" onclick="supprimerVolume(${volume.id})"><h:outputText
 														value="  Supprimer" /></a>
-												<div id="formEdit">
+												<div id="${volume.id}" style="display: none;">
 													<input type="text" placeholder="Enter le nouveau nom"
-														name="title" id="title"  />
-													<button type="button" id="">valider</button>
+														name="title" id="title${volume.id}" />
+													<button type="button" id="submitEdit"
+														onclick="editerVolume()">valider</button>
 
 												</div>
-												
+
 											</dd>
 										</dl>
 									</div>
