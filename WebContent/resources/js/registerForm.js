@@ -11,7 +11,7 @@ function deleteUser(id) {
 		},
 		error : function(data, status, error) {
 			$('#errorsZone').html(
-					"Erreur lors de la creation du workpackage.</br>" + error);
+					"Erreur lors de la suppression de l'utilisateur : </br>" + error);
 			$('#errorsZone').show(500);
 		}
 

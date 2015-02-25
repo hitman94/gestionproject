@@ -11,27 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import livre.Volume;
 import utilisateur.User;
+
 import comportement.Ability;
+
 import dao.VolumeDAO;
 import dao.WorkPackageDAO;
 
 /**
- * Servlet implementation class CreateVolumeServlet
+ * Servlet implementation class DeleteVolumeServlet
  */
-@WebServlet("/CreateVolumeServlet")
-public class CreateVolumeServlet extends HttpServlet {
+@WebServlet("/EditVolumeServlet")
+public class EditVolumeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private VolumeDAO volumeDAO;
 
 	@Inject
-	private WorkPackageDAO workPackageDAO;
+	private WorkPackageDAO wpDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CreateVolumeServlet() {
+	public EditVolumeServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,27 +42,20 @@ public class CreateVolumeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String volumeTitle = request.getParameter("title");
-		String idWP = request.getParameter("idWorkPackage");
+		String idVolume = request.getParameter("idVolume");
 		User user = (User) request.getSession().getAttribute("user");
+		String title = request.getParameter("title");
 
-		if(user == null || volumeTitle == null || idWP == null)
+		if(user == null  || idVolume == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
 
 		else if(user.getAbility() != Ability.Patron)
-			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
+			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");	
 
-		else if(volumeDAO.checkVolumeExist(volumeTitle) ==true){
-			response.sendError(400, "Le titre du volume existe déja.");
-		}else if(volumeTitle.length()==0){
-			response.sendError(400, "Le titre du volume est vide.");		
-		}
 		else if(user.getAbility() == Ability.Patron){
-
-			Volume toAdd=new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP)));
-			volumeDAO.persist(toAdd);
-			//			toAdd.getWp().addVolume(toAdd);
-			//			workPackageDAO.update(toAdd.getWp());
+			Volume v=volumeDAO.findById(new Long(idVolume));
+			v.setTitle(title);
+			volumeDAO.update(v);
 			response.setStatus(200);
 		}
 	}
