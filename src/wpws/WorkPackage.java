@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import org.eclipse.persistence.jpa.config.Cascade;
 
 import entreprise.Entreprise;
 import livre.Chapter;
@@ -40,10 +43,10 @@ public class WorkPackage {
 	@JoinColumn(name="WS_ID")
 	private WorkSpace assignedTo;
 
-	@OneToMany(mappedBy="wp")
+	@OneToMany(mappedBy="wp", cascade=CascadeType.REMOVE)
 	private Set<Volume> vols = new HashSet<>();
 
-	@OneToMany(mappedBy="wp")
+	@OneToMany(mappedBy="wp", cascade=CascadeType.REMOVE)
 	private Set<Chapter> chaps = new HashSet<Chapter>();
 
 	public WorkPackage(){
