@@ -20,8 +20,8 @@ function downloadChapter(chapterId) {
 		data : {
 			chapterId : chapterId
 		},
-		success : function(data) {
-			window.location.replace("chapters/" + chapterId + ".docx");
+		success : function(data, status, xhr) { 
+			window.location.replace(xhr.getResponseHeader("url"));
 		},
 		error : function(data, status, error) {
 

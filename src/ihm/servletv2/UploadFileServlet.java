@@ -47,7 +47,6 @@ public class UploadFileServlet extends HttpServlet {
 		String chapterId = request.getParameter("chapterId"); // On recupere l'id du chapitre a mettre à jour
 		Part file = request.getPart("chapterLocation"); //On récupere le fichier que l'utilisateur a envoyé ( c'est le contenu du chapitre )
 		
-		log("bonjour "+chapterId);
 		//On récupère dans la session la classe qui représente l'utilisateur qui a appelé ce Servlet
 		User user = (User) request.getSession().getAttribute("user");
 		
@@ -63,9 +62,9 @@ public class UploadFileServlet extends HttpServlet {
 		
 		if(user.getAbility() == Ability.User) { 
 			 Chapter chapter = dao.findById(new Long(chapterId));//On récupère le chapitre qu'on modifie
-			 String path=getServletContext().getRealPath("/chapters/");
+			 String path=getServletContext().getRealPath("/chapters/temp/");
 			 File toSave = new File(path+"/"+chapterId+".docx");
-			 toSave.delete();
+			 toSave.createNewFile();
 			 FileOutputStream out=null;
 			 try  {
 			  out= new FileOutputStream(toSave);
@@ -74,7 +73,7 @@ public class UploadFileServlet extends HttpServlet {
 			 while((toRead=in.read()) !=-1)
 				 out.write((char)toRead);
 			 
-			 chapter.setTakenDate(-1L);//On met a jour la takenDate à -1 pour dire qu'on peut a nouveau l'éditer
+			 chapter.setTakenDate(-2L);//On met a jour la takenDate à -2 pour dire qu'il est en promotion
 			 WorkPackage wp = wpDao.findById(chapter.getWp().getId());
 			 if(wp.getStatus().equals(WPMaturity.Start)) {
 					wp.setStatus(WPMaturity.InProgress);

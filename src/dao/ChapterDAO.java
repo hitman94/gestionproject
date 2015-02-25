@@ -22,7 +22,7 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 		try {
 			List<Chapter> result = q.getResultList();
 			for(Chapter c : result) {
-				if(c.getTakenDate()!=-1) {
+				if(c.getTakenDate()!=-1 && c.getTakenDate() != -2) {
 					if(System.currentTimeMillis()-604800 < c.getTakenDate() ) {
 						c.setTakenDate(-1L);
 						update(c);
@@ -36,7 +36,7 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 	}
 	
 	public List<Chapter> editedChapterFromEntreprise(Long id) {
-		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.assignedTo.ent.id=:id AND c.takenDate!=-1");
+		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.assignedTo.ent.id=:id AND c.takenDate!=-1 AND c.takenDate!=-2");
 		q.setParameter("id", id);
 		try {
 			List<Chapter> result = q.getResultList();
@@ -47,7 +47,7 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 	}
 	
 	public List<Chapter> chapterFroWp(Long id) {
-		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.id=:id");
+		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.id=:id AND c.takenDate != -2");
 		q.setParameter("id", id);
 		try {
 			List<Chapter> result = q.getResultList();
