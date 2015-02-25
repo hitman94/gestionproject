@@ -46,6 +46,17 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 		} 
 	}
 	
+	public List<Chapter> promotedChapterFromEntreprise(Long id) {
+		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.assignedTo.ent.id=:id AND c.takenDate=-2 ORDER BY c.wp.id");
+		q.setParameter("id", id);
+		try {
+			List<Chapter> result = q.getResultList();
+			return result;
+		} catch (NoResultException e) {
+			return null;
+		} 
+	}
+	
 	public List<Chapter> chapterFroWp(Long id) {
 		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.id=:id AND c.takenDate != -2");
 		q.setParameter("id", id);

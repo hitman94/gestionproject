@@ -20,11 +20,33 @@ function downloadChapter(chapterId) {
 		data : {
 			chapterId : chapterId
 		},
-		success : function(data, status, xhr) { 
+		success : function(data, status, xhr) {
 			window.location.replace(xhr.getResponseHeader("url"));
 		},
 		error : function(data, status, error) {
 
+		}
+
+	});
+}
+
+function promoteChapter(chapterId, validate) {
+	$.ajax({
+		type : 'POST',
+		url : "PromoteChapterServlet",
+		data : {
+			chapterId : chapterId,
+			validate : validate
+		},
+		success : function(data, status, xhr) {
+			if (valide == "ok")
+				alert("Chapitre promu");
+			else
+				alert("Chapitre non promu");
+			window.location.replace("chapters.jsp");
+		},
+		error : function(data, status, error) {
+			window.location.replace("chapters.jsp");
 		}
 
 	});

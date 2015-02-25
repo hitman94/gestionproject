@@ -90,7 +90,7 @@ public class User {
 	}
 
 	public void setEntreprise(Entreprise entreprise) {
-		Objects.requireNonNull(entreprise);
+//		Objects.requireNonNull(entreprise);
 		this.entreprise = entreprise;
 	}
 }
