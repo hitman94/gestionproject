@@ -17,17 +17,27 @@ import utilisateur.User;
 public class VolumeDAO  extends AbstractDAO<Volume>{
 
 	public VolumeDAO() {
-			super(Volume.class,"Volume");
+		super(Volume.class,"Volume");
 	}
-	
-	public List<Chapter> volumeFromEntreprise(Long id) {
+
+	public List<Volume> volumeFromEntreprise(Long id) {
 		Query q = em.createQuery("SELECT v FROM Volume v WHERE v.wp.assignedTo.ent.id=:id");
 		q.setParameter("id", id);
 		try {
-			List<Chapter> result = q.getResultList();
+			List<Volume> result = q.getResultList();
 			return result;
 		} catch (NoResultException e) {
 			return null;
 		} 
+	}
+	public boolean checkVolumeExist(String title){
+		Query q = em.createQuery("SELECT v FROM Volume v WHERE v.wp.assignedTo.ent.title=:title");
+		q.setParameter("title", title);
+		try {
+			q.getResultList();
+			return true;
+		} catch (NoResultException e) {
+			return false;
+		}
 	}
 }
