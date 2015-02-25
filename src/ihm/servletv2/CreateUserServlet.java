@@ -54,7 +54,7 @@ public class CreateUserServlet extends HttpServlet {
 
 		if (dao.checkUserName(username)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-					"Username dÈj‡ pris");
+					"Username d√©j√† pris");
 			return;
 		}
 		User user = (User) request.getSession().getAttribute("user");
