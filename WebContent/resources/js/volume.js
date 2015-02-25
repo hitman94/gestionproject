@@ -2,7 +2,6 @@
  * 
  */
 function supprimerVolume(idVolume) {
-	alert(idVolume);
 	$.ajax({
 		type: 'POST',
 		url: "DeleteVolumeServlet",

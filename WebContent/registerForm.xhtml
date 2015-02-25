@@ -20,20 +20,27 @@
 						<HR />
 						<div class="col-md-6">
 							<div class="row">
-								<c:forEach
-									items="${userDAO.usersFromEntreprise(sessionScope.user.entreprise.id)}"
-									var="user">
-									<div class="col-md-12">
-										<dl>
-											<dt>
+								<c:choose>
+									<c:when test="${ sessionScope.user.ability == 'Patron'}">
+										<c:forEach items="${userDAO.findAll()}" var="user">
+									</c:when>
+									<c:otherwise>
+										<c:forEach
+											items="${userDAO.usersFromEntreprise(sessionScope.user.entreprise.id)}"
+											var="user">
+									</c:otherwise>
+								</c:choose>
+								<div class="col-md-12">
+									<dl>
+										<dt>
 
-												<h:outputText value="${user.userName}"></h:outputText>
-											</dt>
-											<dd>
-												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
-											</dd>
-										</dl>
-									</div>
+											<h:outputText value="${user.userName}"></h:outputText>
+										</dt>
+										<dd>
+											<h:outputText value="Option : Editer / Supprimer"></h:outputText>
+										</dd>
+									</dl>
+								</div>
 								</c:forEach>
 
 							</div>

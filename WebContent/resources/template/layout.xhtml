@@ -39,17 +39,21 @@
 									<ul class="nav navbar-nav">
 										<li class="active"><a href="home.jsp">Accueil</a></li>
 										<li><a href="companies.jsp">Gestion des entreprises</a></li>
-										<li><a href="#">Gestion des utilisateurs</a></li>
+										<li><a href="registerForm.jsp">Gestion des
+												utilisateurs</a></li>
 										<li><a href="volume.jsp">Gestion des volumes</a></li>
-										<li><a href="workPackages.jsp">Gestion des workPackages</a></li>
+										<li><a href="workPackages.jsp">Gestion des
+												workPackages</a></li>
 									</ul>
 								</c:when>
 								<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
 									<ul class="nav navbar-nav">
 										<li><a href="home.jsp">Accueil</a></li>
-										<li><a href="#">Créer des utilisateurs</a></li>
-										<li><a href="workPackages.jsp">Créer des workPackages</a></li>
-										<li><a href="chapters.jsp">Créer des chapitres</a></li>
+										<li><a href="registerForm.jsp">Gestion des
+												utilisateurs</a></li>
+										<li><a href="workPackages.jsp">Gestion des
+												workPackages</a></li>
+										<li><a href="chapters.jsp">Gestion des chapitres</a></li>
 									</ul>
 								</c:when>
 								<c:when test="${ sessionScope.user.ability == 'User'}">
@@ -101,8 +105,8 @@
 		<div class="navbar-inverse navbar-fixed-bottom">
 			<div class="container text-center">
 				<div class="row">
-						<h5 style="color: white;">ICBM - International Collaboration Book Maker - Tous
-							droits réservés ©</h5>
+					<h5 style="color: white;">ICBM - International Collaboration
+						Book Maker - Tous droits réservés ©</h5>
 				</div>
 			</div>
 		</div>
