@@ -41,6 +41,10 @@ public class CreateWorkPackageServlet extends HttpServlet {
 		String nameWS = request.getParameter("nameWP");
 		WorkSpace ws = workSpaceDao.findById(new Long(idWS));
 		User user = (User) request.getSession().getAttribute("user");
+		if(nameWS.isEmpty()){
+			response.sendError(400, "Veuillez remplir le champ Nom");
+			return;
+		}
 		if(ws != null){
 			if( user == null){
 				response.sendError(400, "Aucun utilisateur connecté");
