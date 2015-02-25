@@ -13,12 +13,13 @@
 
 			<f:view>
 				<div class="container">
-					
+
 					<div class="row">
-					<h2>Liste des entreprises:</h2>
+						<h3>Entreprises</h3>
+						<HR />
 						<div class="col-md-6">
 							<div class="row">
-								
+
 								<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
 									<div class="col-md-12">
 										<dl>
@@ -37,6 +38,9 @@
 						</div>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
+							
+							<h3>Création d'une entreprise</h3>
+							
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
@@ -44,12 +48,13 @@
 										name="companyName" id="companyName" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="chefC">Selectionnez le chef de
-										l'entreprise:</label> <select class="form-control" id="chefC">
+									<label for="chefC">Sélectionnez le chef de
+										l'entreprise</label> <select class="form-control" id="chefC">
 										<c:forEach items="${userDAO.userWithoutCompanies()}"
 											var="user">
 											<c:if test="${ sessionScope.user.id != user.id }">
-												<option value="${user.id}"><h:outputText value="${user.userName}"/></option>
+												<option value="${user.id}"><h:outputText
+														value="${user.userName}" /></option>
 											</c:if>
 										</c:forEach>
 

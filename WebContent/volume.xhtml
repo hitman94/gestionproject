@@ -16,10 +16,11 @@
 
 					<div class="row">
 
-						<h2>Liste des volumes:</h2>
+						<h3>Volumes</h3>
+						<HR />
 						<div class="col-md-6">
 							<div class="row">
-								
+
 								<c:forEach items="${volumeDAO.findAll()}" var="volume">
 									<div class="col-md-12">
 										<dl>
@@ -27,9 +28,7 @@
 												<h:outputText value="${volume.title}"></h:outputText>
 											</dt>
 											<dd>
-												<h:outputText value="Option :   " />
-												<a href="#" onclick="supprimerVolume(${volume.id})"><h:outputText
-														value="   Supprimer" /></a>
+												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
 											</dd>
 										</dl>
 									</div>

@@ -26,58 +26,49 @@ import dao.ChapterDAO;
 @WebServlet("/DownloadFileServlet")
 public class DownloadFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Inject
 	ChapterDAO dao;
-	
-    public DownloadFileServlet() {
-        super();
-    }
 
+	public DownloadFileServlet() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String chapterId = request.getParameter("chapterId"); 	
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String chapterId = request.getParameter("chapterId");
 		User user = (User) request.getSession().getAttribute("user");
-		
 
-		if(user==null) {
+		if (user == null) {
 			response.setStatus(400);
 			return;
 		}
-		
-		
-		if(user.getAbility() == Ability.User) { 
-			 Chapter chapter = dao.findById(new Long(chapterId));
-			 
-			 if(chapter.getTakenDate() == -1) {
-				 response.setStatus(400);
+
+		if (user.getAbility() == Ability.User) {
+			Chapter chapter = dao.findById(new Long(chapterId));
+
+			if (chapter.getTakenDate() != -1) {
+				response.setStatus(400);
 				return;
-			 }
-			 Long time = System.currentTimeMillis();
-			 
-			 chapter.setTakenDate(time);
-			 
-			 String path=getServletContext().getRealPath("/chapters/");
-			 File toSend = new File(path+"/"+chapterId+".docx");
-			 response.setContentType("application/octet-stream");
-			 response.setContentLength((int) toSend.length());
-			 OutputStream out = response.getOutputStream();
-			 InputStream in = new FileInputStream(toSend);
-			 try {
-				 int a;
-				 while((a=in.read())!=-1)
-					 out.write((char)a);
-			 }finally {
-				 out.close();
-				 in.close();
-			 }
-			 response.setStatus(200);
+			}
+			Long time = System.currentTimeMillis();
+
+			chapter.setTakenDate(time);
 			
+			String path = getServletContext().getRealPath("/chapters/");
+			File toSend = new File(path + "/" + chapterId + ".docx");
+			if (toSend.exists()) {
+				dao.update(chapter);
+				response.setStatus(200);
+				return;
+			}
+			response.setStatus(400);
+
 		}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

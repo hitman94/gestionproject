@@ -1,18 +1,21 @@
 
-var barChartData = {
+window.onload = function() {
+	var ctx = document.getElementById("wpChart").getContext("2d");
+	var nbStart = document.getElementById("nbStart").value;
+	var nbCreate = document.getElementById("nbCreate").value;
+	var nbInProgress = document.getElementById("nbInProgress").value;
+	var nbDone = document.getElementById("nbDone").value;
+
+	window.myBar = new Chart(ctx).Bar({
 		labels : [ "Start", "Create", "In Progress", "Done" ],
 		datasets : [
 		            {
-		            	fillColor : "rgba(220,220,220,0.5)",
-		            	strokeColor : "rgba(220,220,220,0.8)",
-		            	highlightFill : "rgba(220,220,220,0.75)",
-		            	highlightStroke : "rgba(220,220,220,1)",
-		            	data : [ 1, 2, 3, 4 ]
+		            	fillColor : "rgba(65,157,252,0.5)",
+		            	strokeColor : "rgba(65,157,252,0.8)",
+		            	highlightFill : "rgba(65,157,252,0.75)",
+		            	highlightStroke : "rgba(65,157,252,1)",
+		            	data : [ nbStart, nbCreate, nbInProgress, nbDone ]
 		            } 
 		            ]
-}
-
-window.onload = function() {
-	var ctx = document.getElementById("wpChart").getContext("2d");
-	window.myBar = new Chart(ctx).Bar(barChartData, {responsive : true});
+	}, {responsive : true});
 }
