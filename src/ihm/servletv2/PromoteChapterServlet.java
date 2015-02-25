@@ -79,7 +79,10 @@ public class PromoteChapterServlet extends HttpServlet {
 			tmpFile.delete();
 			chapter.setTakenDate(-1L);
 			dao.update(chapter);
+			response.setStatus(200);
+			return;
 		}
+		response.setStatus(400);
 	}
 
 	/**

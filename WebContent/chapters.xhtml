@@ -19,11 +19,29 @@
 						<HR />
 						<div class="col-md-6">
 							<div class="row">
-								<h4>Chapitres à valider</h4>
-								<HR />
-								Blablabla les chapitres
-								<HR />
-								
+							<c:if test="${sessionScope.user.ability == 'CompanyChief'}">
+								<c:if
+									test="${chapterDAO.promotedChapterFromEntreprise(sessionScope.user.entreprise.id).size()>0}">
+									<h4>Chapitres à valider</h4>
+									<HR />
+									<ul>
+										<c:forEach
+											items="${chapterDAO.promotedChapterFromEntreprise(sessionScope.user.entreprise.id)}"
+											var="chapterToPromote">
+
+											<li><a href="#"
+												onclick="downloadChapter(${chapterToPromote.id})"><h:outputText
+														value="${chapterToPromote.wp.name} - ${chapterToPromote.title}" /></a> <span
+												class="glyphicon glyphicon-ok"
+												onclick="promoteChapter(${chapterToPromote.id},'ok');"></span>
+												<span class="glyphicon glyphicon-remove"
+												onclick="promoteChapter(${chapterToPromote.id},'nop');"></span></li>
+										</c:forEach>
+									</ul>
+
+									<HR />
+								</c:if>
+								</c:if>
 								<h4>Chapitres par WorkPackage</h4>
 								<HR />
 
@@ -31,7 +49,7 @@
 									items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 									var="wp">
 									<div class="col-md-12">
-										<div class="jumbotron" style="border:1px solid grey;">
+										<div class="jumbotron" style="border: 1px solid grey;">
 											<div class="container">
 												<h2>
 													<h:outputText value="${wp.name}" />
@@ -75,7 +93,9 @@
 							style="border-left: 1px solid grey;">
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<c:if test="${ sessionScope.user.ability == 'User' }">
-								<form class="form" target="frameUpload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
+								<form class="form" target="frameUpload"
+									action="UploadFileServlet" method="POST"
+									enctype="multipart/form-data">
 									<h3>Remettre un travail</h3>
 
 									<div class="form-group">
@@ -117,7 +137,8 @@
 									</div>
 									<div class="form-group">
 										<label for="idWp">Sélectionnez le workPackage auquel
-											le chapitre doit être assigné</label> <select class="form-control" id="idWp">
+											le chapitre doit être assigné</label> <select class="form-control"
+											id="idWp">
 											<c:forEach
 												items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 												var="wp">
@@ -130,8 +151,9 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="idVol">Sélectionnez le volume auquel
-											le chapitre doit être assigné</label> <select class="form-control" id="idVol">
+										<label for="idVol">Sélectionnez le volume auquel le
+											chapitre doit être assigné</label> <select class="form-control"
+											id="idVol">
 											<c:forEach
 												items="${volumeDAO.volumeFromEntreprise(sessionScope.user.entreprise.id)}"
 												var="volume">
