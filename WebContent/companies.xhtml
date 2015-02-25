@@ -35,10 +35,28 @@
 														value="Chef :  ${entreprise.chief.userName}"></h:outputText></Strong>
 											</div>
 											<div class="col-md-10 col-md-offset-1">
-												<h:outputText value="Option :  Revoquer le chef "></h:outputText>
+
+												<a id="changeChiefLink" href="#">Changer le chef</a>
+												<div id="changeChiefDiv" style="display: none">
+													<label for="newChief">Sélectionnez le nouveau chef
+														de l'entreprise</label> <select class="form-control" id="newChief">
+														<c:forEach items="${userDAO.userWithoutCompanies()}"
+															var="user">
+															<c:if test="${ sessionScope.user.id != user.id }">
+																<option value="${user.id}"><h:outputText
+																		value="${user.userName}" /></option>
+
+															</c:if>
+
+														</c:forEach>
+
+													</select> <a onclick="updateChiefEntreprise(${entreprise.id})" href="#">mettre
+														a jour</a>
+												</div>
 											</div>
 											<div class="col-md-10 col-md-offset-1">
-												<a onclick="deleteEntreprise(${entreprise.id})" href="#">Supprimer</a>
+												<a onclick="deleteEntreprise(${entreprise.id})" href="#">Supprimer
+													Entreprise</a>
 
 											</div>
 										</div>
