@@ -23,30 +23,35 @@
 
 				<div class="container">
 					<div class="row">
-						<c:set var="nbStart" scope="session" value="0" />
-						<c:set var="nbCreate" scope="session" value="0" />
-						<c:set var="nbInProgress" scope="session" value="0" />
-						<c:set var="nbDone" scope="session" value="0" />
+						<c:set var="nbStart" value="0"/>
+						<c:set var="nbCreate" value="0" />
+						<c:set var="nbInProgress" value="0" />
+						<c:set var="nbDone" value="0" />
 						<div class="col-md-5">
 							<h4>Liste des WorkPackages</h4>
 							<div class="row">
 
-
-								<c:forEach items="${WorkPackageDAO.findAll()}" var="wp">
+								<c:forEach items="${workPackageDAO.findAll()}" var="wp">
 									<div class="col-md-12">
 										<dl>
 											<dt>
 												<h:outputText value="${wp.name}"></h:outputText>
 											</dt>
 											<dt>
-												<h:outputText value="${wp.status}"></h:outputText>
-
-												<c:set var="salary" scope="" value="2" />
+												<h:outputText value="Statut : ${wp.status}"></h:outputText>
 												<c:choose>
-													<c:when test="${salary == 1}">AAA</c:when>
-													<c:when test="${salary == 2}">BBB</c:when>
-													<c:when test="${salary == 3}">CCC</c:when>
-													<c:otherwise>undefined</c:otherwise>
+													<c:when test="${wp.status eq 'Start'}">
+														<c:set var="nbStart" value="${nbStart + 1}" />
+													</c:when>
+													<c:when test="${wp.status eq 'Create'}">
+														<c:set var="nbCreate" value="${nbCreate + 1}" />
+													</c:when>
+													<c:when test="${wp.status eq 'InProgress'}">
+														<c:set var="nbInProgress" value="${nbInProgress + 1}" />
+													</c:when>
+													<c:when test="${wp.status eq 'Done'}">
+														<c:set var="nbDone" value="${nbDone + 1}" />
+													</c:when>
 												</c:choose>
 											</dt>
 										</dl>
@@ -63,9 +68,13 @@
 								</div>
 							</div>
 						</div>
+						<input id="nbStart" value="${nbStart}" type="hidden"/>
+						<input id="nbCreate" value="${nbCreate}" type="hidden"/>
+						<input id="nbInProgress" value="${nbInProgress}" type="hidden"/>
+						<input id="nbDone" value="${nbDone}" type="hidden"/>
+						<script type="text/javascript" src="resources/js/barChart.js"></script>
 					</div>
 				</div>
-				<script type="text/javascript" src="resources/js/barChart.js"></script>
 
 			</f:view>
 
