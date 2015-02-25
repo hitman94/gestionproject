@@ -52,8 +52,13 @@ public class CreateUserServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
+		if (dao.checkUserName(username)) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+					"Username déjà pris");
+			return;
+		}
 		User user = (User) request.getSession().getAttribute("user");
-		
+
 		if (checkValidity(username) && checkValidity(password)) {
 
 			// Ability roleAbility = Ability.valueOf(role);

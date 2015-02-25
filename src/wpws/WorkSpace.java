@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,71 +15,73 @@ import javax.persistence.OneToOne;
 
 import entreprise.Entreprise;
 
-
 /**
- * Le workspace est compos�e d'un identifiant unique et d'une collection de workpackage qui le compose
+ * Le workspace est compos�e d'un identifiant unique et d'une collection de
+ * workpackage qui le compose
+ * 
  * @author emmanuel
  *
  */
 @Entity
 public class WorkSpace {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@OneToMany(mappedBy="assignedTo")
-	private Set<WorkPackage> wpList;	
 
-	@OneToOne(mappedBy="workspace")
+	@OneToMany(mappedBy = "assignedTo", cascade = CascadeType.REMOVE)
+	private Set<WorkPackage> wpList;
+
+	@OneToOne(mappedBy = "workspace")
 	private Entreprise ent;
-	
+
 	@OneToOne
 	private WorkSpace parent;
 
 	public WorkSpace() {
-		
+
 	}
 
-	public WorkSpace(WorkSpace parent){
+	public WorkSpace(WorkSpace parent) {
 		this.parent = parent;
 		this.wpList = new HashSet<WorkPackage>();
 	}
-	
+
 	/**
 	 * recupere l'identifiant unique du workspace
+	 * 
 	 * @return
 	 */
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public void setWpList(Set<WorkPackage> wpList) {
 		this.wpList = new HashSet<WorkPackage>(wpList);
 	}
-	
+
 	public List<WorkPackage> getWpList() {
 		return new ArrayList<WorkPackage>(wpList);
 	}
-	
+
 	public void setParent(WorkSpace parent) {
 		this.parent = Objects.requireNonNull(parent);
 	}
-	
+
 	public WorkSpace getParent() {
 		return parent;
 	}
-	
+
 	/**
 	 * recup�re la maturite du WS
 	 * 
 	 * @return
 	 */
-	
+
 	public WSMaturity getWSMaturity() {
 
 		// algorithme basic
@@ -97,13 +100,13 @@ public class WorkSpace {
 		}
 		return WSMaturity.Done;
 	}
-	
-	public boolean addWP(WorkPackage wp){
+
+	public boolean addWP(WorkPackage wp) {
 		Objects.requireNonNull(wp);
 		return wpList.add(wp);
 	}
-	
-	public boolean removeWP(WorkPackage wp){
+
+	public boolean removeWP(WorkPackage wp) {
 		Objects.requireNonNull(wp);
 		return wpList.remove(wp);
 	}

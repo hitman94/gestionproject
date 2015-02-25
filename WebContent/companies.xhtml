@@ -30,14 +30,16 @@
 									</dt>
 									<dd>
 										<div class="row">
-										<div class="col-md-10 col-md-offset-1">
-												<h:outputText value="Chef :  Nom du chef"></h:outputText>
+											<div class="col-md-10 col-md-offset-1">
+												<Strong><h:outputText
+														value="Chef :  ${entreprise.chief.userName}"></h:outputText></Strong>
 											</div>
 											<div class="col-md-10 col-md-offset-1">
 												<h:outputText value="Option :  Revoquer le chef "></h:outputText>
 											</div>
 											<div class="col-md-10 col-md-offset-1">
-												<h:outputText value="Option :  Supprimer l'entreprise"></h:outputText>
+												<a onclick="deleteEntreprise(${entreprise.id})" href="#">Supprimer</a>
+
 											</div>
 										</div>
 									</dd>
