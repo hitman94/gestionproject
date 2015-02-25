@@ -40,7 +40,8 @@ public abstract class AbstractDAO<E> {
 	}
 	
 	public void remove(E entity){
-		em.remove(entity);
+		E ent  = em.merge(entity);
+		em.remove(ent);
 	}
 	
 	public E findById(Long id){

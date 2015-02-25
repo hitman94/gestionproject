@@ -24,4 +24,23 @@ $(document).ready(function() {
 		
 		
 	});
+	
 });
+
+function deleteWP(id){
+	alert(id);
+	$.ajax({
+        type: 'POST',
+        url: "DeleteWorkPackageServlet",
+        data: { idWorkPackage : id},
+        success: function (data) {
+        	window.location.replace("workPackages.jsp");
+        },
+        error: function (data , status, error){
+        	$('#errorsZone').html("Erreur lors de la creation du workpackage.</br>" + error);
+        	$('#errorsZone').show(500);
+        }
+        
+         });
+}
+
