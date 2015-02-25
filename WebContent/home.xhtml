@@ -39,7 +39,7 @@
 												<h:outputText value="${wp.name}"></h:outputText>
 											</dt>
 											<dt>
-												<h:outputText value="Statut : ${wp.status}"></h:outputText>
+												<h:outputText value="Statut : ${wp.status}" style="font-weight: normal;"></h:outputText>
 												<c:choose>
 													<c:when test="${wp.status eq 'Start'}">
 														<c:set var="nbStart" value="${nbStart + 1}" />
