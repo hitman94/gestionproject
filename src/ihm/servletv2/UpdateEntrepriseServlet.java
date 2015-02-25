@@ -60,6 +60,9 @@ public class UpdateEntrepriseServlet extends HttpServlet {
 					"requete mal formée");
 		}
 
+		User toUpdate = entreprise.getChief();
+		toUpdate.setEntreprise(null);
+		userDAO.update(toUpdate);
 		user.setEntreprise(entreprise);
 		userDAO.update(user);
 		entreprise.setChief(user);
