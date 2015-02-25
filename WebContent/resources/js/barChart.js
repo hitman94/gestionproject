@@ -7,14 +7,14 @@ window.onload = function() {
 	var nbDone = document.getElementById("nbDone").value;
 
 	window.myBar = new Chart(ctx).Bar({
-		labels : [ "Start", "Create", "In Progress", "Done" ],
+		labels : [ "Create", "Start", "In Progress", "Done" ],
 		datasets : [
 		            {
 		            	fillColor : "rgba(65,157,252,0.5)",
 		            	strokeColor : "rgba(65,157,252,0.8)",
 		            	highlightFill : "rgba(65,157,252,0.75)",
 		            	highlightStroke : "rgba(65,157,252,1)",
-		            	data : [ nbStart, nbCreate, nbInProgress, nbDone ]
+		            	data : [ nbCreate, nbStart, nbInProgress, nbDone ]
 		            } 
 		            ]
 	}, {responsive : true});
