@@ -43,3 +43,21 @@ function deleteWP(id){
          });
 }
 
+function valideWP(id){
+	$.ajax({
+        type: 'POST',
+        url: "ValideWorkPackageServlet",
+        data: { idWorkPackage : id},
+        success: function (data) {
+        	window.location.replace("workPackages.jsp");
+        },
+        error: function (data , status, error){
+        	$('#errorsZone').html("Erreur lors de la creation du workpackage.</br>" + error);
+        	$('#errorsZone').show(500);
+        }
+        
+         });
+	
+	
+}
+

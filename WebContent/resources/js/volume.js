@@ -1,11 +1,23 @@
 /**
  * 
  */
-function editerVolume(idVolume) {
+
+var activeVolume = null;
+function showEditVolume(id) {
+
+	$('#' + id).css("display", "");
+	if (activeVolume != null && activeVolume != id)
+		$('#' + activeVolume).css("display", "none");
+
+	activeVolume = id;
+}
+function editerVolume() {
+	var title = document
+	.getElementById("title"+activeVolume).value;
 	$.ajax({
 		type: 'POST',
 		url: "EditVolumeServlet",
-		data: { idVolume : idVolume },//,title:title},
+		data: { idVolume : activeVolume ,title:title},
 		success: function (data) {
 			window.location.replace("volume.jsp");
 		},

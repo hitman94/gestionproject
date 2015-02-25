@@ -31,10 +31,10 @@ public class VolumeDAO  extends AbstractDAO<Volume>{
 		} 
 	}
 	public boolean checkVolumeExist(String title){
-		Query q = em.createQuery("SELECT v FROM Volume v WHERE v.wp.assignedTo.ent.title=:title");
+		Query q = em.createQuery("SELECT v FROM Volume v WHERE v.title=:title");
 		q.setParameter("title", title);
 		try {
-			q.getResultList();
+			q.getSingleResult();
 			return true;
 		} catch (NoResultException e) {
 			return false;
