@@ -12,73 +12,162 @@
 		<ui:define name="mainContent">
 
 			<f:view>
-				<div class="jumbotron">
-					<div class="container">
-						<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
-						<hr />
-						<h4>Vous pouvez consulter ici l'avancement des différents
-							WorkPackages.</h4>
-					</div>
-				</div>
-
 				<div class="container">
 					<div class="row">
-						<c:set var="nbStart" value="0" />
-						<c:set var="nbCreate" value="0" />
-						<c:set var="nbInProgress" value="0" />
-						<c:set var="nbDone" value="0" />
-						<div class="col-md-5">
-							<h3>WorkPackages</h3>
-							<hr />
-							<div class="row">
-
-								<c:forEach items="${workPackageDAO.findAll()}" var="wp">
-									<div class="col-md-12">
-
-										<dl>
-											<dt>
-												<h:outputText value="${wp.name}"></h:outputText>
-											</dt>
-											<dt>
-												<h:outputText value="Statut : ${wp.status}"
-													style="font-weight: normal;"></h:outputText>
-												<c:choose>
-													<c:when test="${wp.status eq 'Start'}">
-														<c:set var="nbStart" value="${nbStart + 1}" />
-													</c:when>
-													<c:when test="${wp.status eq 'Create'}">
-														<c:set var="nbCreate" value="${nbCreate + 1}" />
-													</c:when>
-													<c:when test="${wp.status eq 'InProgress'}">
-														<c:set var="nbInProgress" value="${nbInProgress + 1}" />
-													</c:when>
-													<c:when test="${wp.status eq 'Done'}">
-														<c:set var="nbDone" value="${nbDone + 1}" />
-													</c:when>
-												</c:choose>
-											</dt>
-										</dl>
+						<c:choose>
+							<c:when test="${ sessionScope.user.ability == 'Patron'}">
+								<div class="jumbotron">
+									<div class="container">
+										<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
+										<hr />
+										<h4>Vous pouvez consulter ici l'avancement des différents
+											WorkPackages.</h4>
 									</div>
-								</c:forEach>
-								<c:if test="${workPackageDAO.findAll().size() eq 0}">
-									<h4>Pas de WorkPackage à afficher.</h4>
-								</c:if>
-
-							</div>
-						</div>
-						<div class="col-md-7">
-							<h4>Etat actuel des différents workPackages</h4>
-							<div class="row">
-								<div id="wpChartDiv">
-									<canvas id="wpChart" width="300" height="200"></canvas>
 								</div>
-							</div>
-						</div>
-						<input id="nbStart" value="${nbStart}" type="hidden" /> <input
-							id="nbCreate" value="${nbCreate}" type="hidden" /> <input
-							id="nbInProgress" value="${nbInProgress}" type="hidden" /> <input
-							id="nbDone" value="${nbDone}" type="hidden" />
-						<script type="text/javascript" src="resources/js/barChart.js"></script>
+								<c:set var="nbStart" value="0" />
+								<c:set var="nbCreate" value="0" />
+								<c:set var="nbInProgress" value="0" />
+								<c:set var="nbDone" value="0" />
+								<div class="col-md-5">
+									<h3>WorkPackages</h3>
+									<hr />
+									<div class="row">
+
+										<c:forEach items="${entrepriseDAO.findAll()}" var="ent">
+											<c:set var="workpackages"
+												value="${workPackageDAO.getWpFromCompany(ent.id)}"></c:set>
+											<c:if test="${workpackages.size() != 0}">
+												<h3>
+													<h:outputText value="${ent.name}"></h:outputText>
+												</h3>
+											</c:if>
+
+											<c:forEach items="${workpackages}" var="workpackage">
+												<div class="row">
+													<div class="col-md-10 col-md-offset-1">
+														<dl>
+															<dt>
+																<h:outputText value="${workpackage.name}"></h:outputText>
+															</dt>
+															<dd>
+																<h:outputText value="Statut : "></h:outputText>
+																<c:choose>
+																	<c:when test="${workpackage.status eq 'Start'}">
+																		<h:outputText class="text-danger"
+																			value="${workpackage.status}"></h:outputText>
+																		<c:set var="nbStart" value="${nbStart + 1}" />
+																	</c:when>
+																	<c:when test="${workpackage.status eq 'Create'}">
+																		<h:outputText class="text-warning"
+																			value="${workpackage.status}"></h:outputText>
+																		<c:set var="nbCreate" value="${nbCreate + 1}" />
+																	</c:when>
+																	<c:when test="${workpackage.status eq 'InProgress'}">
+																		<h:outputText class="text-primary"
+																			value="${workpackage.status}"></h:outputText>
+																		<c:set var="nbInProgress" value="${nbInProgress + 1}" />
+																	</c:when>
+																	<c:when test="${workpackage.status eq 'Done'}">
+																		<h:outputText class="text-success"
+																			value="${workpackage.status}"></h:outputText>
+																		<c:set var="nbDone" value="${nbDone + 1}" />
+																	</c:when>
+																</c:choose>
+															</dd>
+														</dl>
+													</div>
+												</div>
+											</c:forEach>
+										</c:forEach>
+										<c:if test="${workPackageDAO.findAll().size() eq 0}">
+											<h4>Pas de WorkPackage à afficher.</h4>
+										</c:if>
+									</div>
+								</div>
+								<div class="col-md-7">
+									<h4>Etat actuel des différents workPackages</h4>
+									<div class="row">
+										<div id="wpChartDiv">
+											<canvas id="wpChart" width="300" height="200"></canvas>
+										</div>
+									</div>
+								</div>
+								<input id="nbStart" value="${nbStart}" type="hidden" />
+								<input id="nbCreate" value="${nbCreate}" type="hidden" />
+								<input id="nbInProgress" value="${nbInProgress}" type="hidden" />
+								<input id="nbDone" value="${nbDone}" type="hidden" />
+								<script type="text/javascript" src="resources/js/barChart.js"></script>
+							</c:when>
+							<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
+								<div class="jumbotron">
+									<div class="container">
+										<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
+										<hr />
+										<h4>Vous pouvez consulter ici l'avancement des différents
+											WorkPackages de votre entreprise.</h4>
+									</div>
+								</div>
+								<c:set var="nbStart" value="0" />
+								<c:set var="nbCreate" value="0" />
+								<c:set var="nbInProgress" value="0" />
+								<c:set var="nbDone" value="0" />
+								<div class="col-md-5">
+									<h3>WorkPackages de votre entreprise</h3>
+									<hr />
+									<div class="row">
+
+										<c:forEach
+											items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
+											var="wp">
+											<div class="col-md-12">
+
+												<dl>
+													<dt>
+														<h:outputText value="${wp.name}"></h:outputText>
+													</dt>
+													<dt>
+														<h:outputText value="Statut : ${wp.status}"
+															style="font-weight: normal;"></h:outputText>
+														<c:choose>
+															<c:when test="${wp.status eq 'Start'}">
+																<c:set var="nbStart" value="${nbStart + 1}" />
+															</c:when>
+															<c:when test="${wp.status eq 'Create'}">
+																<c:set var="nbCreate" value="${nbCreate + 1}" />
+															</c:when>
+															<c:when test="${wp.status eq 'InProgress'}">
+																<c:set var="nbInProgress" value="${nbInProgress + 1}" />
+															</c:when>
+															<c:when test="${wp.status eq 'Done'}">
+																<c:set var="nbDone" value="${nbDone + 1}" />
+															</c:when>
+														</c:choose>
+													</dt>
+												</dl>
+											</div>
+										</c:forEach>
+										<c:if
+											test="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id).size() eq 0}">
+											<h4>Pas de WorkPackage à afficher.</h4>
+										</c:if>
+
+									</div>
+								</div>
+								<div class="col-md-7">
+									<h4>Etat actuel des différents workPackages</h4>
+									<div class="row">
+										<div id="wpChartDiv">
+											<canvas id="wpChart" width="300" height="200"></canvas>
+										</div>
+									</div>
+								</div>
+								<input id="nbStart" value="${nbStart}" type="hidden" />
+								<input id="nbCreate" value="${nbCreate}" type="hidden" />
+								<input id="nbInProgress" value="${nbInProgress}" type="hidden" />
+								<input id="nbDone" value="${nbDone}" type="hidden" />
+								<script type="text/javascript" src="resources/js/barChart.js"></script>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 
