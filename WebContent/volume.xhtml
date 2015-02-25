@@ -28,7 +28,10 @@
 												<h:outputText value="${volume.title}"></h:outputText>
 											</dt>
 											<dd>
-												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
+											<h:outputText value="Option : Editer / "></h:outputText>
+												<a href="#"
+													onclick="supprimerVolume(${volume.id})"><h:outputText
+															value="Supprimer" /></a>
 											</dd>
 										</dl>
 									</div>

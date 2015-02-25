@@ -55,9 +55,7 @@ public class DeleteVolumeServlet extends HttpServlet {
 			Volume v=volumeDAO.findById(new Long(idVolume));
 			//			v.getWp().removeVolume(v);
 			//			wpDao.update(v.getWp());
-			Volume toRemove = volumeDAO.update(v);
-			log(toRemove.getId().toString());
-			volumeDAO.remove(toRemove);
+			volumeDAO.remove(v);
 			response.setStatus(200);
 		}
 	}
