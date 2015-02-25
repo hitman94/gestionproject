@@ -61,6 +61,9 @@
 						</div>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
+							
+							<h3>Création d'un workPackage</h3>
+							
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
@@ -71,8 +74,8 @@
 									<c:when test="${ sessionScope.user.ability == 'Patron'}">
 
 										<div class="form-group">
-											<label for="entrepriseWP">Selectionnez l'entreprise
-												du Work Package:</label> <select class="form-control"
+											<label for="entrepriseWP">Sélectionnez l'entreprise
+												du WorkPackage</label> <select class="form-control"
 												id="entrepriseWP">
 												<c:forEach items="${entrepriseDAO.findAll()}"
 													var="entreprise">

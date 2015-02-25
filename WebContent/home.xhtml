@@ -23,23 +23,28 @@
 
 				<div class="container">
 					<div class="row">
-						<c:set var="nbStart" value="0"/>
+						<c:set var="nbStart" value="0" />
 						<c:set var="nbCreate" value="0" />
 						<c:set var="nbInProgress" value="0" />
 						<c:set var="nbDone" value="0" />
 						<div class="col-md-5">
 							<h3>WorkPackages</h3>
-							<hr/>
+							<hr />
 							<div class="row">
 
 								<c:forEach items="${workPackageDAO.findAll()}" var="wp">
 									<div class="col-md-12">
+
 										<dl>
+											<c:if test="${workPackageDAO.findAll().size() eq 0}">
+												<dt>Pas de WorkPackage à afficher.</dt>
+											</c:if>
 											<dt>
 												<h:outputText value="${wp.name}"></h:outputText>
 											</dt>
 											<dt>
-												<h:outputText value="Statut : ${wp.status}" style="font-weight: normal;"></h:outputText>
+												<h:outputText value="Statut : ${wp.status}"
+													style="font-weight: normal;"></h:outputText>
 												<c:choose>
 													<c:when test="${wp.status eq 'Start'}">
 														<c:set var="nbStart" value="${nbStart + 1}" />
@@ -69,10 +74,10 @@
 								</div>
 							</div>
 						</div>
-						<input id="nbStart" value="${nbStart}" type="hidden"/>
-						<input id="nbCreate" value="${nbCreate}" type="hidden"/>
-						<input id="nbInProgress" value="${nbInProgress}" type="hidden"/>
-						<input id="nbDone" value="${nbDone}" type="hidden"/>
+						<input id="nbStart" value="${nbStart}" type="hidden" /> <input
+							id="nbCreate" value="${nbCreate}" type="hidden" /> <input
+							id="nbInProgress" value="${nbInProgress}" type="hidden" /> <input
+							id="nbDone" value="${nbDone}" type="hidden" />
 						<script type="text/javascript" src="resources/js/barChart.js"></script>
 					</div>
 				</div>

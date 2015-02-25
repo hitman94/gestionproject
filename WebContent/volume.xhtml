@@ -46,7 +46,7 @@
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
 
-							<h2>Creation d'un volume :</h2>
+							<h3>Création d'un volume</h3>
 
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
@@ -55,7 +55,7 @@
 										name="volumeName" id="volumeName" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="wp">Selectionnez le workpackage:</label> <select
+									<label for="wp">Sélectionnez le WorkPackage</label> <select
 										class="form-control" id="wp">
 										<c:forEach items="${ workPackageDAO.findAll() }" var="wp">
 											<option value="${wp.id}">

@@ -38,6 +38,9 @@
 						</div>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
+							
+							<h3>Création d'une entreprise</h3>
+							
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
@@ -45,8 +48,8 @@
 										name="companyName" id="companyName" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="chefC">Selectionnez le chef de
-										l'entreprise:</label> <select class="form-control" id="chefC">
+									<label for="chefC">Sélectionnez le chef de
+										l'entreprise</label> <select class="form-control" id="chefC">
 										<c:forEach items="${userDAO.userWithoutCompanies()}"
 											var="user">
 											<c:if test="${ sessionScope.user.id != user.id }">
