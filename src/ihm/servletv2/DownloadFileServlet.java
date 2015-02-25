@@ -32,7 +32,7 @@ public class DownloadFileServlet extends HttpServlet {
 
 	@Inject
 	ChapterDAO dao;
-	
+
 	@Inject
 	WorkPackageDAO wpDao;
 
@@ -60,22 +60,36 @@ public class DownloadFileServlet extends HttpServlet {
 			Long time = System.currentTimeMillis();
 
 			chapter.setTakenDate(time);
-			
+
 			String path = getServletContext().getRealPath("/chapters/");
 			File toSend = new File(path + "/" + chapterId + ".docx");
 			if (toSend.exists()) {
 				WorkPackage wp = wpDao.findById(chapter.getWp().getId());
-				if(wp.getStatus().equals(WPMaturity.Create)) {
+				if (wp.getStatus().equals(WPMaturity.Create)) {
 					wp.setStatus(WPMaturity.Start);
 					wpDao.update(wp);
 				}
 				dao.update(chapter);
 				response.setStatus(200);
+				response.setHeader("url", "chapters/" + chapterId + ".docx");
 				return;
 			}
 			response.setStatus(400);
 
+		} else if (user.getAbility() == Ability.CompanyChief) {
+			Chapter chapter = dao.findById(new Long(chapterId));
+			if (chapter.getTakenDate() == -2)
+				response.setHeader("url", "chapters/temp/" + chapterId
+						+ ".docx");
+			else
+				response.setHeader("url", "chapters/" + chapterId + ".docx");
+
+			response.setStatus(200);
+			return;
+
 		}
+		response.setStatus(400);
+		return;
 	}
 
 	protected void doPost(HttpServletRequest request,
