@@ -53,7 +53,7 @@ public abstract class AbstractDAO<E> {
 		
 	}
 	
-	public void update(E entity){
-		em.merge(entity);
+	public E update(E entity){
+		return em.merge(entity);
 	}
 }

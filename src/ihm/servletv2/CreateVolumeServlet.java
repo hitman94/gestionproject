@@ -55,8 +55,8 @@ public class CreateVolumeServlet extends HttpServlet {
 		else if(user.getAbility() == Ability.Patron){
 			Volume toAdd=new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP)));
 			volumeDAO.persist(toAdd);
-			toAdd.getWp().addVolume(toAdd);
-			workPackageDAO.update(toAdd.getWp());
+//			toAdd.getWp().addVolume(toAdd);
+//			workPackageDAO.update(toAdd.getWp());
 			response.setStatus(200);
 		}
 	}
