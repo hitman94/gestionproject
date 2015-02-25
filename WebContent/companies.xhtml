@@ -18,29 +18,41 @@
 						<h3>Entreprises</h3>
 						<HR />
 						<div class="col-md-6">
-							<div class="row">
-
-								<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
-									<div class="col-md-12">
-										<dl>
-											<dt>
-												<h:outputText value="${entreprise.name}"></h:outputText>
-											</dt>
-											<dd>
-												<h:outputText value="Option : Editer / Supprimer"></h:outputText>
-											</dd>
-										</dl>
-									</div>
-								</c:forEach>
 
 
-							</div>
+							<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
+
+								<dl>
+									<dt>
+										<h3>
+											<h:outputText value="${entreprise.name}"></h:outputText>
+										</h3>
+									</dt>
+									<dd>
+										<div class="row">
+										<div class="col-md-10 col-md-offset-1">
+												<h:outputText value="Chef :  Nom du chef"></h:outputText>
+											</div>
+											<div class="col-md-10 col-md-offset-1">
+												<h:outputText value="Option :  Revoquer le chef "></h:outputText>
+											</div>
+											<div class="col-md-10 col-md-offset-1">
+												<h:outputText value="Option :  Supprimer l'entreprise"></h:outputText>
+											</div>
+										</div>
+									</dd>
+								</dl>
+
+							</c:forEach>
+
+
+
 						</div>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
-							
+
 							<h3>Création d'une entreprise</h3>
-							
+
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
@@ -48,8 +60,8 @@
 										name="companyName" id="companyName" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="chefC">Sélectionnez le chef de
-										l'entreprise</label> <select class="form-control" id="chefC">
+									<label for="chefC">Sélectionnez le chef de l'entreprise</label>
+									<select class="form-control" id="chefC">
 										<c:forEach items="${userDAO.userWithoutCompanies()}"
 											var="user">
 											<c:if test="${ sessionScope.user.id != user.id }">
