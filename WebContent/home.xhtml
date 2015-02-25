@@ -15,6 +15,7 @@
 				<div class="container">
 					<div class="row">
 						<c:choose>
+							<!-- PATRON INTERFACE -->
 							<c:when test="${ sessionScope.user.ability == 'Patron'}">
 								<div class="jumbotron">
 									<div class="container">
@@ -98,6 +99,9 @@
 								<input id="nbDone" value="${nbDone}" type="hidden" />
 								<script type="text/javascript" src="resources/js/barChart.js"></script>
 							</c:when>
+
+							<!-- COMPANY CHIEF INTERFACE -->
+
 							<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
 								<div class="jumbotron">
 									<div class="container">
@@ -180,6 +184,67 @@
 								<input id="nbInProgress" value="${nbInProgress}" type="hidden" />
 								<input id="nbDone" value="${nbDone}" type="hidden" />
 								<script type="text/javascript" src="resources/js/barChart.js"></script>
+							</c:when>
+
+							<!-- USER INTERFACE -->
+
+							<c:when test="${ sessionScope.user.ability == 'User'}">
+								<div class="jumbotron">
+									<div class="container">
+										<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
+										<hr />
+										<h4>Vous pouvez consulter ici l'avancement des différents
+											chapitres qui vous concernent.</h4>
+									</div>
+								</div>
+								<c:set var="nbChapterUser" value="0" />
+								<c:set var="nbChapterCompany" value="0" />
+								<c:set var="nbChapterTotal" value="0" />
+								<div class="col-md-5">
+									<dl>
+										<dd>
+											<h3>
+												<h:outputText value="Vos chapitres"></h:outputText>
+											</h3>
+										</dd>
+									</dl>
+									<hr />
+									<div class="row">
+
+										<c:forEach
+											items="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id)}"
+											var="chapter">
+											<div class="col-md-12">
+												<dl>
+													<dt>
+														<h:outputText value="${chapter.title}"></h:outputText>
+													</dt>
+												</dl>
+											</div>
+										</c:forEach>
+										<c:if
+											test="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id).size() eq 0}">
+											<h4>Pas de chapitre à afficher.</h4>
+										</c:if>
+
+									</div>
+								</div>
+								<div class="col-md-7">
+									<h4>Répartition actuelle des différents chapitres</h4>
+									<div class="row">
+										<div id="chapterChartDiv">
+											<canvas id="chapterChart" width="200" height="200"></canvas>
+										</div>
+									</div>
+								</div>
+								<c:set var="nbChapterUser" value="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id).size()}" />
+								<c:set var="nbChapterCompany" value="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id).size()}" />
+								<c:set var="nbChapterTotal" value="${chapterDAO.findAll().size()}" />
+								
+								<input id="nbChapterUser" value="${nbChapterUser}" type="hidden" />
+								<input id="nbChapterCompany" value="${nbChapterCompany}" type="hidden" />
+								<input id="nbChapterTotal" value="${nbChapterTotal}" type="hidden" />
+								<script type="text/javascript" src="resources/js/donutChart.js"></script>
 							</c:when>
 						</c:choose>
 					</div>
