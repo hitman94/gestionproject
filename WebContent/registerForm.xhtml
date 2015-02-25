@@ -23,25 +23,42 @@
 								<c:choose>
 									<c:when test="${ sessionScope.user.ability == 'Patron'}">
 										<c:forEach items="${userDAO.findAll()}" var="user">
+											<div class="col-md-12">
+												<c:if test="${user.id != sessionScope.user.id }">
+													<dl>
+														<dt>
+
+															<h:outputText value="${user.userName}"></h:outputText>
+														</dt>
+														<dd>
+															<a onclick="deleteUser(${user.id})" href="#">Supprimer</a>
+														</dd>
+													</dl>
+												</c:if>
+											</div>
+										</c:forEach>
 									</c:when>
 									<c:otherwise>
 										<c:forEach
 											items="${userDAO.usersFromEntreprise(sessionScope.user.entreprise.id)}"
 											var="user">
+											<div class="col-md-12">
+												<c:if test="${user.id != sessionScope.user.id }">
+													<dl>
+														<dt>
+
+															<h:outputText value="${user.userName}"></h:outputText>
+														</dt>
+														<dd>
+															<a onclick="deleteUser(${user.id})" href="#">Supprimer</a>
+														</dd>
+													</dl>
+												</c:if>
+											</div>
+										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-								<div class="col-md-12">
-									<dl>
-										<dt>
 
-											<h:outputText value="${user.userName}"></h:outputText>
-										</dt>
-										<dd>
-											<h:outputText value="Option : Editer / Supprimer"></h:outputText>
-										</dd>
-									</dl>
-								</div>
-								</c:forEach>
 
 							</div>
 

@@ -4,15 +4,16 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import comportement.Ability;
-
 import utilisateur.User;
 import dao.UserDAO;
 
+@WebServlet("/RemoveUserServlet")
 public class RemoveUserServlet extends HttpServlet {
 
 	@Inject
@@ -21,6 +22,12 @@ public class RemoveUserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		super.doGet(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		String id = req.getParameter("id");
 		User ownerRequest = (User) req.getSession().getAttribute("user");
 		if (id == null || id.isEmpty()) {
@@ -28,13 +35,13 @@ public class RemoveUserServlet extends HttpServlet {
 					"La requete est mal formee");
 			return;
 		}
-		
+
 		User userTodelete = userdao.findById(new Long(id));
 		if (userTodelete == null) {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"L'utilisateur n'existe pas");
 			return;
-		} 
+		}
 		Ability userTodeleteAbility = userTodelete.getAbility();
 		Ability userAb = ownerRequest.getAbility();
 
@@ -45,17 +52,11 @@ public class RemoveUserServlet extends HttpServlet {
 			resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 					"Vous n'avez pas les droits requis pour cette opération");
 		} else {
-					
-				userdao.remove(userTodelete);
-				resp.setStatus(200);
+
+			userdao.remove(userTodelete);
+			resp.setStatus(200);
 
 		}
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		doGet(req, resp);
 	}
 
 }
