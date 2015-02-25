@@ -1,3 +1,23 @@
+function deleteUser(id) {
+
+	$.ajax({
+		type : 'POST',
+		url : "RemoveUserServlet",
+		data : {
+			id : id
+		},
+		success : function(data) {
+			window.location.replace("registerForm.jsp");
+		},
+		error : function(data, status, error) {
+			$('#errorsZone').html(
+					"Erreur lors de la creation du workpackage.</br>" + error);
+			$('#errorsZone').show(500);
+		}
+
+	});
+}
+
 $('document').ready(
 		function() {
 
@@ -37,26 +57,5 @@ $('document').ready(
 							}
 						});
 					});
-
-			function deleteUser(id) {
-				alert(id);
-				$.ajax({
-					type : 'POST',
-					url : "RemoveUserServlet",
-					data : {
-						id : id
-					},
-					success : function(data) {
-						window.location.replace("registerForm.jsp");
-					},
-					error : function(data, status, error) {
-						$('#errorsZone').html(
-								"Erreur lors de la creation du workpackage.</br>"
-										+ error);
-						$('#errorsZone').show(500);
-					}
-
-				});
-			}
 
 		});
