@@ -43,17 +43,17 @@ public class CreateWorkPackageServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		if(ws != null){
 			if( user == null){
-				response.sendError(400, "Aucun utilisateur connect�");
+				response.sendError(400, "Aucun utilisateur connecté");
 				return;
 			}
 			if(user.getAbility() == Ability.User){
-				response.sendError(400, "L'utilisateur connect� n'as pas les droits requis pour cr�er un workPackage");
+				response.sendError(400, "L'utilisateur connecté n'as pas les droits requis pour créer un workPackage");
 				return;
 			}
 			WorkPackage wp = new WorkPackage(ws,nameWS);
 			workPackageDAO.persist(wp);
 		}else{
-			response.sendError(400,"l'id " + idWS + "ne correspond � aucun workspace de la base de donn�es");
+			response.sendError(400,"l'id " + idWS + "ne correspond à aucun workspace de la base de données");
 		}
 		
 	}

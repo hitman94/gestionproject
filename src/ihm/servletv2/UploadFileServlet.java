@@ -16,8 +16,13 @@ import javax.servlet.http.Part;
 
 import livre.Chapter;
 import utilisateur.User;
+import wpws.WPMaturity;
+import wpws.WorkPackage;
+
 import comportement.Ability;
+
 import dao.ChapterDAO;
+import dao.WorkPackageDAO;
 
 /**
  * Servlet implementation class UploadFileServlet
@@ -30,6 +35,8 @@ public class UploadFileServlet extends HttpServlet {
 	@Inject
 	ChapterDAO dao;
 	
+	@Inject
+	WorkPackageDAO wpDao;
 
     public UploadFileServlet() {
         super();
@@ -68,6 +75,11 @@ public class UploadFileServlet extends HttpServlet {
 				 out.write((char)toRead);
 			 
 			 chapter.setTakenDate(-1L);//On met a jour la takenDate à -1 pour dire qu'on peut a nouveau l'éditer
+			 WorkPackage wp = wpDao.findById(chapter.getWp().getId());
+			 if(wp.getStatus().equals(WPMaturity.Start)) {
+					wp.setStatus(WPMaturity.InProgress);
+					wpDao.update(wp);
+			}
 			 dao.update(chapter);//On met à jour la BDD
 			 response.getWriter().write("<html><body><div id=\"answer\">ok</div></body></html>");
 			 response.setStatus(200);
