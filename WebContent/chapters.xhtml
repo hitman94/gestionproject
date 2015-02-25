@@ -19,6 +19,13 @@
 						<HR />
 						<div class="col-md-6">
 							<div class="row">
+								<h4>Chapitres à valider</h4>
+								<HR />
+								Blablabla les chapitres
+								<HR />
+								
+								<h4>Chapitres par WorkPackage</h4>
+								<HR />
 
 								<c:forEach
 									items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
@@ -69,7 +76,7 @@
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<c:if test="${ sessionScope.user.ability == 'User' }">
 								<form class="form" target="frameUpload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
-									<legend>Remettre un travail</legend>
+									<h3>Remettre un travail</h3>
 
 									<div class="form-group">
 										<label for="chefC">Sélectionnez le chapitre pour
@@ -102,15 +109,15 @@
 
 							<c:if test="${ sessionScope.user.ability == 'CompanyChief' }">
 								<form class="form">
-									<legend>Creer un chapitre</legend>
+									<h3>Créer un chapitre</h3>
 									<div class="form-group">
 
 										<input type="text" placeholder="Nom du chapitre"
 											name="chapterName" id="chapterName" class="form-control" />
 									</div>
 									<div class="form-group">
-										<label for="idWp">Selectionnez le WorkPackage auquel
-											assigner le chapitre</label> <select class="form-control" id="idWp">
+										<label for="idWp">Sélectionnez le workPackage auquel
+											le chapitre doit être assigné</label> <select class="form-control" id="idWp">
 											<c:forEach
 												items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 												var="wp">
@@ -123,8 +130,8 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="idVol">Selectionnez le volume auquel
-											assigner le chapitre</label> <select class="form-control" id="idVol">
+										<label for="idVol">Sélectionnez le volume auquel
+											le chapitre doit être assigné</label> <select class="form-control" id="idVol">
 											<c:forEach
 												items="${volumeDAO.volumeFromEntreprise(sessionScope.user.entreprise.id)}"
 												var="volume">
@@ -137,7 +144,7 @@
 										</select>
 									</div>
 									<button type="button" id="submitChapter"
-										class="form-control btn btn-success">Creer le
+										class="form-control btn btn-success">Créer le
 										chapitre</button>
 								</form>
 							</c:if>

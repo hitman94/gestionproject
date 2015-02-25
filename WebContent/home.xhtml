@@ -112,37 +112,51 @@
 								<c:set var="nbInProgress" value="0" />
 								<c:set var="nbDone" value="0" />
 								<div class="col-md-5">
-									<h3>WorkPackages de votre entreprise</h3>
+									<dl>
+										<dd>
+											<h3>
+												<h:outputText value="WorkPackages de "></h:outputText>
+												<h:outputText value="${sessionScope.user.entreprise.name}"></h:outputText>
+											</h3>
+										</dd>
+									</dl>
 									<hr />
 									<div class="row">
 
 										<c:forEach
 											items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
-											var="wp">
+											var="workpackage">
 											<div class="col-md-12">
 
 												<dl>
 													<dt>
-														<h:outputText value="${wp.name}"></h:outputText>
+														<h:outputText value="${workpackage.name}"></h:outputText>
 													</dt>
-													<dt>
-														<h:outputText value="Statut : ${wp.status}"
-															style="font-weight: normal;"></h:outputText>
+													<dd>
+														<h:outputText value="Statut : "></h:outputText>
 														<c:choose>
-															<c:when test="${wp.status eq 'Start'}">
+															<c:when test="${workpackage.status eq 'Start'}">
+																<h:outputText class="text-danger"
+																	value="${workpackage.status}"></h:outputText>
 																<c:set var="nbStart" value="${nbStart + 1}" />
 															</c:when>
-															<c:when test="${wp.status eq 'Create'}">
+															<c:when test="${workpackage.status eq 'Create'}">
+																<h:outputText class="text-warning"
+																	value="${workpackage.status}"></h:outputText>
 																<c:set var="nbCreate" value="${nbCreate + 1}" />
 															</c:when>
-															<c:when test="${wp.status eq 'InProgress'}">
+															<c:when test="${workpackage.status eq 'InProgress'}">
+																<h:outputText class="text-primary"
+																	value="${workpackage.status}"></h:outputText>
 																<c:set var="nbInProgress" value="${nbInProgress + 1}" />
 															</c:when>
-															<c:when test="${wp.status eq 'Done'}">
+															<c:when test="${workpackage.status eq 'Done'}">
+																<h:outputText class="text-success"
+																	value="${workpackage.status}"></h:outputText>
 																<c:set var="nbDone" value="${nbDone + 1}" />
 															</c:when>
 														</c:choose>
-													</dt>
+													</dd>
 												</dl>
 											</div>
 										</c:forEach>
