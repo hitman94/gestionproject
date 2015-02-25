@@ -54,8 +54,9 @@
 																</c:choose>
 														</dt>
 														<dd>
-															Options : <a
-																onclick="deleteWP(${workpackage.id})" href="#">Supprimer </a>
+															Options : 
+															<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
+																
 														</dd>
 													</dl>
 												</div>
@@ -85,14 +86,18 @@
 																	<h:outputText class="text-primary" value="${workpackage.status}"></h:outputText>
 																	</c:when>
 																	<c:when test="${workpackage.status == 'Done'}">
-																	<h:outputText class="text-sucess" value="${workpackage.status}"></h:outputText>
+																	<h:outputText class="text-success" value="${workpackage.status}"></h:outputText>
 																	</c:when>
 																	
 																</c:choose>
 												</dt>
 												<dd>
-													Options : <a onclick="deleteWP(${workpackage.id})"
-														href="#">Supprimer</a>
+													Options :
+													<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer </a>
+															<c:if test="${ sessionScope.user.ability == 'CompanyChief'}">
+																	<a onclick="valideWP(${workpackage.id})" href="#">Valider</a>
+															</c:if>
+															
 
 												</dd>
 											</dl>
