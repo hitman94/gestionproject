@@ -35,11 +35,27 @@
 												<div class="col-md-10 col-md-offset-1">
 													<dl>
 														<dt>
-															<h:outputText value="${workpackage.name}"></h:outputText>
+															<h:outputText value="${workpackage.name} - Status: "></h:outputText>
+																
+																<c:choose>
+																	<c:when test="${workpackage.status == 'Create'}">
+																	<h:outputText class="text-danger" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	<c:when test="${workpackage.status == 'Start'}">
+																	<h:outputText class="text-warning" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	<c:when test="${workpackage.status == 'InProgress'}">
+																	<h:outputText class="text-primary" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	<c:when test="${workpackage.status == 'Done'}">
+																	<h:outputText class="text-sucess" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	
+																</c:choose>
 														</dt>
 														<dd>
 															Options : <a
-																onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
+																onclick="deleteWP(${workpackage.id})" href="#">Supprimer </a>
 														</dd>
 													</dl>
 												</div>
@@ -56,7 +72,23 @@
 										<div class="col-md-12">
 											<dl>
 												<dt>
-													<h:outputText value="${workpackage.name}"></h:outputText>
+													<h:outputText value="${workpackage.name} - Status: "></h:outputText>
+																
+																<c:choose>
+																	<c:when test="${workpackage.status == 'Create'}">
+																	<h:outputText class="text-danger" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	<c:when test="${workpackage.status == 'Start'}">
+																	<h:outputText class="text-warning" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	<c:when test="${workpackage.status == 'InProgress'}">
+																	<h:outputText class="text-primary" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	<c:when test="${workpackage.status == 'Done'}">
+																	<h:outputText class="text-sucess" value="${workpackage.status}"></h:outputText>
+																	</c:when>
+																	
+																</c:choose>
 												</dt>
 												<dd>
 													Options : <a onclick="deleteWP(${workpackage.id})"
