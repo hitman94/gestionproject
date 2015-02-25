@@ -15,7 +15,8 @@
 				<div class="container">
 
 					<div class="row">
-						<h2>Liste des chapitres:</h2>
+						<h3>Chapitres</h3>
+						<HR />
 						<div class="col-md-6">
 							<div class="row">
 
@@ -69,7 +70,7 @@
 							<c:if test="${ sessionScope.user.ability == 'User' }">
 								<form class="form">
 									<legend>Remettre un travail</legend>
-							
+
 									<div class="form-group">
 										<label for="chefC">Selectionnez le chapitre pour
 											lequel vous remettez le travail</label> <select class="form-control"
@@ -89,7 +90,8 @@
 									<div class="form-group">
 										<label for="chapterLocation">Votre fichier</label> <input
 											type="file" name="chapterLocation" id="chapterLocation" />
-										<p class="help-block">Votre chapitre au format Word( .docx ).</p>
+										<p class="help-block">Votre chapitre au format Word( .docx
+											).</p>
 									</div>
 
 									<button type="button" id="submitWork"

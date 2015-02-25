@@ -13,12 +13,13 @@
 
 			<f:view>
 				<div class="container">
-					
+
 					<div class="row">
-					<h2>Liste des entreprises:</h2>
+						<h3>Entreprises</h3>
+						<HR />
 						<div class="col-md-6">
 							<div class="row">
-								
+
 								<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
 									<div class="col-md-12">
 										<dl>
@@ -49,7 +50,8 @@
 										<c:forEach items="${userDAO.userWithoutCompanies()}"
 											var="user">
 											<c:if test="${ sessionScope.user.id != user.id }">
-												<option value="${user.id}"><h:outputText value="${user.userName}"/></option>
+												<option value="${user.id}"><h:outputText
+														value="${user.userName}" /></option>
 											</c:if>
 										</c:forEach>
 

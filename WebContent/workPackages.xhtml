@@ -15,7 +15,8 @@
 				<div class="container">
 
 					<div class="row">
-						<h2>Liste des WorkPackages:</h2>
+						<h3>WorkPackages</h3>
+						<HR />
 						<div class="col-md-6">
 							<div class="row">
 								<c:choose>
@@ -45,8 +46,8 @@
 														<h:outputText value="${workpackage.name}"></h:outputText>
 													</dt>
 													<dd>
-													<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
-														
+														<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
+
 													</dd>
 												</dl>
 											</div>
@@ -82,12 +83,13 @@
 											</select>
 										</div>
 									</c:when>
-										<c:otherwise>
-											<div class="form-group">
-												<input type="hidden" value="${sessionScope.user.entreprise.workspace.id}"
-													name="entrepriseWP" id="entrepriseWP" class="form-control" />
-											</div>
-										</c:otherwise>
+									<c:otherwise>
+										<div class="form-group">
+											<input type="hidden"
+												value="${sessionScope.user.entreprise.workspace.id}"
+												name="entrepriseWP" id="entrepriseWP" class="form-control" />
+										</div>
+									</c:otherwise>
 								</c:choose>
 								<button type="button" id="submitWP"
 									class="form-control btn btn-success">Créer le
