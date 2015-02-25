@@ -24,7 +24,7 @@
 									items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 									var="wp">
 									<div class="col-md-12">
-										<div class="jumbotron">
+										<div class="jumbotron" style="border:1px solid grey;">
 											<div class="container">
 												<h2>
 													<h:outputText value="${wp.name}" />
@@ -68,13 +68,13 @@
 							style="border-left: 1px solid grey;">
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<c:if test="${ sessionScope.user.ability == 'User' }">
-								<form class="form">
+								<form class="form" target="frameUpload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
 									<legend>Remettre un travail</legend>
 
 									<div class="form-group">
 										<label for="chefC">Sélectionnez le chapitre pour
 											lequel vous remettez le travail</label> <select class="form-control"
-											id="idChapter">
+											id="chapterId" name="chapterId">
 											<c:forEach
 												items="${chapterDAO.editedChapterFromEntreprise(sessionScope.user.entreprise.id)}"
 												var="chapter">
@@ -94,7 +94,7 @@
 											).</p>
 									</div>
 
-									<button type="button" id="submitWork"
+									<button type="submit" id="submitWork"
 										class="form-control btn btn-success">Remettre mon
 										travail</button>
 								</form>
@@ -146,6 +146,7 @@
 					</div>
 
 				</div>
+				<iframe name="frameUpload" id="frameUpload" style="display: none;"></iframe>
 				<SCRIPT type="text/javascript" src="resources/js/chapters.js"></SCRIPT>
 			</f:view>
 

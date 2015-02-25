@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,15 +16,14 @@ import javax.servlet.http.Part;
 
 import livre.Chapter;
 import utilisateur.User;
-
 import comportement.Ability;
-
 import dao.ChapterDAO;
 
 /**
  * Servlet implementation class UploadFileServlet
  */
 @WebServlet("/UploadFileServlet")
+@MultipartConfig
 public class UploadFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,13 +38,15 @@ public class UploadFileServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chapterId = request.getParameter("chapterId"); // On recupere l'id du chapitre a mettre à jour
-		Part file = request.getPart("file"); //On récupere le fichier que l'utilisateur a envoyé ( c'est le contenu du chapitre )
+		Part file = request.getPart("chapterLocation"); //On récupere le fichier que l'utilisateur a envoyé ( c'est le contenu du chapitre )
 		
+		log("bonjour "+chapterId);
 		//On récupère dans la session la classe qui représente l'utilisateur qui a appelé ce Servlet
 		User user = (User) request.getSession().getAttribute("user");
 		
 		//Si c'est null c'est que la personne n'est pas connectée
 		if(user==null) {
+			response.getWriter().write("<html><body><div id=\"answer\">non</div></body></html>");
 			response.setStatus(400);//on met donc un message d'erreur
 			return;//et on s'arrete là
 		}
@@ -67,13 +69,17 @@ public class UploadFileServlet extends HttpServlet {
 			 
 			 chapter.setTakenDate(-1L);//On met a jour la takenDate à -1 pour dire qu'on peut a nouveau l'éditer
 			 dao.update(chapter);//On met à jour la BDD
+			 response.getWriter().write("<html><body><div id=\"answer\">ok</div></body></html>");
+			 response.setStatus(200);
 			 } finally {
 				 if(out!=null)
 					 out.close();
 			 }
 			 
-			
+			return;
 		}
+		response.setStatus(400);
+		response.getWriter().write("<html><body><div id=\"answer\">non</div></body></html>");
 	}
 
 
