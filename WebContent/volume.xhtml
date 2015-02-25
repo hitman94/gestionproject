@@ -28,10 +28,17 @@
 												<h:outputText value="${volume.title}"></h:outputText>
 											</dt>
 											<dd>
-											<h:outputText value="Option : Editer / "></h:outputText>
-												<a href="#"
-													onclick="supprimerVolume(${volume.id})"><h:outputText
-															value="Supprimer" /></a>
+												<h:outputText value="Option :  "></h:outputText>
+												<a href="#" onclick="editerVolume(${volume.id})">Editer</a>
+												<a href="#" onclick="supprimerVolume(${volume.id})"><h:outputText
+														value="  Supprimer" /></a>
+												<div id="formEdit">
+													<input type="text" placeholder="Enter le nouveau nom"
+														name="title" id="title"  />
+													<button type="button" id="">valider</button>
+
+												</div>
+												
 											</dd>
 										</dl>
 									</div>
@@ -49,7 +56,7 @@
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
 
-							<h3>Création d'un volume </h3>
+							<h3>Création d'un volume</h3>
 
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">

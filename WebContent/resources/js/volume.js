@@ -1,6 +1,23 @@
 /**
  * 
  */
+function editerVolume(idVolume) {
+	$.ajax({
+		type: 'POST',
+		url: "EditVolumeServlet",
+		data: { idVolume : idVolume },//,title:title},
+		success: function (data) {
+			window.location.replace("volume.jsp");
+		},
+		error: function ( error){
+			$('#errorsZone').html("Erreur lors de la suppression de l'entreprise.</br>" + error);
+			$('#errorsZone').show(500);
+		}
+
+	});
+
+
+}
 function supprimerVolume(idVolume) {
 	$.ajax({
 		type: 'POST',

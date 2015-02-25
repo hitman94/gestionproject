@@ -54,7 +54,7 @@ public class WorkPackage {
 	}
 
 	public WorkPackage(WorkSpace assignedTo,String name) {
-		this.status = WPMaturity.Start;
+		this.status = WPMaturity.Create;
 		this.assignedTo = assignedTo;
 		this.vols = new HashSet<Volume>();
 		this.chaps = new HashSet<Chapter>();

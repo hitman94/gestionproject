@@ -21,6 +21,14 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 		q.setParameter("id", id);
 		try {
 			List<Chapter> result = q.getResultList();
+			for(Chapter c : result) {
+				if(c.getTakenDate()!=-1) {
+					if(System.currentTimeMillis()-604800 < c.getTakenDate() ) {
+						c.setTakenDate(-1L);
+						update(c);
+					}
+				}
+			}
 			return result;
 		} catch (NoResultException e) {
 			return null;

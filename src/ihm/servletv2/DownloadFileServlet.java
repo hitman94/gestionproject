@@ -17,8 +17,11 @@ import javax.servlet.http.Part;
 
 import livre.Chapter;
 import utilisateur.User;
+import wpws.WPMaturity;
+import wpws.WorkPackage;
 import comportement.Ability;
 import dao.ChapterDAO;
+import dao.WorkPackageDAO;
 
 /**
  * Servlet implementation class DownloadFileServlet
@@ -29,6 +32,9 @@ public class DownloadFileServlet extends HttpServlet {
 
 	@Inject
 	ChapterDAO dao;
+	
+	@Inject
+	WorkPackageDAO wpDao;
 
 	public DownloadFileServlet() {
 		super();
@@ -58,6 +64,11 @@ public class DownloadFileServlet extends HttpServlet {
 			String path = getServletContext().getRealPath("/chapters/");
 			File toSend = new File(path + "/" + chapterId + ".docx");
 			if (toSend.exists()) {
+				WorkPackage wp = wpDao.findById(chapter.getWp().getId());
+				if(wp.getStatus().equals(WPMaturity.Create)) {
+					wp.setStatus(WPMaturity.Start);
+					wpDao.update(wp);
+				}
 				dao.update(chapter);
 				response.setStatus(200);
 				return;

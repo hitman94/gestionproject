@@ -28,7 +28,6 @@ $(document).ready(function() {
 });
 
 function deleteWP(id){
-	alert(id);
 	$.ajax({
         type: 'POST',
         url: "DeleteWorkPackageServlet",

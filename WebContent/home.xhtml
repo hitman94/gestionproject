@@ -36,9 +36,6 @@
 									<div class="col-md-12">
 
 										<dl>
-											<c:if test="${workPackageDAO.findAll().size() eq 0}">
-												<dt>Pas de WorkPackage à afficher.</dt>
-											</c:if>
 											<dt>
 												<h:outputText value="${wp.name}"></h:outputText>
 											</dt>
@@ -63,6 +60,9 @@
 										</dl>
 									</div>
 								</c:forEach>
+								<c:if test="${workPackageDAO.findAll().size() eq 0}">
+									<h4>Pas de WorkPackage à afficher.</h4>
+								</c:if>
 
 							</div>
 						</div>
