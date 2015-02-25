@@ -30,7 +30,7 @@ public class Entreprise {
 	private String name;
 
 	@NotNull
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	private User chief;
 
 	@OneToMany(mappedBy = "entreprise", cascade = CascadeType.REMOVE)

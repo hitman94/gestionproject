@@ -92,9 +92,9 @@
 																</c:choose>
 												</dt>
 												<dd>
-													Options :
-													<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer </a>
 															<c:if test="${ sessionScope.user.ability == 'CompanyChief'}">
+																	Options :
+																	<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer </a>
 																	<a onclick="valideWP(${workpackage.id})" href="#">Valider</a>
 															</c:if>
 															
@@ -110,6 +110,7 @@
 
 
 						</div>
+						<c:if test="${ sessionScope.user.ability != 'User'}">
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
 
@@ -150,6 +151,7 @@
 									WorkPackage</button>
 							</form>
 						</div>
+						</c:if>
 					</div>
 
 				</div>

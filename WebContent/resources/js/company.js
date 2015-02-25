@@ -18,8 +18,33 @@ function deleteEntreprise(id) {
 	});
 }
 
+function updateChiefEntreprise(id) {
+	var idChief = document.getElementById("newChief").value;
+	$.ajax({
+		type : 'POST',
+		url : "UpdateEntrepriseServlet",
+		data : {
+			idEntreprise : id,
+			idChief : idChief
+		},
+		success : function(data) {
+			window.location.replace("companies.jsp");
+		},
+		error : function(data, status, error) {
+			$('#errorsZone').html(
+					"Erreur lors de la mise à jour  du chef.</br>" + error);
+			$('#errorsZone').show(500);
+		}
+
+	});
+}
+
 $(document).ready(
 		function() {
+			$('#changeChiefLink').on('click', function() {
+				$("#changeChiefDiv").css("display", "");
+			});
+
 			$('#errorsZone').hide();
 
 			$("#submitCompany").click(
