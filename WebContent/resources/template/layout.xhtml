@@ -53,7 +53,9 @@
 												utilisateurs</a></li>
 										<li><a href="workPackages.jsp">Gestion des
 												workPackages</a></li>
-										<li><a href="chapters.jsp">Gestion des chapitres<span class="badge" style="background-color:black;"><h:outputText value="${chapterDAO.promotedChapterFromEntreprise(sessionScope.user.entreprise.id).size()}" /></span></a></li>
+										<li><a href="chapters.jsp">Gestion des chapitres <span
+												class="badge" style="background-color: white; color: black;"><h:outputText
+														value="${chapterDAO.promotedChapterFromEntreprise(sessionScope.user.entreprise.id).size()}" /></span></a></li>
 									</ul>
 								</c:when>
 								<c:when test="${ sessionScope.user.ability == 'User'}">
@@ -73,6 +75,9 @@
 									</button>
 									<ul class="dropdown-menu" role="menu"
 										aria-labelledby="dropdownLogin">
+										<li role="presentation"><a role="menuitem" href="#"><h:outputText
+													value="Rôle - ${ sessionScope.user.ability }"></h:outputText></a></li>
+										<li class="divider"></li>
 										<li role="presentation"><a role="menuitem" tabindex="-1"
 											href="#" id="deconnectSubmit">Déconnexion</a></li>
 									</ul>
@@ -96,7 +101,7 @@
 		</nav>
 
 
-		<div id="mainContent" style="margin-bottom:10%">
+		<div id="mainContent" style="margin-bottom: 5%">
 			<ui:insert name="mainContent">
 			</ui:insert>
 		</div>

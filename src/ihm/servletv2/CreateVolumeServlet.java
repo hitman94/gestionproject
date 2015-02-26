@@ -50,11 +50,12 @@ public class CreateVolumeServlet extends HttpServlet {
 		else if(user.getAbility() != Ability.Patron)
 			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
 
-		else if(volumeDAO.checkVolumeExist(volumeTitle) ==true){
-			response.sendError(400, "Le titre du volume existe déja.");
-		}else if(volumeTitle.length()==0){
-			response.sendError(400, "Le titre du volume est vide.");		
-		}
+		else if(volumeDAO.checkVolumeExist(volumeTitle))
+			response.sendError(400, "Le volume existe déja.");
+		
+		else if(volumeTitle.isEmpty())
+			response.sendError(400, "Le titre du volume est vide.");
+		
 		else if(user.getAbility() == Ability.Patron){
 
 			Volume toAdd=new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP)));

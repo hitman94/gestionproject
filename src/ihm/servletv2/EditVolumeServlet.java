@@ -50,7 +50,13 @@ public class EditVolumeServlet extends HttpServlet {
 			response.sendError(400, "Un des paramètres est incorrect.");
 
 		else if(user.getAbility() != Ability.Patron)
-			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");	
+			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
+		
+		else if(volumeDAO.checkVolumeExist(title))
+			response.sendError(400, "Le volume existe déja.");
+		
+		else if(title.isEmpty())
+			response.sendError(400, "Veuillez remplir le titre du volume.");
 
 		else if(user.getAbility() == Ability.Patron){
 			Volume v=volumeDAO.findById(new Long(idVolume));

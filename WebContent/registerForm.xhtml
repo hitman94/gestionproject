@@ -25,38 +25,45 @@
 										<c:forEach items="${userDAO.findAll()}" var="user">
 											<div class="col-md-12">
 												<c:if test="${user.id != sessionScope.user.id }">
-													<dl>
-														<dt>
-
-															<h:outputText value="${user.userName}"></h:outputText>
-														</dt>
-														<dd>
-															<a onclick="deleteUser(${user.id})" href="#">Supprimer</a>
-														</dd>
-													</dl>
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4>
+																<h:outputText
+																	value="${user.userName} - Rôle : ${user.ability}"></h:outputText>
+															</h4>
+														</div>
+														<div class="panel-body">
+															<a class="btn btn-danger" role="button"
+																onclick="deleteUser(${user.id})" href="#">Supprimer</a>
+														</div>
+													</div>
 												</c:if>
 											</div>
 										</c:forEach>
 									</c:when>
-									<c:otherwise>
+									<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
 										<c:forEach
 											items="${userDAO.usersFromEntreprise(sessionScope.user.entreprise.id)}"
 											var="user">
 											<div class="col-md-12">
 												<c:if test="${user.id != sessionScope.user.id }">
-													<dl>
-														<dt>
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4>
+																<h:outputText
+																	value="${user.userName} - Rôle : ${user.ability}"></h:outputText>
+															</h4>
+														</div>
+														<div class="panel-body">
+															<a class="btn btn-danger" role="button"
+																onclick="deleteUser(${user.id})" href="#">Supprimer</a>
 
-															<h:outputText value="${user.userName}"></h:outputText>
-														</dt>
-														<dd>
-															<a onclick="deleteUser(${user.id})" href="#">Supprimer</a>
-														</dd>
-													</dl>
+														</div>
+													</div>
 												</c:if>
 											</div>
 										</c:forEach>
-									</c:otherwise>
+									</c:when>
 								</c:choose>
 
 
@@ -66,6 +73,7 @@
 						</div>
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
+							<h3>Création d'un utilisateur</h3>
 							<form class="form">
 								<div role="alert" id="infoZone" style='display: none'></div>
 								<div class="form-group">
@@ -76,10 +84,19 @@
 									<input type="password" placeholder="Mot de passe"
 										name="password" id="password" class="form-control" />
 								</div>
-								<button type="button" id="submit"
-									class="form-control btn btn-success">Créer
-									l'utilisateur</button>
+								<c:choose>
 
+									<c:when test="${ sessionScope.user.ability == 'Patron'}">
+										<button type="button" id="submit"
+											class="form-control btn btn-success">Créer le chef
+											d'entreprise</button>
+									</c:when>
+									<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
+										<button type="button" id="submit"
+											class="form-control btn btn-success">Créer
+											l'utilisateur</button>
+									</c:when>
+								</c:choose>
 							</form>
 						</div>
 					</div>

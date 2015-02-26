@@ -22,47 +22,60 @@
 							<c:choose>
 								<c:when test="${ sessionScope.user.ability == 'Patron'}">
 									<c:forEach items="${entrepriseDAO.findAll()}" var="ent">
-									<c:set var="workpackages" value="${workPackageDAO.getWpFromCompany(ent.id)}"></c:set>
-									<c:if test="${workpackages.size() != 0}">
-										<h3><h:outputText value="${ent.name}"></h:outputText></h3>
-									</c:if>
-								
-									
-									
-										<c:forEach items="${workpackages}"
-											var="workpackage">
-											<div class="row">
-												<div class="col-md-10 col-md-offset-1">
-													<dl>
-														<dt>
-															<h:outputText value="${workpackage.name} - Status: "></h:outputText>
-																
-																<c:choose>
-																	<c:when test="${workpackage.status == 'Create'}">
-																	<h:outputText class="text-danger" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	<c:when test="${workpackage.status == 'Start'}">
-																	<h:outputText class="text-warning" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	<c:when test="${workpackage.status == 'InProgress'}">
-																	<h:outputText class="text-primary" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	<c:when test="${workpackage.status == 'Done'}">
-																	<h:outputText class="text-success" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	
-																</c:choose>
-														</dt>
-														<dd>
-															Options : 
-															<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
-																
-														</dd>
-													</dl>
-												</div>
-											</div>
+										<c:set var="workpackages"
+											value="${workPackageDAO.getWpFromCompany(ent.id)}"></c:set>
 
-										</c:forEach>
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<c:if test="${workpackages.size() != 0}">
+													<h4>
+														<h:outputText value="${ent.name}"></h:outputText>
+													</h4>
+												</c:if>
+											</div>
+											<div class="panel-body">
+												<c:forEach items="${workpackages}" var="workpackage">
+													<div class="row">
+														<div class="col-md-12">
+															<dl>
+																<dt style="white-space: normal;">
+
+																	<h:outputText value="${workpackage.name} - Statut : "></h:outputText>
+
+
+																	<c:choose>
+																		<c:when test="${workpackage.status == 'Create'}">
+																			<h:outputText class="text-danger"
+																				value="${workpackage.status}"></h:outputText>
+																		</c:when>
+																		<c:when test="${workpackage.status == 'Start'}">
+																			<h:outputText class="text-warning"
+																				value="${workpackage.status}"></h:outputText>
+																		</c:when>
+																		<c:when test="${workpackage.status == 'InProgress'}">
+																			<h:outputText class="text-primary"
+																				value="${workpackage.status}"></h:outputText>
+																		</c:when>
+																		<c:when test="${workpackage.status == 'Done'}">
+																			<h:outputText class="text-success"
+																				value="${workpackage.status}"></h:outputText>
+																		</c:when>
+
+																	</c:choose>
+
+																</dt>
+																<dd class="pull-right">
+																	<a class="btn btn-danger" role="button"
+																		onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
+																</dd>
+															</dl>
+														</div>
+
+
+													</div>
+												</c:forEach>
+											</div>
+										</div>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -70,39 +83,44 @@
 										items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 										var="workpackage">
 										<div class="row">
-										<div class="col-md-12">
-											<dl>
-												<dt>
-													<h:outputText value="${workpackage.name} - Status: "></h:outputText>
-																
-																<c:choose>
-																	<c:when test="${workpackage.status == 'Create'}">
-																	<h:outputText class="text-danger" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	<c:when test="${workpackage.status == 'Start'}">
-																	<h:outputText class="text-warning" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	<c:when test="${workpackage.status == 'InProgress'}">
-																	<h:outputText class="text-primary" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	<c:when test="${workpackage.status == 'Done'}">
-																	<h:outputText class="text-success" value="${workpackage.status}"></h:outputText>
-																	</c:when>
-																	
-																</c:choose>
-												</dt>
-												<dd>
-															<c:if test="${ sessionScope.user.ability == 'CompanyChief'}">
-																	Options :
-																	<a onclick="deleteWP(${workpackage.id})" href="#">Supprimer </a>
-																	<a onclick="valideWP(${workpackage.id})" href="#">Valider</a>
-															</c:if>
-															
+											<div class="col-md-12">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<h:outputText value="${workpackage.name} - Statut : "></h:outputText>
 
-												</dd>
-											</dl>
-										</div>
+														<c:choose>
+															<c:when test="${workpackage.status == 'Create'}">
+																<h:outputText class="text-danger"
+																	value="${workpackage.status}"></h:outputText>
+															</c:when>
+															<c:when test="${workpackage.status == 'Start'}">
+																<h:outputText class="text-warning"
+																	value="${workpackage.status}"></h:outputText>
+															</c:when>
+															<c:when test="${workpackage.status == 'InProgress'}">
+																<h:outputText class="text-primary"
+																	value="${workpackage.status}"></h:outputText>
+															</c:when>
+															<c:when test="${workpackage.status == 'Done'}">
+																<h:outputText class="text-success"
+																	value="${workpackage.status}"></h:outputText>
+															</c:when>
+
+														</c:choose>
+													</div>
+													<div class="panel-body">
+														<c:if
+															test="${ sessionScope.user.ability == 'CompanyChief'}">
+															<a class="btn btn-success" role="button"
+																onclick="valideWP(${workpackage.id})" href="#">Valider</a>
+															<a class="btn btn-danger" role="button"
+																onclick="deleteWP(${workpackage.id})" href="#">Supprimer</a>
+														</c:if>
+
+													</div>
+												</div>
 											</div>
+										</div>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
@@ -111,46 +129,46 @@
 
 						</div>
 						<c:if test="${ sessionScope.user.ability != 'User'}">
-						<div class="col-md-offset-1 col-md-5"
-							style="border-left: 1px solid grey;">
+							<div class="col-md-offset-1 col-md-5"
+								style="border-left: 1px solid grey;">
 
-							<h3>Création d'un workPackage</h3>
+								<h3>Création d'un workPackage</h3>
 
-							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
-							<form class="form">
-								<div class="form-group">
-									<input type="text" placeholder="Nom du workPackage"
-										name="nameWP" id="nameWP" class="form-control" />
-								</div>
-								<c:choose>
-									<c:when test="${ sessionScope.user.ability == 'Patron'}">
+								<div class="alert alert-danger" role="alert" id="errorsZone"></div>
+								<form class="form">
+									<div class="form-group">
+										<input type="text" placeholder="Nom du workPackage"
+											name="nameWP" id="nameWP" class="form-control" />
+									</div>
+									<c:choose>
+										<c:when test="${ sessionScope.user.ability == 'Patron'}">
 
-										<div class="form-group">
-											<label for="entrepriseWP">Sélectionnez l'entreprise
-												du WorkPackage</label> <select class="form-control"
-												id="entrepriseWP">
-												<c:forEach items="${entrepriseDAO.findAll()}"
-													var="entreprise">
-													<option value="${entreprise.workspace.id}"><h:outputText
-															value="${entreprise.name}" /></option>
-												</c:forEach>
+											<div class="form-group">
+												<label for="entrepriseWP">Sélectionnez l'entreprise
+													du WorkPackage</label> <select class="form-control"
+													id="entrepriseWP">
+													<c:forEach items="${entrepriseDAO.findAll()}"
+														var="entreprise">
+														<option value="${entreprise.workspace.id}"><h:outputText
+																value="${entreprise.name}" /></option>
+													</c:forEach>
 
-											</select>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div class="form-group">
-											<input type="hidden"
-												value="${sessionScope.user.entreprise.workspace.id}"
-												name="entrepriseWP" id="entrepriseWP" class="form-control" />
-										</div>
-									</c:otherwise>
-								</c:choose>
-								<button type="button" id="submitWP"
-									class="form-control btn btn-success">Créer le
-									WorkPackage</button>
-							</form>
-						</div>
+												</select>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="form-group">
+												<input type="hidden"
+													value="${sessionScope.user.entreprise.workspace.id}"
+													name="entrepriseWP" id="entrepriseWP" class="form-control" />
+											</div>
+										</c:otherwise>
+									</c:choose>
+									<button type="button" id="submitWP"
+										class="form-control btn btn-success">Créer le
+										WorkPackage</button>
+								</form>
+							</div>
 						</c:if>
 					</div>
 

@@ -23,37 +23,38 @@
 
 								<c:forEach items="${volumeDAO.findAll()}" var="volume">
 									<div class="col-md-12">
-										<dl>
-											<dt>
-												<h:outputText value="${volume.title}"></h:outputText>
-											</dt>
-											<dd>
-												<h:outputText value="Option :  "></h:outputText>
-												<a href="#" onclick="showEditVolume(${volume.id})">Editer</a>
 
-												<a href="#" onclick="supprimerVolume(${volume.id})"><h:outputText
-														value="  Supprimer" /></a>
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4>
+													<h:outputText
+														value="${volume.title} - Associé à ${volume.wp.name}"></h:outputText>
+												</h4>
+											</div>
+											<div class="panel-body">
+												<a href="#" class="btn btn-success" role="button"
+													onclick="showEditVolume(${volume.id})">Editer</a> <a
+													href="#" class="btn btn-danger" role="button"
+													onclick="supprimerVolume(${volume.id})">Supprimer</a>
+
 												<div id="${volume.id}" style="display: none;">
-													<input type="text" placeholder="Enter le nouveau nom"
-														name="title" id="title${volume.id}" />
-													<button type="button" id="submitEdit"
-														onclick="editerVolume()">valider</button>
+													<BR /> 
+													<input class="input-sm" type="text"
+														placeholder="Entrer le nouveau nom" name="title"
+														id="title${volume.id}" />
+													<button class="btn btn-success btn-sm" role="button" type="button"
+														id="submitEdit" onclick="editerVolume()">Valider</button>
+													<BR />
 
 												</div>
+											</div>
+										</div>
 
-											</dd>
-										</dl>
 									</div>
 								</c:forEach>
 
-
 							</div>
 						</div>
-
-
-
-
-
 
 						<div class="col-md-offset-1 col-md-5"
 							style="border-left: 1px solid grey;">
@@ -63,7 +64,7 @@
 							<div class="alert alert-danger" role="alert" id="errorsZone"></div>
 							<form class="form">
 								<div class="form-group">
-									<input type="text" placeholder="nom du volume"
+									<input type="text" placeholder="Nom du volume"
 										name="volumeName" id="volumeName" class="form-control" />
 								</div>
 								<div class="form-group">

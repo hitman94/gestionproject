@@ -14,22 +14,25 @@
 			<f:view>
 				<div class="container">
 					<div class="row">
-						<c:choose>
-							<!-- PATRON INTERFACE -->
+					
+					<!-- PATRON INTERFACE -->
+					
+						<c:choose>						
+
 							<c:when test="${ sessionScope.user.ability == 'Patron'}">
 								<div class="jumbotron">
 									<div class="container">
 										<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
 										<hr />
-										<h4>Vous pouvez consulter ici l'avancement des différents
-											WorkPackages.</h4>
+										<h4>En tant que Patron, vous pouvez consulter ici
+											l'avancement de l'ensemble des WorkPackages.</h4>
 									</div>
 								</div>
 								<c:set var="nbStart" value="0" />
 								<c:set var="nbCreate" value="0" />
 								<c:set var="nbInProgress" value="0" />
 								<c:set var="nbDone" value="0" />
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<h3>WorkPackages</h3>
 									<hr />
 									<div class="row">
@@ -37,56 +40,64 @@
 										<c:forEach items="${entrepriseDAO.findAll()}" var="ent">
 											<c:set var="workpackages"
 												value="${workPackageDAO.getWpFromCompany(ent.id)}"></c:set>
-											<c:if test="${workpackages.size() != 0}">
-												<h3>
-													<h:outputText value="${ent.name}"></h:outputText>
-												</h3>
-											</c:if>
 
-											<c:forEach items="${workpackages}" var="workpackage">
-												<div class="row">
-													<div class="col-md-10 col-md-offset-1">
-														<dl>
-															<dt>
-																<h:outputText value="${workpackage.name}"></h:outputText>
-															</dt>
-															<dd>
-																<h:outputText value="Statut : "></h:outputText>
-																<c:choose>
-																	<c:when test="${workpackage.status eq 'Start'}">
-																		<h:outputText class="text-danger"
-																			value="${workpackage.status}"></h:outputText>
-																		<c:set var="nbStart" value="${nbStart + 1}" />
-																	</c:when>
-																	<c:when test="${workpackage.status eq 'Create'}">
-																		<h:outputText class="text-warning"
-																			value="${workpackage.status}"></h:outputText>
-																		<c:set var="nbCreate" value="${nbCreate + 1}" />
-																	</c:when>
-																	<c:when test="${workpackage.status eq 'InProgress'}">
-																		<h:outputText class="text-primary"
-																			value="${workpackage.status}"></h:outputText>
-																		<c:set var="nbInProgress" value="${nbInProgress + 1}" />
-																	</c:when>
-																	<c:when test="${workpackage.status eq 'Done'}">
-																		<h:outputText class="text-success"
-																			value="${workpackage.status}"></h:outputText>
-																		<c:set var="nbDone" value="${nbDone + 1}" />
-																	</c:when>
-																</c:choose>
-															</dd>
-														</dl>
-													</div>
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<c:if test="${workpackages.size() != 0}">
+														<h4>
+															<h:outputText value="${ent.name}"></h:outputText>
+														</h4>
+													</c:if>
 												</div>
-											</c:forEach>
+
+												<div class="panel-body">
+													<c:forEach items="${workpackages}" var="workpackage">
+														<div class="row">
+															<div class="col-md-10">
+																<dl>
+																	<dt>
+																		<h:outputText value="${workpackage.name}"></h:outputText>
+																	</dt>
+																	<dd>
+																		<h:outputText value="Statut : "></h:outputText>
+																		<c:choose>
+																			<c:when test="${workpackage.status eq 'Start'}">
+																				<h:outputText class="text-warning"
+																					value="${workpackage.status}"></h:outputText>
+																				<c:set var="nbStart" value="${nbStart + 1}" />
+																			</c:when>
+																			<c:when test="${workpackage.status eq 'Create'}">
+																				<h:outputText class="text-danger"
+																					value="${workpackage.status}"></h:outputText>
+																				<c:set var="nbCreate" value="${nbCreate + 1}" />
+																			</c:when>
+																			<c:when test="${workpackage.status eq 'InProgress'}">
+																				<h:outputText class="text-primary"
+																					value="${workpackage.status}"></h:outputText>
+																				<c:set var="nbInProgress"
+																					value="${nbInProgress + 1}" />
+																			</c:when>
+																			<c:when test="${workpackage.status eq 'Done'}">
+																				<h:outputText class="text-success"
+																					value="${workpackage.status}"></h:outputText>
+																				<c:set var="nbDone" value="${nbDone + 1}" />
+																			</c:when>
+																		</c:choose>
+																	</dd>
+																</dl>
+															</div>
+														</div>
+													</c:forEach>
+												</div>
+											</div>
 										</c:forEach>
 										<c:if test="${workPackageDAO.findAll().size() eq 0}">
 											<h4>Pas de WorkPackage à afficher.</h4>
 										</c:if>
 									</div>
 								</div>
-								<div class="col-md-7">
-									<h4>Etat actuel des différents workPackages</h4>
+								<div class="col-md-7 col-md-offset-1">
+									<h4>Etat actuel de l'ensemble des WorkPackages</h4>
 									<div class="row">
 										<div id="wpChartDiv">
 											<canvas id="wpChart" width="300" height="200"></canvas>
@@ -107,21 +118,22 @@
 									<div class="container">
 										<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
 										<hr />
-										<h4>Vous pouvez consulter ici l'avancement des différents
-											WorkPackages de votre entreprise.</h4>
+										<h4>En tant que chef d'entreprise, vous pouvez consulter
+											ici l'avancement de l'ensemble des WorkPackages de votre
+											entreprise.</h4>
 									</div>
 								</div>
 								<c:set var="nbStart" value="0" />
 								<c:set var="nbCreate" value="0" />
 								<c:set var="nbInProgress" value="0" />
 								<c:set var="nbDone" value="0" />
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<dl>
 										<dd>
-											<h3>
-												<h:outputText value="WorkPackages de "></h:outputText>
-												<h:outputText value="${sessionScope.user.entreprise.name}"></h:outputText>
-											</h3>
+											<h4>
+												<h:outputText
+													value="WorkPackages de ${sessionScope.user.entreprise.name}"></h:outputText>
+											</h4>
 										</dd>
 									</dl>
 									<hr />
@@ -131,21 +143,20 @@
 											items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 											var="workpackage">
 											<div class="col-md-12">
-
-												<dl>
-													<dt>
+												<div class="panel panel-default">
+													<div class="panel-heading">
 														<h:outputText value="${workpackage.name}"></h:outputText>
-													</dt>
-													<dd>
+													</div>
+													<div class="panel-body">
 														<h:outputText value="Statut : "></h:outputText>
 														<c:choose>
 															<c:when test="${workpackage.status eq 'Start'}">
-																<h:outputText class="text-danger"
+																<h:outputText class="text-warning"
 																	value="${workpackage.status}"></h:outputText>
 																<c:set var="nbStart" value="${nbStart + 1}" />
 															</c:when>
 															<c:when test="${workpackage.status eq 'Create'}">
-																<h:outputText class="text-warning"
+																<h:outputText class="text-danger"
 																	value="${workpackage.status}"></h:outputText>
 																<c:set var="nbCreate" value="${nbCreate + 1}" />
 															</c:when>
@@ -160,8 +171,8 @@
 																<c:set var="nbDone" value="${nbDone + 1}" />
 															</c:when>
 														</c:choose>
-													</dd>
-												</dl>
+													</div>
+												</div>
 											</div>
 										</c:forEach>
 										<c:if
@@ -171,8 +182,8 @@
 
 									</div>
 								</div>
-								<div class="col-md-7">
-									<h4>Etat actuel des différents workPackages</h4>
+								<div class="col-md-7 col-md-offset-1">
+									<h4>Etat actuel des différents WorkPackages</h4>
 									<div class="row">
 										<div id="wpChartDiv">
 											<canvas id="wpChart" width="300" height="200"></canvas>
@@ -197,10 +208,9 @@
 											chapitres qui vous concernent.</h4>
 									</div>
 								</div>
-								<c:set var="nbChapterUser" value="0" />
 								<c:set var="nbChapterCompany" value="0" />
 								<c:set var="nbChapterTotal" value="0" />
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<dl>
 										<dd>
 											<h3>
@@ -229,21 +239,23 @@
 
 									</div>
 								</div>
-								<div class="col-md-7">
+								<div class="col-md-7 col-md-offset-1">
 									<h4>Répartition actuelle des différents chapitres</h4>
 									<div class="row">
 										<div id="chapterChartDiv">
-											<canvas id="chapterChart" width="200" height="200"></canvas>
+											<canvas id="chapterChart" max-width="300" max-height="300"></canvas>
 										</div>
 									</div>
 								</div>
-								<c:set var="nbChapterUser" value="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id).size()}" />
-								<c:set var="nbChapterCompany" value="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id).size()}" />
-								<c:set var="nbChapterTotal" value="${chapterDAO.findAll().size()}" />
-								
-								<input id="nbChapterUser" value="${nbChapterUser}" type="hidden" />
-								<input id="nbChapterCompany" value="${nbChapterCompany}" type="hidden" />
-								<input id="nbChapterTotal" value="${nbChapterTotal}" type="hidden" />
+								<c:set var="nbChapterCompany"
+									value="${chapterDAO.chapterFromEntreprise(sessionScope.user.entreprise.id).size()}" />
+								<c:set var="nbChapterTotal"
+									value="${chapterDAO.findAll().size()}" />
+
+								<input id="nbChapterCompany" value="${nbChapterCompany}"
+									type="hidden" />
+								<input id="nbChapterTotal" value="${nbChapterTotal}"
+									type="hidden" />
 								<script type="text/javascript" src="resources/js/donutChart.js"></script>
 							</c:when>
 						</c:choose>
@@ -253,7 +265,6 @@
 			</f:view>
 
 		</ui:define>
-
 
 	</ui:composition>
 </body>

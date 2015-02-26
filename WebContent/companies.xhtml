@@ -19,27 +19,31 @@
 						<HR />
 						<div class="col-md-6">
 
-
 							<c:forEach items="${entrepriseDAO.findAll()}" var="entreprise">
 
-								<dl>
-									<dt>
-										<h3>
-											<h:outputText value="${entreprise.name}"></h:outputText>
-										</h3>
-									</dt>
-									<dd>
-										<div class="row">
-											<div class="col-md-10 col-md-offset-1">
-												<Strong><h:outputText
-														value="Chef :  ${entreprise.chief.userName}"></h:outputText></Strong>
-											</div>
-											<div class="col-md-10 col-md-offset-1">
+								<div class="panel panel-default">
+									<div class="panel-heading">
 
-												<a id="changeChiefLink" href="#">Changer le chef</a>
+										<h4>
+											<h:outputText
+												value="${entreprise.name} - Chef : ${entreprise.chief.userName}"></h:outputText>
+										</h4>
+
+									</div>
+									<div class="panel-body">
+
+										<div class="row">
+											<div class="col-md-10">
+
+												<a class="btn btn-success" role="button"
+													id="changeChiefLink" href="#">Changer le chef</a> <a
+													class="btn btn-danger" role="button"
+													onclick="deleteEntreprise(${entreprise.id})" href="#">Supprimer</a>
+
 												<div id="changeChiefDiv" style="display: none">
-													<label for="newChief">Sélectionnez le nouveau chef
-														de l'entreprise</label> <select class="form-control" id="newChief">
+													<BR /> <label for="newChief">Sélectionnez le
+														nouveau chef de l'entreprise</label> <select class="form-control"
+														id="newChief">
 														<c:forEach items="${userDAO.userWithoutCompanies()}"
 															var="user">
 															<c:if test="${ sessionScope.user.id != user.id }">
@@ -47,21 +51,18 @@
 																		value="${user.userName}" /></option>
 
 															</c:if>
-
 														</c:forEach>
-
-													</select> <a onclick="updateChiefEntreprise(${entreprise.id})" href="#">mettre
-														a jour</a>
+													</select> <BR />
+													<a class="btn btn-success" role="button"
+														onclick="updateChiefEntreprise(${entreprise.id})" href="#">Mettre
+														à jour</a>
 												</div>
-											</div>
-											<div class="col-md-10 col-md-offset-1">
-												<a onclick="deleteEntreprise(${entreprise.id})" href="#">Supprimer
-													Entreprise</a>
 
 											</div>
 										</div>
-									</dd>
-								</dl>
+
+									</div>
+								</div>
 
 							</c:forEach>
 
