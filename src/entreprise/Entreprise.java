@@ -1,7 +1,6 @@
 package entreprise;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,8 +14,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import utilisateur.User;
-import wpws.WorkPackage;
 import wpws.WorkSpace;
+
 import comportement.Ability;
 
 @Entity
