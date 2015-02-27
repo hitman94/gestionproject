@@ -204,8 +204,8 @@
 									<div class="container">
 										<h2>Bienvenue sur votre logiciel collaboratif ICBM !</h2>
 										<hr />
-										<h4>Vous pouvez consulter ici l'avancement des différents
-											chapitres qui vous concernent.</h4>
+										<h4>Vous pouvez consulter ici la répartition des différents
+											chapitres.</h4>
 									</div>
 								</div>
 								<c:set var="nbChapterCompany" value="0" />
@@ -252,11 +252,15 @@
 								<c:set var="nbChapterTotal"
 									value="${chapterDAO.findAll().size()}" />
 
+								<input id="companyName" value="${sessionScope.user.entreprise.name}"
+									type="hidden" />
 								<input id="nbChapterCompany" value="${nbChapterCompany}"
+									type="hidden" />
+								<input id="nbOtherChapter" value="${nbChapterTotal - nbChapterCompany}"
 									type="hidden" />
 								<input id="nbChapterTotal" value="${nbChapterTotal}"
 									type="hidden" />
-								<script type="text/javascript" src="resources/js/donutChart.js"></script>
+								<script type="text/javascript" src="resources/js/userBarChart.js"></script>
 							</c:when>
 						</c:choose>
 					</div>
