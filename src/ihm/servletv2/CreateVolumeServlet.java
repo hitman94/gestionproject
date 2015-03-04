@@ -43,6 +43,8 @@ public class CreateVolumeServlet extends HttpServlet {
 		String volumeTitle = request.getParameter("title");
 		String idWP = request.getParameter("idWorkPackage");
 		User user = (User) request.getSession().getAttribute("user");
+		
+		response.setCharacterEncoding("UTF-8");
 
 		if(user == null || volumeTitle == null || idWP == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
@@ -51,7 +53,7 @@ public class CreateVolumeServlet extends HttpServlet {
 			response.sendError(400, "L'utilisateur n'est pas le Patron du livre.");
 
 		else if(volumeDAO.checkVolumeExist(volumeTitle))
-			response.sendError(400, "Le volume existe déja.");
+			response.sendError(400, "Le volume existe déjà.");
 		
 		else if(volumeTitle.isEmpty())
 			response.sendError(400, "Le titre du volume est vide.");

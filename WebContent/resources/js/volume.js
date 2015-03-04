@@ -11,9 +11,15 @@ function showEditVolume(id) {
 
 	activeVolume = id;
 }
+
+function hideEditVolume(id){
+	$("#" + id).css("display", "none");
+}
+
 function editerVolume() {
 	var title = document
 	.getElementById("title"+activeVolume).value;
+
 	$.ajax({
 		type: 'POST',
 		url: "EditVolumeServlet",
@@ -21,8 +27,8 @@ function editerVolume() {
 		success: function (data) {
 			window.location.replace("volume.jsp");
 		},
-		error: function ( error){
-			$('#errorsZone').html("Erreur lors de la suppression de l'entreprise.</br>" + error);
+		error: function (error){
+			$('#errorsZone').html("Erreur lors de l'édition du volume.</br>" + error);
 			$('#errorsZone').show(500);
 		}
 

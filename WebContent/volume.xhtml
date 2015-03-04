@@ -32,18 +32,21 @@
 												</h4>
 											</div>
 											<div class="panel-body">
-												<a href="#" class="btn btn-success" role="button"
+												<a class="btn btn-success" role="button"
 													onclick="showEditVolume(${volume.id})">Editer</a> <a
-													href="#" class="btn btn-danger" role="button"
+													class="btn btn-danger" role="button"
 													onclick="supprimerVolume(${volume.id})">Supprimer</a>
 
 												<div id="${volume.id}" style="display: none;">
-													<BR /> 
+													<BR /> <label for="newVolumeName">Choisissez un
+														nouveau nom pour ce volume</label> <br />
 													<input class="input-sm" type="text"
 														placeholder="Entrer le nouveau nom" name="title"
 														id="title${volume.id}" />
 													<button class="btn btn-success btn-sm" role="button" type="button"
 														id="submitEdit" onclick="editerVolume()">Valider</button>
+													<button class="btn btn-danger btn-sm" role="button" type="button"
+														onclick="hideEditVolume(${volume.id})">Annuler</button>
 													<BR />
 
 												</div>
