@@ -59,6 +59,7 @@ public class CreateCompanyServlet extends HttpServlet {
 			Entreprise ent = new Entreprise(name, chief);
 			entrepriseDAO.persist(ent);
 			chief.setEntreprise(ent);
+			chief.setAbility(Ability.CompanyChief);
 			userDAO.update(chief);
 		} else {
 			response.sendError(
