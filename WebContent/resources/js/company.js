@@ -39,24 +39,23 @@ function updateChiefEntreprise(id) {
 	});
 }
 
-function hideDiv(){
-	var div = document.getElementById("changeChiefDiv");
-	div.setAttribute("style", "display: none;");
+function hideDiv(id){
+	$("#" + id).css("display", "none");
+}
+
+function displayDiv(id){
+	$("#" + id).css("display", "");
 }
 
 $(document).ready(
 		function() {
-			$('#changeChiefLink').on('click', function() {
-				$("#changeChiefDiv").css("display", "");
-			});
-
 			$('#errorsZone').hide();
 
 			$("#submitCompany").click(
 					function() {
 						var idChief = document.getElementById("chefC").value;
 						var companyName = document
-								.getElementById("companyName").value;
+						.getElementById("companyName").value;
 
 						$.ajax({
 							type : 'POST',
@@ -71,7 +70,7 @@ $(document).ready(
 							error : function(data, status, error) {
 								$('#errorsZone').html(
 										"Erreur lors de la creation de l'entreprise.</br>"
-												+ error);
+										+ error);
 								$('#errorsZone').show(500);
 							}
 

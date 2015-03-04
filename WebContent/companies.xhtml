@@ -36,11 +36,11 @@
 											<div class="col-md-10">
 
 												<a class="btn btn-success" role="button"
-													id="changeChiefLink" href="#">Changer le chef</a> <a
+													onclick="displayDiv(${entreprise.id})" href="#">Changer le chef</a> <a
 													class="btn btn-danger" role="button"
 													onclick="deleteEntreprise(${entreprise.id})" href="#">Supprimer</a>
 
-												<div id="changeChiefDiv" style="display: none">
+												<div id="${entreprise.id}" style="display: none">
 													<BR /> <label for="newChief">Sélectionnez le
 														nouveau chef de l'entreprise</label> <select class="form-control"
 														id="newChief">
@@ -55,7 +55,7 @@
 													</select> <BR /> <a class="btn btn-success" role="button"
 														onclick="updateChiefEntreprise(${entreprise.id})" href="#">Mettre
 														à jour</a> <a class="btn btn-danger" role="button"
-														onclick="hideDiv()" href="#">Annuler</a>
+														onclick="hideDiv(${entreprise.id})" href="#">Annuler</a>
 												</div>
 
 											</div>
