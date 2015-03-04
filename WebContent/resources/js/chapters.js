@@ -119,6 +119,8 @@ $(document)
 												.getElementById("idWp").value;
 										var idVol = document
 												.getElementById("idVol").value;
+										var numberInVolume = document
+										.getElementById("numberInVol").value;
 
 										$
 												.ajax({
@@ -127,7 +129,8 @@ $(document)
 													data : {
 														title : title,
 														wpId : idWp,
-														idVolume : idVol
+														idVolume : idVol,
+														numberInVolume: numberInVolume
 													},
 													success : function(data) {
 														window.location
@@ -135,6 +138,7 @@ $(document)
 													},
 													error : function(data,
 															status, error) {
+							
 														$('#errorsZone')
 																.html(
 																		"Erreur lors de la creation du chapitre.</br>"

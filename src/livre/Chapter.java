@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.GET;
 
 import wpws.WorkPackage;
 
@@ -23,6 +24,9 @@ public class Chapter {
 	private Long id;
 	@NotNull
 	private String title;
+	
+	@NotNull
+	private Long numberInVolume;
 	
 	@ManyToOne
 	@NotNull
@@ -41,10 +45,11 @@ public class Chapter {
 	
 	}
 
-	public Chapter(String title, Volume volume,WorkPackage p) {
+	public Chapter(String title, Volume volume,WorkPackage p,Long numberInVolume) {
 		this.title = title;
 		this.volume = Objects.requireNonNull(volume);
 		this.wp=Objects.requireNonNull(p);
+		this.numberInVolume=numberInVolume;
 	}
 
 	public Long getId() {
@@ -86,6 +91,14 @@ public class Chapter {
 	
 	public WorkPackage getWp() {
 		return wp;
+	}
+	
+	public Long getNumberInVolume() {
+		return numberInVolume;
+	}
+	
+	public void setNumberInVolume(Long numberInVolume) {
+		this.numberInVolume = numberInVolume;
 	}
 
 }

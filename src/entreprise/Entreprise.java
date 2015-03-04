@@ -69,7 +69,6 @@ public class Entreprise {
 
 	public void setChief(User chief) {
 		Objects.requireNonNull(chief);
-		chief.setAbility(Ability.CompanyChief);
 		this.chief = chief;
 	}
 
