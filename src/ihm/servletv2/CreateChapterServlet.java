@@ -69,6 +69,12 @@ public class CreateChapterServlet extends HttpServlet {
 //			wpDao.update(toAdd.getWp());
 
 			String path=getServletContext().getRealPath("/chapters/");
+			File chapterDir = new File(path+"/");
+			File tmpChapterDir = new File(path+"/temp/");
+			if(!chapterDir.exists()) 
+				chapterDir.mkdir();
+			if(!tmpChapterDir.exists())
+				tmpChapterDir.mkdir();
 			File toCreate = new File(path+"/"+toAdd.getId()+".docx");
 			toCreate.createNewFile();
 			response.setStatus(200);
