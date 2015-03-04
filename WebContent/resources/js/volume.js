@@ -27,7 +27,7 @@ function editerVolume() {
 		success: function (data) {
 			window.location.replace("volume.jsp");
 		},
-		error: function (error){
+		error: function (data, status, error){
 			$('#errorsZone').html("Erreur lors de l'édition du volume.</br>" + error);
 			$('#errorsZone').show(500);
 		}

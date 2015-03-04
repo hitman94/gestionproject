@@ -84,19 +84,9 @@
 									<input type="password" placeholder="Mot de passe"
 										name="password" id="password" class="form-control" />
 								</div>
-								<c:choose>
-
-									<c:when test="${ sessionScope.user.ability == 'Patron'}">
-										<button type="button" id="submit"
-											class="form-control btn btn-success">Créer le chef
-											d'entreprise</button>
-									</c:when>
-									<c:when test="${ sessionScope.user.ability == 'CompanyChief'}">
-										<button type="button" id="submit"
-											class="form-control btn btn-success">Créer
-											l'utilisateur</button>
-									</c:when>
-								</c:choose>
+								<button type="button" id="submit"
+									class="form-control btn btn-success">Créer
+									l'utilisateur</button>
 							</form>
 						</div>
 					</div>

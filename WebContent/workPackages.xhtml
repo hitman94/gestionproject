@@ -27,13 +27,15 @@
 
 										<div class="panel panel-default">
 											<div class="panel-heading">
-												<c:if test="${workpackages.size() != 0}">
-													<h4>
-														<h:outputText value="${ent.name}"></h:outputText>
-													</h4>
-												</c:if>
+												<h4>
+													<h:outputText value="${ent.name}"></h:outputText>
+												</h4>
 											</div>
 											<div class="panel-body">
+												<c:if test="${workpackages.size() eq 0}">
+													<h:outputText
+														value="Cette entreprise n'a pas de workPackage."></h:outputText>
+												</c:if>
 												<c:forEach items="${workpackages}" var="workpackage">
 													<div class="row">
 														<div class="col-md-12">

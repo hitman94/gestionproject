@@ -58,8 +58,8 @@ public class EditVolumeServlet extends HttpServlet {
 		else if(title.isEmpty())
 			response.sendError(400, "Veuillez remplir le titre du volume.");
 
-		else if(title.length() > 30)
-			response.sendError(400, "Veuillez choisir un nom plus court pour votre volume. (< 30 caractères)");
+		else if(title.length() > 20)
+			response.sendError(400, "Veuillez choisir un nom plus court pour votre volume. (< 20 caractères)");
 
 		else if(user.getAbility() == Ability.Patron){
 			Volume v=volumeDAO.findById(new Long(idVolume));

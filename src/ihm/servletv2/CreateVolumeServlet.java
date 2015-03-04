@@ -43,7 +43,7 @@ public class CreateVolumeServlet extends HttpServlet {
 		String volumeTitle = request.getParameter("title");
 		String idWP = request.getParameter("idWorkPackage");
 		User user = (User) request.getSession().getAttribute("user");
-		
+
 		response.setCharacterEncoding("UTF-8");
 
 		if(user == null || volumeTitle == null || idWP == null)
@@ -54,10 +54,13 @@ public class CreateVolumeServlet extends HttpServlet {
 
 		else if(volumeDAO.checkVolumeExist(volumeTitle))
 			response.sendError(400, "Le volume existe déjà.");
-		
+
 		else if(volumeTitle.isEmpty())
 			response.sendError(400, "Le titre du volume est vide.");
-		
+
+		else if(volumeTitle.length() > 20)
+			response.sendError(400, "Veuillez choisir un nom plus court pour votre volume. (< 20 caractères)");
+
 		else if(user.getAbility() == Ability.Patron){
 
 			Volume toAdd=new Volume(volumeTitle, workPackageDAO.findById(new Long(idWP)));
