@@ -48,6 +48,7 @@
 								<c:forEach
 									items="${workPackageDAO.getWpFromCompany(sessionScope.user.entreprise.id)}"
 									var="wp">
+									<c:if test="${wp.status != 'Done'}">
 									<div class="col-md-12">
 										<div class="jumbotron" style="border: 1px solid grey;">
 											<div class="container">
@@ -82,6 +83,7 @@
 											</div>
 										</div>
 									</div>
+									</c:if>
 								</c:forEach>
 
 

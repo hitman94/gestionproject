@@ -39,7 +39,7 @@ function promoteChapter(chapterId, validate) {
 			validate : validate
 		},
 		success : function(data, status, xhr) {
-			if (valide == "ok")
+			if (validate == "ok")
 				alert("Chapitre promu");
 			else
 				alert("Chapitre non promu");
