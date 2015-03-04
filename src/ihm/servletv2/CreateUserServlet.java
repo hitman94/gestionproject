@@ -66,11 +66,11 @@ public class CreateUserServlet extends HttpServlet {
 			Ability userAb = user.getAbility();
 			if (userAb.equals(Ability.User)) {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"Vous n'avez pas les droits suffissants pour creer un utilisateur quelconques");
+						"Vous n'avez pas les droits suffisants pour créer un utilisateur quelconque");
 			} else {
 				if (userAb.equals(Ability.Patron)) {
 					dao.persist(new User(username, DigestUtils
-							.sha1Hex(password), Ability.CompanyChief));
+							.sha1Hex(password), Ability.User));
 				} else {
 					Entreprise entreprise = user.getEntreprise();
 					if (Objects.isNull(entreprise)) {
@@ -91,7 +91,7 @@ public class CreateUserServlet extends HttpServlet {
 		} else {
 
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"La requete est mal formee");
+					"La requete est mal formée");
 		}
 
 	}
