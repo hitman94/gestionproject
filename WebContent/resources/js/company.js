@@ -39,6 +39,11 @@ function updateChiefEntreprise(id) {
 	});
 }
 
+function hideDiv(){
+	var div = document.getElementById("changeChiefDiv");
+	div.setAttribute("style", "display: none;");
+}
+
 $(document).ready(
 		function() {
 			$('#changeChiefLink').on('click', function() {
