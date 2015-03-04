@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import comportement.Ability;
+
 import utilisateur.User;
 import dao.EntrepriseDAO;
 import dao.UserDAO;
@@ -57,13 +59,15 @@ public class UpdateEntrepriseServlet extends HttpServlet {
 		Entreprise entreprise = entrepriseDAO.findById(new Long(idEntreprise));
 		if (user == null || entreprise == null) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"requete mal formée");
+					"requete mal formï¿½e");
 		}
 
 		User toUpdate = entreprise.getChief();
 		toUpdate.setEntreprise(null);
+		toUpdate.setAbility(Ability.CompanyChief);
 		userDAO.update(toUpdate);
 		user.setEntreprise(entreprise);
+		user.setAbility(Ability.CompanyChief);
 		userDAO.update(user);
 		entreprise.setChief(user);
 
