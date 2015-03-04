@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -29,6 +30,7 @@ public class Volume {
 	private String title;
 
 	@OneToMany(mappedBy="volume")
+	@MapKey(name="numberInVolume")
 	private Map<Long, Chapter> chapters;
 	
 	
@@ -66,26 +68,15 @@ public class Volume {
 		this.chapters = new HashMap<Long, Chapter>(chapters);
 	}
 	
-	public List<Chapter> getChapters() {
-		return new ArrayList<Chapter>(chapters.values());
+	public Map<Long, Chapter> getChapters() {
+		return chapters;
 	}
 
-	public Chapter getChapter(Long id) {
-		return chapters.get(id);
+	public Chapter getChapter(Long numberInVolume) {
+		return chapters.get(numberInVolume);
 	}
 
-	public void addChapter(Chapter chapter) {
-		Objects.requireNonNull(chapter);
-		if (chapters.putIfAbsent(chapter.getId(), chapter) != null)
-			throw new IllegalArgumentException();
-	}
 
-	public void removeChapter(Chapter chapter) {
-		Objects.requireNonNull(chapter);
-		if (chapters.remove(chapter.getId()) == null)
-			throw new IllegalArgumentException();
-	}
-	
 	public WorkPackage getWp() {
 		return wp;
 	}

@@ -57,7 +57,6 @@ public class DeleteChapterServlet extends HttpServlet {
 		else if(user.getAbility() == Ability.CompanyChief){
 			response.setStatus(200);
 			Chapter toDelete=chapterDAO.findById(new Long(idChapter));
-			toDelete.getVolume().removeChapter(toDelete);
 			toDelete.getWp().removeChapter(toDelete);
 			chapterDAO.remove(toDelete);
 			volDao.update(toDelete.getVolume());

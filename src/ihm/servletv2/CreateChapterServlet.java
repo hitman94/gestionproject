@@ -2,6 +2,7 @@ package ihm.servletv2;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import livre.Chapter;
+import livre.Volume;
 import utilisateur.User;
-
 import comportement.Ability;
-
 import dao.ChapterDAO;
 import dao.VolumeDAO;
 import dao.WorkPackageDAO;
@@ -50,8 +50,11 @@ public class CreateChapterServlet extends HttpServlet {
 		String chapterTitle = request.getParameter("title");
 		String workPackageId = request.getParameter("wpId");
 		String idVolume = request.getParameter("idVolume");
+		String numberInVolume = request.getParameter("numberInVolume");
 		User user = (User) request.getSession().getAttribute("user");
 
+		response.setCharacterEncoding("UTF-8");
+		
 		if(user == null || chapterTitle == null || idVolume == null || workPackageId == null)
 			response.sendError(400, "Un des paramètres est incorrect.");
 
@@ -59,7 +62,12 @@ public class CreateChapterServlet extends HttpServlet {
 			response.sendError(400, "L'utilisateur n'est pas un chef d'entreprise");
 
 		else if(user.getAbility() == Ability.CompanyChief){
-			Chapter toAdd = new Chapter(chapterTitle, volumeDAO.findById(new Long(idVolume)), wpDao.findById(new Long(workPackageId)));
+			Volume v =volumeDAO.findById(new Long(idVolume));
+			if(v.getChapter(new Long(numberInVolume)) != null) {
+				response.sendError(400, "Ce numéro de chapitre est déjà attribué.");
+				return;
+			}
+			Chapter toAdd = new Chapter(chapterTitle, v, wpDao.findById(new Long(workPackageId)), new Long(numberInVolume));
 			chapterDAO.persist(toAdd);
 
 //			toAdd.getVolume().addChapter(toAdd);
@@ -78,6 +86,8 @@ public class CreateChapterServlet extends HttpServlet {
 			File toCreate = new File(path+"/"+toAdd.getId()+".docx");
 			toCreate.createNewFile();
 			response.setStatus(200);
+			
+		
 		}
 	}
 
