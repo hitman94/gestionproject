@@ -64,7 +64,7 @@ public class UpdateEntrepriseServlet extends HttpServlet {
 
 		User toUpdate = entreprise.getChief();
 		toUpdate.setEntreprise(null);
-		toUpdate.setAbility(Ability.CompanyChief);
+		toUpdate.setAbility(Ability.User);
 		userDAO.update(toUpdate);
 		user.setEntreprise(entreprise);
 		user.setAbility(Ability.CompanyChief);
