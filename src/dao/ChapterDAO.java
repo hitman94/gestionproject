@@ -57,6 +57,18 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 		} 
 	}
 	
+	public boolean chapterNumberInVolumeCheck(Long numberInVolume,Long volume) {
+		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.numberInVolume=:numberInVolume AND c.volume.id=:volumeId");
+		q.setParameter("numberInVolume", numberInVolume);
+		q.setParameter("volumeId", volume);
+		try {
+			q.getSingleResult();
+			return true;
+		}catch (NoResultException e){
+			return false;
+		}
+	}
+	
 	public List<Chapter> chapterFroWp(Long id) {
 		Query q = em.createQuery("SELECT c FROM Chapter c WHERE c.wp.id=:id AND c.takenDate != -2");
 		q.setParameter("id", id);

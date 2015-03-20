@@ -2,7 +2,7 @@ package ihm.servletv2;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import livre.Chapter;
 import livre.Volume;
 import utilisateur.User;
+
 import comportement.Ability;
+
 import dao.ChapterDAO;
 import dao.VolumeDAO;
 import dao.WorkPackageDAO;
@@ -63,18 +65,21 @@ public class CreateChapterServlet extends HttpServlet {
 
 		else if(user.getAbility() == Ability.CompanyChief){
 			Volume v =volumeDAO.findById(new Long(idVolume));
-			if(v.getChapter(new Long(numberInVolume)) != null) {
-				response.sendError(400, "Ce numéro de chapitre est déjà attribué.");
-				return;
-			}
+
+				if(chapterDAO.chapterNumberInVolumeCheck(new Long(numberInVolume), new Long(idVolume))) {
+					response.sendError(400, "Ce numero de chapitre est deja attribue.");
+					return;
+				}
+				for(Entry<Long,Chapter> entry : v.getChapters().entrySet()) {
+					if(entry.getValue().getTitle().equals(chapterTitle)) {
+						response.sendError(400, "Un chapitre portant ce nom existe deja dans le volume.");
+						return;
+					}
+				}
+			
 			Chapter toAdd = new Chapter(chapterTitle, v, wpDao.findById(new Long(workPackageId)), new Long(numberInVolume));
 			chapterDAO.persist(toAdd);
 
-//			toAdd.getVolume().addChapter(toAdd);
-//			toAdd.getWp().addChapter(toAdd);
-//
-//			volumeDAO.update(toAdd.getVolume());
-//			wpDao.update(toAdd.getWp());
 
 			String path=getServletContext().getRealPath("/chapters/");
 			File chapterDir = new File(path+"/");

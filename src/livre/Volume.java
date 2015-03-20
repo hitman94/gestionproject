@@ -1,12 +1,11 @@
 package livre;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,7 +28,7 @@ public class Volume {
 	@NotNull
 	private String title;
 
-	@OneToMany(mappedBy="volume")
+	@OneToMany(mappedBy="volume", fetch=FetchType.EAGER)
 	@MapKey(name="numberInVolume")
 	private Map<Long, Chapter> chapters;
 	

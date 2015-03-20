@@ -44,7 +44,6 @@ public class DownloadFileServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String chapterId = request.getParameter("chapterId");
 		User user = (User) request.getSession().getAttribute("user");
-
 		if (user == null) {
 			response.setStatus(400);
 			return;

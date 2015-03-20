@@ -21,7 +21,13 @@ function downloadChapter(chapterId) {
 			chapterId : chapterId
 		},
 		success : function(data, status, xhr) {
-			window.location.replace(xhr.getResponseHeader("url"));
+			var link = document.createElement('a');
+			link.href = xhr.getResponseHeader("url");
+			link.download =xhr.getResponseHeader("url");
+			document.body.appendChild(link);
+			link.click();
+			
+			
 		},
 		error : function(data, status, error) {
 
@@ -56,39 +62,7 @@ $(document)
 				function() {
 					$('#errorsZone').hide();
 
-					$("#submitCompany")
-							.click(
-									function() {
-										var idChief = document
-												.getElementById("chefC").value;
-										var companyName = document
-												.getElementById("companyName").value;
-
-										$
-												.ajax({
-													type : 'POST',
-													url : "CreateCompanyServlet",
-													data : {
-														companyName : companyName,
-														idChief : idChief
-													},
-													success : function(data) {
-														window.location
-																.replace("companies.jsp");
-													},
-													error : function(data,
-															status, error) {
-														$('#errorsZone')
-																.html(
-																		"Erreur lors de la creation de l'entreprise.</br>"
-																				+ error);
-														$('#errorsZone').show(
-																500);
-													}
-
-												});
-
-									});
+					
 
 					$("#frameUpload")
 							.load(
@@ -133,6 +107,7 @@ $(document)
 														numberInVolume: numberInVolume
 													},
 													success : function(data) {
+														alert("Chapite ajouté avec succès");
 														window.location
 																.replace("chapters.jsp");
 													},
