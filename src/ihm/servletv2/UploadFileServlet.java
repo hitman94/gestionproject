@@ -56,7 +56,11 @@ public class UploadFileServlet extends HttpServlet {
 			response.setStatus(400);//on met donc un message d'erreur
 			return;//et on s'arrete là
 		}
-		
+		if(!file.getContentType().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+			response.getWriter().write("<html><body><div id=\"answer\">non</div></body></html>");
+			response.setStatus(400);//on met donc un message d'erreur
+			return;//et on s'arrete là
+		}
 		//Si c'est bien un utilisateur ( car seul les utilisateurs ont le droit de soumettre un travail )
 		//Alors on commence le traitement de mise à jour
 		

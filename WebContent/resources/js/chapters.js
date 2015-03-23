@@ -26,7 +26,7 @@ function downloadChapter(chapterId) {
 			link.download =xhr.getResponseHeader("url");
 			document.body.appendChild(link);
 			link.click();
-			
+			window.location.reload();
 			
 		},
 		error : function(data, status, error) {

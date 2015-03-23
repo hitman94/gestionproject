@@ -23,7 +23,8 @@ public class ChapterDAO extends AbstractDAO<Chapter> {
 			List<Chapter> result = q.getResultList();
 			for(Chapter c : result) {
 				if(c.getTakenDate()!=-1 && c.getTakenDate() != -2) {
-					if(System.currentTimeMillis()-604800 < c.getTakenDate() ) {
+					if( (System.currentTimeMillis()-604800) > c.getTakenDate() ) {
+						
 						c.setTakenDate(-1L);
 						update(c);
 					}
